@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.TlpGeneral = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnOk = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.BtnCancel = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.TbxTexto = new System.Windows.Forms.TextBox();
-            this.BtnOk = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.TlpGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +53,29 @@
             this.TlpGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TlpGeneral.Size = new System.Drawing.Size(324, 93);
             this.TlpGeneral.TabIndex = 2;
+            // 
+            // BtnOk
+            // 
+            this.BtnOk.BackColor = System.Drawing.Color.SeaGreen;
+            this.BtnOk.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnOk.FlatAppearance.BorderSize = 0;
+            this.BtnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOk.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.BtnOk.Font = new System.Drawing.Font("Courier New", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnOk.ForeColor = System.Drawing.Color.White;
+            this.BtnOk.IconChar = FontAwesome.Sharp.IconChar.Check;
+            this.BtnOk.IconColor = System.Drawing.Color.White;
+            this.BtnOk.IconSize = 28;
+            this.BtnOk.Location = new System.Drawing.Point(13, 47);
+            this.BtnOk.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.BtnOk.Name = "BtnOk";
+            this.BtnOk.Rotation = 0D;
+            this.BtnOk.Size = new System.Drawing.Size(139, 34);
+            this.BtnOk.TabIndex = 3;
+            this.BtnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnOk.UseVisualStyleBackColor = false;
+            this.BtnOk.Click += new System.EventHandler(this.BtnOk_Click);
             // 
             // BtnCancel
             // 
@@ -88,29 +111,6 @@
             this.TbxTexto.Size = new System.Drawing.Size(298, 26);
             this.TbxTexto.TabIndex = 2;
             // 
-            // BtnOk
-            // 
-            this.BtnOk.BackColor = System.Drawing.Color.SeaGreen;
-            this.BtnOk.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnOk.FlatAppearance.BorderSize = 0;
-            this.BtnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOk.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.BtnOk.Font = new System.Drawing.Font("Courier New", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnOk.ForeColor = System.Drawing.Color.White;
-            this.BtnOk.IconChar = FontAwesome.Sharp.IconChar.Check;
-            this.BtnOk.IconColor = System.Drawing.Color.White;
-            this.BtnOk.IconSize = 28;
-            this.BtnOk.Location = new System.Drawing.Point(13, 47);
-            this.BtnOk.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.BtnOk.Name = "BtnOk";
-            this.BtnOk.Rotation = 0D;
-            this.BtnOk.Size = new System.Drawing.Size(139, 34);
-            this.BtnOk.TabIndex = 3;
-            this.BtnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BtnOk.UseVisualStyleBackColor = false;
-            this.BtnOk.Click += new System.EventHandler(this.BtnOk_Click);
-            // 
             // FrmPerfil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -119,7 +119,7 @@
             this.Controls.Add(this.TlpGeneral);
             this.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmPerfil";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmPerfil";
