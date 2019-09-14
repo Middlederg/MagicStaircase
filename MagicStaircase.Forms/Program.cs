@@ -44,7 +44,8 @@ namespace MagicStaircase.Forms
             }
             catch (Exception)
             {
-                MessageBox.Show("No se pudo actualizar correctamente");
+                MessageBox.Show("No se pudo actualizar correctamente. " +
+                    "Si continuan los problemas, prueba a desinstalar y volver a instalar la aplicación");
             }
 
             Application.Run(new FrmMenuPrincipal());
