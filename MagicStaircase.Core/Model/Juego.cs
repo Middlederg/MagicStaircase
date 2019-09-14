@@ -6,8 +6,8 @@ namespace MagicStaircase.Core.Model
 {
     public class Juego
     {
-        public readonly int NumCartasMano = 8;
-        public readonly int NumCartasPorTurno = 2;
+        public const int NumCartasMano = 8;
+        public const int NumCartasPorTurno = 2;
 
         public List<int> Baraja { get; private set; }
 

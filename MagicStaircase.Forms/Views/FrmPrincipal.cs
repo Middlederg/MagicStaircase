@@ -41,7 +41,7 @@ namespace MagicStaircase.Forms
 
             j = new Juego();
             FlpMano.Controls.Clear();
-            for (int i = 0; i < j.NumCartasMano; i++)
+            for (int i = 0; i < Juego.NumCartasMano; i++)
             {
                 FlpMano.Controls.Add(new Carta(j.GetCard()));
             }
@@ -67,11 +67,11 @@ namespace MagicStaircase.Forms
                 origen.Colocada();
 
                 numColocadas++;
-                BtnNext.Enabled = (numColocadas >= j.NumCartasPorTurno);
+                BtnNext.Enabled = (numColocadas >= Juego.NumCartasPorTurno);
                 LblPuntuacion.Text = $"Score: {j.Puntuacion}";
                 ColorearCartas();
 
-                if ((CartasMano().Count() > j.NumCartasMano - j.NumCartasPorTurno) && !ExisteCartaColocable())
+                if ((CartasMano().Count() > Juego.NumCartasMano - Juego.NumCartasPorTurno) && !ExisteCartaColocable())
                     JuegoTerminado();
             }
         }
@@ -81,7 +81,10 @@ namespace MagicStaircase.Forms
             if (numColocadas >= 2)
             {
                 foreach (var carta in CartasVacias())
-                    carta.Numero = j.GetCard();
+                {
+                    if (j.HasCards)
+                        carta.Numero = j.GetCard();
+                }
                 numColocadas = 0;
                 ColorearCartas();
 

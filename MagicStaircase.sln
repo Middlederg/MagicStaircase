@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2035
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Core", "MagicStaircase.Core\MagicStaircase.Core.csproj", "{3737E358-320E-4BD6-86D1-07E8240A6254}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Forms", "MagicStaircase.Forms\MagicStaircase.Forms.csproj", "{23EA3EA2-ED5D-4D3B-A587-384040497263}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MagicStaircase.Installer", "MagicStaircase.Installer\TheGame.Installer.vdproj", "{142646B2-0381-4775-8E20-A2120CBD6DA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Data", "MagicStaircase.Data\MagicStaircase.Data.csproj", "{8161B446-8A5F-4320-B8FF-5FBF7796FADA}"
 EndProject
@@ -25,8 +23,6 @@ Global
 		{23EA3EA2-ED5D-4D3B-A587-384040497263}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23EA3EA2-ED5D-4D3B-A587-384040497263}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23EA3EA2-ED5D-4D3B-A587-384040497263}.Release|Any CPU.Build.0 = Release|Any CPU
-		{142646B2-0381-4775-8E20-A2120CBD6DA7}.Debug|Any CPU.ActiveCfg = Debug
-		{142646B2-0381-4775-8E20-A2120CBD6DA7}.Release|Any CPU.ActiveCfg = Release
 		{8161B446-8A5F-4320-B8FF-5FBF7796FADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8161B446-8A5F-4320-B8FF-5FBF7796FADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8161B446-8A5F-4320-B8FF-5FBF7796FADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
