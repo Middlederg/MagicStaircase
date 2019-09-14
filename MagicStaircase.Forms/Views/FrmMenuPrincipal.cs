@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MagicStaircase.Core.Model;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace MagicStaircase.Forms
 {
@@ -17,7 +19,10 @@ namespace MagicStaircase.Forms
         public FrmMenuPrincipal()
         {
             InitializeComponent();
-            Icon = System.Drawing.Icon.FromHandle(IconChar.Magic.ToBitmap(98, Color.Black).GetHicon());
+            //Icon = System.Drawing.Icon.FromHandle(IconChar.Magic.ToBitmap(98, Color.Black).GetHicon());
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Version.Text = $"Versíon: {assembly.GetName().Version.ToString()}";
+
             CargarPerfiles();
         }
 
@@ -114,6 +119,11 @@ namespace MagicStaircase.Forms
                 Data.Negocio.PerfilRepository.EliminarPerfil(perfil.Id);
                 CargarPerfiles();
             }
+        }
+
+        private void Repo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/Middlederg/MagicStaircase");
         }
     }
 }

@@ -23,7 +23,7 @@ namespace MagicStaircase.Forms
         public FrmPrincipal()
         {
             InitializeComponent();
-            Icon = System.Drawing.Icon.FromHandle(IconChar.Magic.ToBitmap(98, Color.Black).GetHicon());
+            //Icon = System.Drawing.Icon.FromHandle(IconChar.Magic.ToBitmap(98, Color.Black).GetHicon());
             Reiniciar();          
         }
 

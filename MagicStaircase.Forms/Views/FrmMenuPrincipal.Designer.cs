@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMenuPrincipal));
             this.TlpPrincipal = new System.Windows.Forms.TableLayoutPanel();
             this.BtnNext = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.LblTitulo = new System.Windows.Forms.Label();
@@ -40,6 +41,8 @@
             this.renombrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarPerfilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pGeneral = new System.Windows.Forms.Panel();
+            this.Version = new System.Windows.Forms.Label();
+            this.Repo = new System.Windows.Forms.LinkLabel();
             this.TlpPrincipal.SuspendLayout();
             this.MenuListView.SuspendLayout();
             this.pGeneral.SuspendLayout();
@@ -51,21 +54,24 @@
             this.TlpPrincipal.ColumnCount = 2;
             this.TlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.TlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.TlpPrincipal.Controls.Add(this.Version, 1, 4);
             this.TlpPrincipal.Controls.Add(this.BtnNext, 0, 1);
             this.TlpPrincipal.Controls.Add(this.LblTitulo, 0, 0);
             this.TlpPrincipal.Controls.Add(this.BtnReset, 0, 2);
             this.TlpPrincipal.Controls.Add(this.BtnExit, 0, 3);
             this.TlpPrincipal.Controls.Add(this.Lbx, 1, 1);
+            this.TlpPrincipal.Controls.Add(this.Repo, 0, 4);
             this.TlpPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TlpPrincipal.Location = new System.Drawing.Point(0, 0);
             this.TlpPrincipal.Margin = new System.Windows.Forms.Padding(0);
             this.TlpPrincipal.Name = "TlpPrincipal";
             this.TlpPrincipal.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.TlpPrincipal.RowCount = 4;
+            this.TlpPrincipal.RowCount = 5;
             this.TlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.TlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
             this.TlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.TlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.TlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TlpPrincipal.Size = new System.Drawing.Size(495, 280);
             this.TlpPrincipal.TabIndex = 1;
             // 
@@ -85,7 +91,7 @@
             this.BtnNext.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
             this.BtnNext.Name = "BtnNext";
             this.BtnNext.Rotation = 0D;
-            this.BtnNext.Size = new System.Drawing.Size(257, 49);
+            this.BtnNext.Size = new System.Drawing.Size(257, 43);
             this.BtnNext.TabIndex = 8;
             this.BtnNext.Text = "PLAY";
             this.BtnNext.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -122,11 +128,11 @@
             this.BtnReset.IconChar = FontAwesome.Sharp.IconChar.PenFancy;
             this.BtnReset.IconColor = System.Drawing.Color.White;
             this.BtnReset.IconSize = 40;
-            this.BtnReset.Location = new System.Drawing.Point(20, 139);
+            this.BtnReset.Location = new System.Drawing.Point(20, 133);
             this.BtnReset.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
             this.BtnReset.Name = "BtnReset";
             this.BtnReset.Rotation = 0D;
-            this.BtnReset.Size = new System.Drawing.Size(257, 50);
+            this.BtnReset.Size = new System.Drawing.Size(257, 43);
             this.BtnReset.TabIndex = 9;
             this.BtnReset.Text = "BEST SCORES";
             this.BtnReset.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -146,11 +152,11 @@
             this.BtnExit.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.BtnExit.IconColor = System.Drawing.Color.White;
             this.BtnExit.IconSize = 40;
-            this.BtnExit.Location = new System.Drawing.Point(20, 209);
+            this.BtnExit.Location = new System.Drawing.Point(20, 196);
             this.BtnExit.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
             this.BtnExit.Name = "BtnExit";
             this.BtnExit.Rotation = 0D;
-            this.BtnExit.Size = new System.Drawing.Size(257, 51);
+            this.BtnExit.Size = new System.Drawing.Size(257, 43);
             this.BtnExit.TabIndex = 10;
             this.BtnExit.Text = "EXIT";
             this.BtnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -169,7 +175,7 @@
             this.Lbx.Margin = new System.Windows.Forms.Padding(0, 10, 20, 10);
             this.Lbx.Name = "Lbx";
             this.TlpPrincipal.SetRowSpan(this.Lbx, 3);
-            this.Lbx.Size = new System.Drawing.Size(178, 190);
+            this.Lbx.Size = new System.Drawing.Size(178, 169);
             this.Lbx.TabIndex = 11;
             this.Lbx.SelectedIndexChanged += new System.EventHandler(this.Lbx_SelectedIndexChanged);
             // 
@@ -214,6 +220,32 @@
             this.pGeneral.Size = new System.Drawing.Size(497, 282);
             this.pGeneral.TabIndex = 2;
             // 
+            // Version
+            // 
+            this.Version.AutoSize = true;
+            this.Version.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Version.Location = new System.Drawing.Point(297, 249);
+            this.Version.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
+            this.Version.Name = "Version";
+            this.Version.Size = new System.Drawing.Size(178, 21);
+            this.Version.TabIndex = 13;
+            this.Version.Text = "Version";
+            this.Version.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Repo
+            // 
+            this.Repo.AutoSize = true;
+            this.Repo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Repo.Location = new System.Drawing.Point(20, 249);
+            this.Repo.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.Repo.Name = "Repo";
+            this.Repo.Size = new System.Drawing.Size(277, 21);
+            this.Repo.TabIndex = 14;
+            this.Repo.TabStop = true;
+            this.Repo.Text = "Source code in github.com";
+            this.Repo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Repo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.Repo_LinkClicked);
+            // 
             // FrmMenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,6 +254,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.pGeneral);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmMenuPrincipal";
@@ -248,5 +281,7 @@
         private System.Windows.Forms.ToolStripMenuItem nuevoPerfilToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renombrarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarPerfilToolStripMenuItem;
+        private System.Windows.Forms.Label Version;
+        private System.Windows.Forms.LinkLabel Repo;
     }
 }
