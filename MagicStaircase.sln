@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Core", "MagicStaircase.Core\MagicStaircase.Core.csproj", "{3737E358-320E-4BD6-86D1-07E8240A6254}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Core", "src\MagicStaircase.Core\MagicStaircase.Core.csproj", "{3737E358-320E-4BD6-86D1-07E8240A6254}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Forms", "MagicStaircase.Forms\MagicStaircase.Forms.csproj", "{23EA3EA2-ED5D-4D3B-A587-384040497263}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Data", "src\MagicStaircase.Data\MagicStaircase.Data.csproj", "{8161B446-8A5F-4320-B8FF-5FBF7796FADA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Data", "MagicStaircase.Data\MagicStaircase.Data.csproj", "{8161B446-8A5F-4320-B8FF-5FBF7796FADA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Forms", "src\MagicStaircase.Forms\MagicStaircase.Forms.csproj", "{31DD2FEC-FA5A-4037-A033-5A65E21D4274}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{3737E358-320E-4BD6-86D1-07E8240A6254}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3737E358-320E-4BD6-86D1-07E8240A6254}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3737E358-320E-4BD6-86D1-07E8240A6254}.Release|Any CPU.Build.0 = Release|Any CPU
-		{23EA3EA2-ED5D-4D3B-A587-384040497263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23EA3EA2-ED5D-4D3B-A587-384040497263}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23EA3EA2-ED5D-4D3B-A587-384040497263}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23EA3EA2-ED5D-4D3B-A587-384040497263}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8161B446-8A5F-4320-B8FF-5FBF7796FADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8161B446-8A5F-4320-B8FF-5FBF7796FADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8161B446-8A5F-4320-B8FF-5FBF7796FADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8161B446-8A5F-4320-B8FF-5FBF7796FADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31DD2FEC-FA5A-4037-A033-5A65E21D4274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31DD2FEC-FA5A-4037-A033-5A65E21D4274}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31DD2FEC-FA5A-4037-A033-5A65E21D4274}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31DD2FEC-FA5A-4037-A033-5A65E21D4274}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
