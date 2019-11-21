@@ -23,7 +23,7 @@ namespace MagicStaircase.Core.Model
 
         public void Reset()
         {
-            Baraja = Enumerable.Range(2, 97).ToList().Desordenar();
+            Baraja = Enumerable.Range(2, 97).ToList().RandomizeList().ToList();
             Montones = new List<int>[4];
             Montones[0] = new List<int>() { 1 };
             Montones[1] = new List<int>() { 1 };

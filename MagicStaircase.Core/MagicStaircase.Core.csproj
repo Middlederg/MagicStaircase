@@ -59,14 +59,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Util.Core">
-      <HintPath>..\..\Util\Util.Core\bin\Debug\Util.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Direction.cs" />
     <Compile Include="Model\Juego.cs" />
     <Compile Include="Model\Perfil.cs" />
+    <Compile Include="Randomizer.cs" />
     <Compile Include="Model\Registro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
