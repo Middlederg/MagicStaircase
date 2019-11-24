@@ -12,6 +12,7 @@ using MagicStaircase.Core.Model;
 using System.Diagnostics;
 using System.Reflection;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace MagicStaircase.Forms
 {
@@ -20,11 +21,7 @@ namespace MagicStaircase.Forms
         public FrmMenuPrincipal()
         {
             InitializeComponent();
-            //Icon = System.Drawing.Icon.FromHandle(IconChar.Magic.ToBitmap(98, Color.Black).GetHicon());
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            Version.Text = $"Versíon: {assembly.GetName().Version.ToString()}";
-
-          
+            Version.Text = $"Current version: {Configuration.CurrentVersion()}";
 
             CargarPerfiles();
         }
@@ -131,17 +128,18 @@ namespace MagicStaircase.Forms
 
         private async void OnLoad(object sender, EventArgs e)
         {
-            using (var client = new HttpClient())
+            try
             {
-                //GET /repos/:owner/:repo/releases/latest
-                HttpResponseMessage response = await client.GetAsync($"https://api.github.com/repos/Middlederg/MagicStaircase/releases/latest");
-                if (response.IsSuccessStatusCode)
-                {
-                    string json = await response.Content.ReadAsStringAsync();
-                   
-                }
+                var updateChecker = new UpdateChecker();
+                if (await updateChecker.IsUpToDate())
+                    Version.Text += " Up to date";
+                else
+                    Version.Text += $"Version {await updateChecker.LastRelease()} avaliable";
             }
-            //Program.UpdatePath
+            catch (Exception ex)
+            { 
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
