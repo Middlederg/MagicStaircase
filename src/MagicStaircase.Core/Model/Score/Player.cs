@@ -2,12 +2,10 @@
 {
     public class Player
     {
-        public int Id { get; private set; }
         public string Name { get; private set; }
 
-        public Player(int id, string name)
+        public Player(string name)
         {
-            Id = id;
             Name = name;
         }
 
@@ -16,8 +14,8 @@
         {
             if (obj == null || GetType() != obj.GetType())
                 return false;
-            return ((Player)obj).Id == Id;
+            return ((Player)obj).Name.Equals(Name);
         }
-        public override int GetHashCode() => Id.GetHashCode();
+        public override int GetHashCode() => Name.GetHashCode();
     }
 }

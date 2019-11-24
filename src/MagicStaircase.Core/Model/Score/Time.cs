@@ -24,5 +24,8 @@ namespace MagicStaircase.Core
         }
 
         public override int GetHashCode() => Seconds.GetHashCode();
+
+        internal bool IsLowerThan(Time minimumTime) => Seconds < minimumTime.Seconds;
+        
     }
 }

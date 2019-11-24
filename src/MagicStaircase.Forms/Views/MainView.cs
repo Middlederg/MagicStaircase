@@ -176,7 +176,7 @@ namespace MagicStaircase.Forms
             using (var f = new GameEndView(game.Points, segundos)) { f.ShowDialog(); }
 
             //Registrar puntuación obtenida
-            Data.Negocio.RegistrosRepository.AddNuevoRegistro(game.Points, segundos);
+            Data.Negocio.ScoreRepository.AddNuevoRegistro(game.Points, segundos);
 
             BtnNext.Enabled = false;
             BtnReset.Enabled = false;
