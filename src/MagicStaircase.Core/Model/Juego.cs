@@ -14,7 +14,7 @@ namespace MagicStaircase.Core.Model
         public List<int>[] Montones { get; private set; }
 
         public bool HasCards => Baraja.Any();
-        public int Puntuacion => 98 - Montones.Sum(x=> x.Count);
+        public int Puntuacion => 100 - Baraja.Count();
 
         public Juego()
         {

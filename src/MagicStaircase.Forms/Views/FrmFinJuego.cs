@@ -25,11 +25,11 @@ namespace MagicStaircase.Forms
 
         private string Valoracion(int puntuacion)
         {
-            if (puntuacion == 0 )return "¡¡Best score ever!!";
-            if (puntuacion < 5) return "¡¡Magnifique!!";
-            if (puntuacion < 10) return "¡Excelent!";
-            if (puntuacion < 20) return "¡Well done!";
-            if (puntuacion < 30) return "Not bad";
+            if (puntuacion >= 100 ) return "¡¡Best score ever!!";
+            if (puntuacion > 95) return "¡¡Magnifique!!";
+            if (puntuacion > 90) return "¡Excelent!";
+            if (puntuacion > 85) return "¡Well done!";
+            if (puntuacion > 80) return "Not bad";
             return "You have to get better...";
         }
         private void BtnExit_Click(object sender, EventArgs e) => Close();
