@@ -1,22 +1,22 @@
-﻿namespace MagicStaircase.Core.Model
+﻿namespace MagicStaircase.Core
 {
-    public class Perfil
+    public class Player
     {
         public int Id { get; private set; }
-        public string Nombre { get; private set; }
+        public string Name { get; private set; }
 
-        public Perfil(int id, string nombre)
+        public Player(int id, string name)
         {
             Id = id;
-            Nombre = nombre;
+            Name = name;
         }
 
-        public override string ToString() => Nombre;
+        public override string ToString() => Name;
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
                 return false;
-            return ((Perfil)obj).Id == Id;
+            return ((Player)obj).Id == Id;
         }
         public override int GetHashCode() => Id.GetHashCode();
     }

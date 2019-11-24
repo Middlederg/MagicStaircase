@@ -1,4 +1,4 @@
-﻿namespace MagicStaircase.Core.Model
+﻿namespace MagicStaircase.Core
 {
     public enum Direction
     {

@@ -1,6 +1,6 @@
 ﻿namespace MagicStaircase.Forms
 {
-    partial class FrmPrincipal
+    partial class MainView
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.TlpPrincipal = new System.Windows.Forms.TableLayoutPanel();
             this.LblTiempo = new System.Windows.Forms.Label();
             this.pDown2 = new System.Windows.Forms.Panel();
@@ -125,7 +125,7 @@
             // CartaDown2
             // 
             this.CartaDown2.BackColor = System.Drawing.Color.White;
-            this.CartaDown2.Direccion = MagicStaircase.Core.Model.Direction.Down;
+            this.CartaDown2.Direccion = MagicStaircase.Core.Direction.Down;
             this.CartaDown2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CartaDown2.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold);
             this.CartaDown2.FontSize = 40;
@@ -154,7 +154,7 @@
             // CartaDown1
             // 
             this.CartaDown1.BackColor = System.Drawing.Color.White;
-            this.CartaDown1.Direccion = MagicStaircase.Core.Model.Direction.Down;
+            this.CartaDown1.Direccion = MagicStaircase.Core.Direction.Down;
             this.CartaDown1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CartaDown1.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold);
             this.CartaDown1.FontSize = 40;
@@ -182,7 +182,7 @@
             // CartaUp2
             // 
             this.CartaUp2.BackColor = System.Drawing.Color.White;
-            this.CartaUp2.Direccion = MagicStaircase.Core.Model.Direction.Up;
+            this.CartaUp2.Direccion = MagicStaircase.Core.Direction.Up;
             this.CartaUp2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CartaUp2.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold);
             this.CartaUp2.FontSize = 40;
@@ -222,7 +222,7 @@
             // CartaUp1
             // 
             this.CartaUp1.BackColor = System.Drawing.Color.White;
-            this.CartaUp1.Direccion = MagicStaircase.Core.Model.Direction.Up;
+            this.CartaUp1.Direccion = MagicStaircase.Core.Direction.Up;
             this.CartaUp1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CartaUp1.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold);
             this.CartaUp1.FontSize = 40;
@@ -421,7 +421,7 @@
             // 
             this.T.Enabled = true;
             this.T.Interval = 1000;
-            this.T.Tick += new System.EventHandler(this.T_Tick);
+            this.T.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // FrmPrincipal
             // 

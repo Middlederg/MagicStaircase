@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using MagicStaircase.Core.Model;
+using MagicStaircase.Core;
 
 namespace MagicStaircase.Data.Negocio
 {
     public static class PerfilRepository
     {
-        public static Perfil GetPerfilActual()
+        public static Player GetPerfilActual()
         {
             using (GameDBEntities db = new GameDBEntities())
             {
                 var p = db.Perfiles.FirstOrDefault(x=> x.Id == Properties.Settings.Default.IdPerfil);
-                return new Perfil(p.Id, p.Nombre);
+                return new Player(p.Id, p.Nombre);
             }
         }
 
@@ -29,11 +29,11 @@ namespace MagicStaircase.Data.Negocio
             }
         }
 
-        public static IEnumerable<Perfil> GetPerfiles()
+        public static IEnumerable<Player> GetPerfiles()
         {
             using (GameDBEntities db = new GameDBEntities())
             {
-                return db.Perfiles.AsEnumerable().Select(x=> new Perfil(x.Id, x.Nombre)).ToList();
+                return db.Perfiles.AsEnumerable().Select(x=> new Player(x.Id, x.Nombre)).ToList();
             }
         }
 

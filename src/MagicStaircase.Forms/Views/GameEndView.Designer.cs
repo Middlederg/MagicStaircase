@@ -1,6 +1,6 @@
 ﻿namespace MagicStaircase.Forms
 {
-    partial class FrmFinJuego
+    partial class GameEndView
     {
         /// <summary>
         /// Required designer variable.

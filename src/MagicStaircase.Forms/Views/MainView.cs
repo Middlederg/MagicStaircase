@@ -11,19 +11,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MagicStaircase.Core.Model;
 using MagicStaircase.Forms.CustomControls;
+using MagicStaircase.Core;
 
 namespace MagicStaircase.Forms
 {
-    public partial class FrmPrincipal : Form
+    public partial class MainView : Form
     {
-        private Juego j;
+        private Game game;
         private int numColocadas;
         private int segundos;
 
-        public FrmPrincipal()
+        public MainView()
         {
             InitializeComponent();
-            //Icon = System.Drawing.Icon.FromHandle(IconChar.Magic.ToBitmap(98, Color.Black).GetHicon());
             Reiniciar();          
         }
 
@@ -39,11 +39,11 @@ namespace MagicStaircase.Forms
             CartaDown1.Colocar(Direction.Down, CardDrop);
             CartaDown2.Colocar(Direction.Down, CardDrop);
 
-            j = new Juego();
+            game = new Game();
             FlpMano.Controls.Clear();
-            for (int i = 0; i < Juego.NumCartasMano; i++)
+            for (int i = 0; i < Game.PlayerCardCount; i++)
             {
-                FlpMano.Controls.Add(new Carta(j.GetCard()));
+                FlpMano.Controls.Add(new Carta(game.TakeCard()));
             }
         }
 
@@ -57,8 +57,8 @@ namespace MagicStaircase.Forms
                 panelDestino.Controls.Remove(destino);
 
                 int indxCarta = Int32.Parse(panelDestino.Tag.ToString());
-                j.AddToMonton(origen.Numero, indxCarta);
-                string ayuda = string.Join("\n", j.Montones[indxCarta].Select(x => x.ToString()));
+                game.AddToPile(origen.Numero, indxCarta);
+                string ayuda = string.Join("\n", game.Piles[indxCarta].Select(x => x.ToString()));
                 
                 var nuevaCarta = new Carta(origen.Numero);
                 ToolTipAyuda.SetToolTip(nuevaCarta, ayuda);
@@ -67,11 +67,11 @@ namespace MagicStaircase.Forms
                 origen.Colocada();
 
                 numColocadas++;
-                BtnNext.Enabled = (numColocadas >= Juego.NumCartasPorTurno);
-                LblPuntuacion.Text = $"Score: {j.Puntuacion}";
+                BtnNext.Enabled = (numColocadas >= Game.MinCardPerTurn);
+                LblPuntuacion.Text = $"Score: {game.Points}";
                 ColorearCartas();
 
-                if ((CartasMano().Count() > Juego.NumCartasMano - Juego.NumCartasPorTurno) && !ExisteCartaColocable())
+                if ((CartasMano().Count() > Game.PlayerCardCount - Game.MinCardPerTurn) && !ExisteCartaColocable())
                     JuegoTerminado();
             }
         }
@@ -82,8 +82,8 @@ namespace MagicStaircase.Forms
             {
                 foreach (var carta in CartasVacias())
                 {
-                    if (j.HasCards)
-                        carta.Numero = j.GetCard();
+                    if (game.HasCards)
+                        carta.Numero = game.TakeCard();
                 }
                 numColocadas = 0;
                 ColorearCartas();
@@ -161,7 +161,7 @@ namespace MagicStaircase.Forms
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
-            j.Reset();
+            game.Reset();
             Reiniciar();
         }
 
@@ -173,19 +173,19 @@ namespace MagicStaircase.Forms
             T.Enabled = false;
 
             //Mostrar pantalla fin de juego
-            using (var f = new FrmFinJuego(j.Puntuacion, segundos)) { f.ShowDialog(); }
+            using (var f = new GameEndView(game.Points, segundos)) { f.ShowDialog(); }
 
             //Registrar puntuación obtenida
-            Data.Negocio.RegistrosRepository.AddNuevoRegistro(j.Puntuacion, segundos);
+            Data.Negocio.RegistrosRepository.AddNuevoRegistro(game.Points, segundos);
 
             BtnNext.Enabled = false;
             BtnReset.Enabled = false;
         }
 
-        private void T_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             segundos++;
-            LblTiempo.Text = new Registro() { SegundosUtilizados = segundos }.Tiempo;
+            LblTiempo.Text = new Time(segundos).ToString();
         }
     }
 }

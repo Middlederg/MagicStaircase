@@ -1,6 +1,6 @@
 ﻿namespace MagicStaircase.Forms
 {
-    partial class FrmPerfil
+    partial class InputView
     {
         /// <summary>
         /// Required designer variable.

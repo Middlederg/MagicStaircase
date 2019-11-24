@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MagicStaircase.Forms
 {
-    public partial class FrmPerfil : Form
+    public partial class InputView : Form
     {
         public string Caption { set => Text = value; }
         public string Contenido
@@ -19,7 +19,7 @@ namespace MagicStaircase.Forms
             set { TbxTexto.Text = value; }
         }
 
-        public FrmPerfil()
+        public InputView()
         {
             InitializeComponent();
         }

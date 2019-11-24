@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace MagicStaircase.Forms
 {
-    public partial class FrmFinJuego : Form
+    public partial class GameEndView : Form
     {
-        public FrmFinJuego(int puntuacion, int segundos)
+        public GameEndView(int puntuacion, int segundos)
         {
             InitializeComponent();
             Icon = System.Drawing.Icon.FromHandle(IconChar.HourglassEnd.ToBitmap(98, Color.Black).GetHicon());

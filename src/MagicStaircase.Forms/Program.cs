@@ -18,7 +18,7 @@ namespace MagicStaircase.Forms
             //Core.Negocio.GameHelper.ReplaceConnectionString();
             //MessageBox.Show(ConfigurationManager.ConnectionStrings["GameDBEntities"].ConnectionString);
 
-            Application.Run(new FrmMenuPrincipal());
+            Application.Run(new MainMenuView());
         }
     }
 }

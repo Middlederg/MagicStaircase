@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MagicStaircase.Core.Model
+namespace MagicStaircase.Core
 {
     public static class Randomizer
     {

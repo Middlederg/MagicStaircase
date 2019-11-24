@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MagicStaircase.Core.Model;
+using MagicStaircase.Core;
 
 namespace MagicStaircase.Data.Negocio
 {
     public static class RegistrosRepository
     {
-        public static IEnumerable<Registro> GetRegistros(int num = 10)
+        public static IEnumerable<Score> GetRegistros(int num = 10)
         {
             using (GameDBEntities db = new GameDBEntities())
             {
                 return db.Registros
                     .OrderBy(x=> x.Puntuacion).ThenByDescending(x=> x.Segundos).ThenBy(x=> !x.Sistema)
                     .Take(num)
-                    .Select(x=> new Registro()
+                    .Select(x=> new Score()
                     {
-                        Fecha = x.Fecha,
+                        Date = x.Fecha,
                         Nombre = x.Nombre,
                         Puntuacion = x.Puntuacion,
                         SegundosUtilizados = x.Segundos,
@@ -28,7 +26,7 @@ namespace MagicStaircase.Data.Negocio
             }
         }
 
-        public static IEnumerable<Registro> GetRegistrosJugador(int num = 10)
+        public static IEnumerable<Score> GetRegistrosJugador(int num = 10)
         {
             using (GameDBEntities db = new GameDBEntities())
             {
@@ -36,9 +34,9 @@ namespace MagicStaircase.Data.Negocio
                     .Where(x=> !x.Sistema)
                     .OrderBy(x => x.Puntuacion).ThenByDescending(x => x.Segundos)
                     .Take(num)
-                    .Select(x => new Registro()
+                    .Select(x => new Score()
                     {
-                        Fecha = x.Fecha,
+                        Date = x.Fecha,
                         Nombre = x.Nombre,
                         Puntuacion = x.Puntuacion,
                         SegundosUtilizados = x.Segundos,
@@ -53,7 +51,7 @@ namespace MagicStaircase.Data.Negocio
             {
                 db.Registros.Add(new Registros()
                 {
-                    Nombre = PerfilRepository.GetPerfilActual().Nombre,
+                    Nombre = PerfilRepository.GetPerfilActual().Name,
                     Fecha = DateTime.Now,
                     Puntuacion = puntuacion,
                     Segundos = segundos,

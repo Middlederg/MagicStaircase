@@ -2,9 +2,10 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using MagicStaircase.Core.Model;
 using Newtonsoft.Json;
 
-namespace MagicStaircase.Core.Model
+namespace MagicStaircase.Core
 {
     public class VersionViewModel
     {

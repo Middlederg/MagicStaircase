@@ -12,10 +12,10 @@ using MagicStaircase.Core.Model;
 
 namespace MagicStaircase.Forms
 {
-    public partial class FrmMejoresPuntuaciones : Form
+    public partial class BestScoresView : Form
     {
         private bool all = false;
-        public FrmMejoresPuntuaciones()
+        public BestScoresView()
         {
             InitializeComponent();
             Icon = System.Drawing.Icon.FromHandle(IconChar.PenFancy.ToBitmap(98, Color.Black).GetHicon());
@@ -40,8 +40,10 @@ namespace MagicStaircase.Forms
             Lvw.Items.Clear();
             foreach (var registro in lista)
             {
-                int? pos = registro.Sistema ? (int?)null : i++;
-                Lvw.Items.Add(registro.Item(pos));
+                //int? pos = registro.Sistema ? (int?)null : i++;
+                //TODO
+                //Lvw.FillWith(i, )
+                //Lvw.Items.Add(registro.Item(pos));
             }
         }
 
