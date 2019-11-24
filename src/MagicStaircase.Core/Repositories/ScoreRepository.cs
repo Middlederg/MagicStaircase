@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MagicStaircase.Core;
 
-namespace MagicStaircase.Data
+namespace MagicStaircase.Core.Repositories
 {
     public static class ScoreRepository
     {

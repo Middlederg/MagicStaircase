@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using MagicStaircase.Core.Model;
 using System.Diagnostics;
 using MagicStaircase.Core;
 

@@ -155,10 +155,6 @@
       <Project>{3737e358-320e-4bd6-86d1-07e8240a6254}</Project>
       <Name>MagicStaircase.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MagicStaircase.Data\MagicStaircase.Data.csproj">
-      <Project>{8161b446-8a5f-4320-b8ff-5fbf7796fada}</Project>
-      <Name>MagicStaircase.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
