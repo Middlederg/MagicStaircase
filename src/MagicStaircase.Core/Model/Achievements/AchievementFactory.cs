@@ -1,4 +1,6 @@
-﻿namespace MagicStaircase.Core
+﻿using System.Collections.Generic;
+
+namespace MagicStaircase.Core
 {
     public static class AchievementFactory
     {
@@ -20,5 +22,18 @@
         public static Achievement ApprovalCertificate => new Achievement("Approval certificate", AtLeast85Points);
 
         public static Achievement FastPlayer => new Achievement("Fast player", UnderMinutes(1));
+        public static Achievement EasyAchievemnt => new Achievement("Easy one", PointsAtLeast(10));
+
+        public static List<Achievement> Achievements = new List<Achievement>
+        {
+            GoldMedal,
+            SilverMedal,
+            BronzeMedal,
+            MagicalCertificate,
+            ExcelenceCertificate,
+            ApprovalCertificate,
+            FastPlayer,
+            EasyAchievemnt
+        };
     }
 }

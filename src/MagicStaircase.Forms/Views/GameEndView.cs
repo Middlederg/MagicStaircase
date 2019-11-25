@@ -1,4 +1,5 @@
 ﻿using FontAwesome.Sharp;
+using MagicStaircase.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,25 +14,41 @@ namespace MagicStaircase.Forms
 {
     public partial class GameEndView : Form
     {
-        public GameEndView(int puntuacion, int segundos)
+        private readonly int points;
+        private readonly Time time;
+
+        public Score Score => new Score(new Player(NameTextbox.Text.Trim()), points, time);
+
+        public GameEndView(int points, Time time)
         {
             InitializeComponent();
+            this.points = points;
+            this.time = time;
+
             Icon = System.Drawing.Icon.FromHandle(IconChar.HourglassEnd.ToBitmap(98, Color.Black).GetHicon());
-            LblPuntuacion.Text = $"Score: {puntuacion}";
-            LblValoracion.Text = Valoracion(puntuacion);
-            var minutos = ((int)new TimeSpan(0, 0, segundos).TotalMinutes);
-            LblTiempo.Text = $"{minutos}:{segundos - (minutos * 60)}";
+            LblPuntuacion.Text = $"Score: {points}";
+            LblValoracion.Text = Score.Message;
+            LblTiempo.Text = $"Time: {time.ToString()}";
         }
 
-        private string Valoracion(int puntuacion)
+        private void BtnOk_Click(object sender, EventArgs e)
         {
-            if (puntuacion >= 100 ) return "¡¡Best score ever!!";
-            if (puntuacion > 95) return "¡¡Magnifique!!";
-            if (puntuacion > 90) return "¡Excelent!";
-            if (puntuacion > 85) return "¡Well done!";
-            if (puntuacion > 80) return "Not bad";
-            return "You have to get better...";
+            if (string.IsNullOrWhiteSpace(NameTextbox.Text))
+            {
+                MessageBox.Show(this, "Name can not be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult = DialogResult.OK;
+            Close();
         }
-        private void BtnExit_Click(object sender, EventArgs e) => Close();
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
+        public void DisableCancel() => BtnCancel.Enabled = false;
     }
 }

@@ -21,6 +21,20 @@ namespace MagicStaircase.Core
             Time = time;
         }
 
+
+        public string Message
+        {
+            get
+            {
+                if (Points >= 100) return "¡¡Best score ever!!";
+                if (Points > 95) return "¡¡Magnifique!!";
+                if (Points > 90) return "¡Excelent!";
+                if (Points > 85) return "¡Well done!";
+                if (Points > 80) return "Not bad";
+                return "You have to get better...";
+            }
+        }
+
         private Score(ScoreViewModel score)
         {
             Player = new Player(score.PlayerName);
@@ -38,9 +52,15 @@ namespace MagicStaircase.Core
             }
         }
 
-        public string Serialize()
+        public ScoreViewModel ToViewModel()
         {
-            return JsonConvert.SerializeObject(this);
+            return new ScoreViewModel()
+            {
+                Date = Date,
+                PlayerName = Player.ToString(),
+                Points = Points,
+                Seconds = Time.Seconds
+            };
         }
 
         

@@ -9,35 +9,35 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MagicStaircase.Core.Model;
 using MagicStaircase.Forms.CustomControls;
 using MagicStaircase.Core;
+using MagicStaircase.Core.Repositories;
 
 namespace MagicStaircase.Forms
 {
     public partial class MainView : Form
     {
         private Game game;
-        private int numColocadas;
-        private int segundos;
+        private int placedCards;
+        private Time time;
 
         public MainView()
         {
             InitializeComponent();
-            Reiniciar();          
+            Reset();          
         }
 
-        private void Reiniciar()
+        private void Reset()
         {
-            segundos = 0;
+            time = new Time();
             BtnNext.Enabled = false;
-            numColocadas = 0;
+            placedCards = 0;
             CartaUp1.Numero = CartaUp2.Numero = 1;
             CartaDown1.Numero = CartaDown2.Numero = 99;
-            CartaUp1.Colocar(Direction.Up, CardDrop);
-            CartaUp2.Colocar(Direction.Up, CardDrop);
-            CartaDown1.Colocar(Direction.Down, CardDrop);
-            CartaDown2.Colocar(Direction.Down, CardDrop);
+            CartaUp1.Place(Direction.Up, CardDrop);
+            CartaUp2.Place(Direction.Up, CardDrop);
+            CartaDown1.Place(Direction.Down, CardDrop);
+            CartaDown2.Place(Direction.Down, CardDrop);
 
             game = new Game();
             FlpMano.Controls.Clear();
@@ -47,7 +47,7 @@ namespace MagicStaircase.Forms
             }
         }
 
-        private void CardDrop(object sender, DragEventArgs e)
+        private async void CardDrop(object sender, DragEventArgs e)
         {
             var origen = e.Data.GetData(typeof(Carta)) as Carta;
             var destino = sender as Carta;
@@ -63,40 +63,44 @@ namespace MagicStaircase.Forms
                 var nuevaCarta = new Carta(origen.Numero);
                 ToolTipAyuda.SetToolTip(nuevaCarta, ayuda);
                 panelDestino.Controls.Add(nuevaCarta);
-                nuevaCarta.Colocar(destino.Direccion, CardDrop);
-                origen.Colocada();
+                nuevaCarta.Place(destino.Direction, CardDrop);
+                origen.Placed();
 
-                numColocadas++;
-                BtnNext.Enabled = (numColocadas >= Game.MinCardPerTurn);
+                placedCards++;
+                BtnNext.Enabled = (placedCards >= Game.MinCardPerTurn);
                 LblPuntuacion.Text = $"Score: {game.Points}";
-                ColorearCartas();
+                PutInGrayNonPlayableCards();
 
-                if ((CartasMano().Count() > Game.PlayerCardCount - Game.MinCardPerTurn) && !ExisteCartaColocable())
-                    JuegoTerminado();
+                if ((CartasMano().Count() > Game.PlayerCardCount - Game.MinCardPerTurn) && !IsPlayableCard())
+                {
+                    await JuegoTerminado();
+                }
             }
         }
 
-        private void BtnNext_Click(object sender, EventArgs e)
+        private async void BtnNext_Click(object sender, EventArgs e)
         {
-            if (numColocadas >= 2)
+            if (placedCards >= 2)
             {
                 foreach (var carta in CartasVacias())
                 {
                     if (game.HasCards)
                         carta.Numero = game.TakeCard();
                 }
-                numColocadas = 0;
-                ColorearCartas();
+                placedCards = 0;
+                PutInGrayNonPlayableCards();
 
-                if (!ExisteCartaColocable())
-                    JuegoTerminado();
+                if (!IsPlayableCard())
+                {
+                    await JuegoTerminado();
+                }
             }
         }
 
         private Carta GetCarta(Panel p) => p.Controls[0] as Carta;
         private IEnumerable<Carta> CartasVacias() => FlpMano.Controls.OfType<Carta>().Where(x => x.Numero == 0);
         private IEnumerable<Carta> CartasMano() => FlpMano.Controls.OfType<Carta>().Where(x => x.Numero != 0);
-        private bool ExisteCartaColocable()
+        private bool IsPlayableCard()
         {
             foreach (Carta c in CartasMano())
             {
@@ -106,11 +110,7 @@ namespace MagicStaircase.Forms
             return false;
         }
 
-        /// <summary>
-        /// Pone en gris las cartas que no se pueden colocar
-        /// </summary>
-        /// <returns></returns>
-        private void ColorearCartas()
+        private void PutInGrayNonPlayableCards()
         {
             foreach (Carta c in CartasMano())
             {
@@ -162,30 +162,36 @@ namespace MagicStaircase.Forms
         private void BtnReset_Click(object sender, EventArgs e)
         {
             game.Reset();
-            Reiniciar();
+            Reset();
         }
 
         private void BtnExit_Click(object sender, EventArgs e) => Close();
 
-        private void JuegoTerminado()
+        private async Task JuegoTerminado()
         {
-            //Detenemos el tiempo
-            T.Enabled = false;
+            StopTimer();
+            using (var gameEndView = new GameEndView(game.Points, time))
+            {
+                gameEndView.DisableCancel();
+                if (gameEndView.ShowDialog() == DialogResult.OK)
+                {
+                    await new ScoreRepository().AddScore(gameEndView.Score);
+                }
+            }
+            DisableButtons();
+        }
 
-            //Mostrar pantalla fin de juego
-            using (var f = new GameEndView(game.Points, segundos)) { f.ShowDialog(); }
-
-            //Registrar puntuación obtenida
-            Data.Negocio.ScoreRepository.AddNuevoRegistro(game.Points, segundos);
-
+        private void StopTimer() => T.Enabled = false;
+        private void DisableButtons()
+        {
             BtnNext.Enabled = false;
             BtnReset.Enabled = false;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            segundos++;
-            LblTiempo.Text = new Time(segundos).ToString();
+            time.NextSecond();
+            LblTiempo.Text = time.ToString();
         }
     }
 }

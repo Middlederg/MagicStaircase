@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MagicStaircase.Core.Model;
 using MagicStaircase.Core;
 
 namespace MagicStaircase.Forms.CustomControls
@@ -17,33 +16,32 @@ namespace MagicStaircase.Forms.CustomControls
     {
         public int FontSize { get; set; } = 40;
 
-        private int numero;
+        private int number;
         public int Numero
         {
-            get { return numero; }
+            get { return number; }
             set
             {
-                numero = value;
-                if (numero == 0)
+                number = value;
+                if (number == 0)
                 {
                     Text = "";
                     BackColor = SystemColors.Control;
                 }
                 else
                 {
-                    Text = numero.ToString();
+                    Text = number.ToString();
                     BackColor = Color.White;
                 }
             }
         }
 
-
-        public Direction Direccion { get; set; }
+        public Direction Direction { get; set; }
 
         public Carta()
         {
             InitializeComponent();
-            numero = 1;
+            number = 1;
         }
 
         public Carta(int numero)
@@ -55,20 +53,20 @@ namespace MagicStaircase.Forms.CustomControls
             MouseDown += Carta_MouseDown;
         }
 
-        public void Colocar(Direction direccion, DragEventHandler cardDrop)
+        public void Place(Direction direccion, DragEventHandler cardDrop)
         {
             BorderStyle = BorderStyle.None;
             Font = new Font("Courier new", 20, FontStyle.Bold);
             TextAlign = ContentAlignment.TopCenter;
             Image = GetArrowIcon(direccion.Equals(Direction.Up) ? IconChar.ArrowUp : IconChar.ArrowDown);
-            Direccion = direccion;
+            Direction = direccion;
             AllowDrop = true;
             MouseDown -= Carta_MouseDown;
             DragEnter += CardEnter;
             DragDrop += cardDrop;
         }
 
-        public void Colocada() => Numero = 0;
+        public void Placed() => Numero = 0;
 
         private void Carta_MouseDown(object sender, MouseEventArgs e)
         {
@@ -77,24 +75,24 @@ namespace MagicStaircase.Forms.CustomControls
 
         private void CardEnter(object sender, DragEventArgs e)
         {
-            var origen = e.Data.GetData(typeof(Carta)) as Carta;
-            var destino = sender as Carta;
-            e.Effect = (origen.Fits(destino)) ?
+            var origin = e.Data.GetData(typeof(Carta)) as Carta;
+            var destiny = sender as Carta;
+            e.Effect = (origin.Fits(destiny)) ?
                         DragDropEffects.Copy :
                         DragDropEffects.None;
         }
 
         protected override void OnPaint(PaintEventArgs pe) => base.OnPaint(pe);
 
-        public bool Greater(Carta obj) => numero > obj.Numero;
-        public bool Lower(Carta obj) => numero < obj.Numero;
-        public bool DiezMenos(Carta obj) => numero == obj.Numero - 10;
-        public bool DiezMas(Carta obj) => numero == obj.Numero + 10;
+        public bool Greater(Carta obj) => number > obj.Numero;
+        public bool Lower(Carta obj) => number < obj.Numero;
+        public bool TenLess(Carta obj) => number == obj.Numero - 10;
+        public bool TenMore(Carta obj) => number == obj.Numero + 10;
 
         public bool Fits(Carta obj)
         {
-            if(obj.Direccion.Equals(Direction.Up)) return (Greater(obj) || DiezMenos(obj));
-            if(obj.Direccion.Equals(Direction.Down)) return (Lower(obj) || DiezMas(obj));
+            if(obj.Direction.Equals(Direction.Up)) return (Greater(obj) || TenLess(obj));
+            if(obj.Direction.Equals(Direction.Down)) return (Lower(obj) || TenMore(obj));
             return false;
         }
 
