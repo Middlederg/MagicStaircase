@@ -156,7 +156,6 @@ namespace MagicStaircase.Forms
             }
         }
 
-
         #endregion
 
         private void BtnReset_Click(object sender, EventArgs e)

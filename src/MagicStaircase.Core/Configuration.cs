@@ -17,7 +17,7 @@ namespace MagicStaircase.Core
         public static string CurrentVersion()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            return $"v{assembly.GetName().Version.ToString()}";
+            return $"v{assembly.GetName().Version.ToString(3)}";
         }
     }
 }

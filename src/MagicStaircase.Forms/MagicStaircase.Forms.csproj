@@ -58,7 +58,12 @@
     <Compile Include="..\..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BestRecordsHelper.cs" />
+    <Compile Include="Views\AchievementDetailView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AchievementDetailView.Designer.cs">
+      <DependentUpon>AchievementDetailView.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\AchievementControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,6 +108,9 @@
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\AchievementDetailView.resx">
+      <DependentUpon>AchievementDetailView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\AchievementControl.resx">
       <DependentUpon>AchievementControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +128,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\GameEndView.resx">
       <DependentUpon>GameEndView.cs</DependentUpon>
@@ -152,6 +161,9 @@
       <Project>{3737e358-320e-4bd6-86d1-07e8240a6254}</Project>
       <Name>MagicStaircase.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\main.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

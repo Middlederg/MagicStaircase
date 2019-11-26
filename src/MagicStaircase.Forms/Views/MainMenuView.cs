@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Diagnostics;
 using MagicStaircase.Core;
+using System.Runtime.InteropServices;
 
 namespace MagicStaircase.Forms
 {
@@ -42,7 +43,7 @@ namespace MagicStaircase.Forms
             {
                 var updateChecker = new UpdateChecker();
                 if (await updateChecker.IsUpToDate())
-                    Version.Text += " Up to date";
+                    Version.Text += " Program is up to date";
                 else
                     Version.Text += $"Version {await updateChecker.LastRelease()} avaliable";
             }
@@ -51,5 +52,30 @@ namespace MagicStaircase.Forms
                 MessageBox.Show(ex.Message);
             }
         }
+        private void BtnMaxClick(object sender, EventArgs e) => BarraSuperiorDobleClick(null, null);
+        private void BtnMinClick(object sender, EventArgs e) => WindowState = FormWindowState.Minimized;
+        private void BtnCloseClick(object sender, EventArgs e) => Application.Exit();
+        private void BarraSuperiorDobleClick(object sender, EventArgs e)
+           => WindowState = WindowState.Equals(FormWindowState.Maximized) ?
+            FormWindowState.Normal :
+            FormWindowState.Maximized;
+
+        #region MoverFormulario
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd,
+                 int Msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void MoveFormMouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }

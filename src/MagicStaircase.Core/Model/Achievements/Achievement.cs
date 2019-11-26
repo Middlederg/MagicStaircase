@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MagicStaircase.Core
@@ -17,5 +18,7 @@ namespace MagicStaircase.Core
         public bool AchievementUnlocked(Score score) => unlockingStrategies.All(x => x.IsUnlocked(score));
 
         public override string ToString() => name;
+
+        public string Description() => $"To unlock this achievement, you must: {string.Join("\n-", unlockingStrategies)}";
     }
 }

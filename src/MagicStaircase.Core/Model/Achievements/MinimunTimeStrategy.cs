@@ -10,5 +10,7 @@
         }
 
         public bool IsUnlocked(Score score) => score.Time.IsLowerThan(minimumTime);
+
+        public override string ToString() => $"End a game in less than {minimumTime.ToText()}.";
     }
 }

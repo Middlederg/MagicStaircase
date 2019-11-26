@@ -10,5 +10,7 @@
         }
 
         public bool IsUnlocked(Score score) => score.Points >= minimunScore;
+
+        public override string ToString() => $"Get at least {minimunScore} points in a game.";
     }
 }

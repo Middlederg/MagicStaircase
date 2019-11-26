@@ -47,17 +47,21 @@ namespace MagicStaircase.Forms.CustomControls
 
         private void OnMouseOver(object sender, EventArgs e)
         {
-            (sender as Control).BackColor = Color.AliceBlue;
+            (sender as Control).ForeColor = Color.SeaGreen;
         }
 
         private void OnMouseLeave(object sender, EventArgs e)
         {
-            (sender as Control).BackColor = Color.Transparent;
+            (sender as Control).ForeColor = Color.Black;
         }
 
         private void OnClick(object sender, EventArgs e)
         {
-            MessageBox.Show(string.Join("\n", unlockerScores.Select(x => x.ToString())));
+            var scores = unlockerScores.Where(score => achievement.AchievementUnlocked(score));
+            using (var detailView = new AchievementDetailView(achievement, scores))
+            {
+                detailView.ShowDialog();
+            }
         }
     }
 }

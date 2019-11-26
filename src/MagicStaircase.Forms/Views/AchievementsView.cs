@@ -40,5 +40,7 @@ namespace MagicStaircase.Forms
         {
             await LoadAchievements();
         }
+
+        private void BtnClose_Click(object sender, EventArgs e) => Close();
     }
 }
