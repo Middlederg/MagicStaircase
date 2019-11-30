@@ -24,10 +24,10 @@ namespace MagicStaircase.Forms
         public MainView()
         {
             InitializeComponent();
-            Reset();          
+            InitializeGame();          
         }
 
-        private void Reset()
+        private void InitializeGame()
         {
             time = new Time();
             BtnNext.Enabled = false;
@@ -45,7 +45,10 @@ namespace MagicStaircase.Forms
             {
                 FlpMano.Controls.Add(new Carta(game.TakeCard()));
             }
+            PrintScore();
         }
+
+        private void PrintScore() => LblPuntuacion.Text = $"Score: {game.Points(CardsInHand().Count())}/100";
 
         private async void CardDrop(object sender, DragEventArgs e)
         {
@@ -56,7 +59,7 @@ namespace MagicStaircase.Forms
                 var panelDestino = destino.Parent as Panel;
                 panelDestino.Controls.Remove(destino);
 
-                int indxCarta = Int32.Parse(panelDestino.Tag.ToString());
+                int indxCarta = int.Parse(panelDestino.Tag.ToString());
                 game.AddToPile(origen.Numero, indxCarta);
                 string ayuda = string.Join("\n", game.Piles[indxCarta].Select(x => x.ToString()));
                 
@@ -67,11 +70,11 @@ namespace MagicStaircase.Forms
                 origen.Placed();
 
                 placedCards++;
-                BtnNext.Enabled = (placedCards >= Game.MinCardPerTurn);
-                LblPuntuacion.Text = $"Score: {game.Points}";
+                BtnNext.Enabled = placedCards >= Game.MinCardPerTurn;
+                PrintScore();
                 PutInGrayNonPlayableCards();
 
-                if ((CartasMano().Count() > Game.PlayerCardCount - Game.MinCardPerTurn) && !IsPlayableCard())
+                if ((CardsInHand().Count() > Game.PlayerCardCount - Game.MinCardPerTurn) && !IsPlayableCard())
                 {
                     await JuegoTerminado();
                 }
@@ -82,7 +85,7 @@ namespace MagicStaircase.Forms
         {
             if (placedCards >= 2)
             {
-                foreach (var carta in CartasVacias())
+                foreach (var carta in CardsPlayed())
                 {
                     if (game.HasCards)
                         carta.Numero = game.TakeCard();
@@ -98,11 +101,11 @@ namespace MagicStaircase.Forms
         }
 
         private Carta GetCarta(Panel p) => p.Controls[0] as Carta;
-        private IEnumerable<Carta> CartasVacias() => FlpMano.Controls.OfType<Carta>().Where(x => x.Numero == 0);
-        private IEnumerable<Carta> CartasMano() => FlpMano.Controls.OfType<Carta>().Where(x => x.Numero != 0);
+        private IEnumerable<Carta> CardsPlayed() => FlpMano.Controls.OfType<Carta>().Where(x => x.Numero == 0);
+        private IEnumerable<Carta> CardsInHand() => FlpMano.Controls.OfType<Carta>().Where(x => x.Numero != 0);
         private bool IsPlayableCard()
         {
-            foreach (Carta c in CartasMano())
+            foreach (Carta c in CardsInHand())
             {
                 if (c.Fits(GetCarta(pUp1)) || c.Fits(GetCarta(pUp2)) || c.Fits(GetCarta(pDown1)) || c.Fits(GetCarta(pDown2)))
                     return true;
@@ -112,7 +115,7 @@ namespace MagicStaircase.Forms
 
         private void PutInGrayNonPlayableCards()
         {
-            foreach (Carta c in CartasMano())
+            foreach (Carta c in CardsInHand())
             {
                 if (!c.Fits(GetCarta(pUp1)) && !c.Fits(GetCarta(pUp2)) && !c.Fits(GetCarta(pDown1)) && !c.Fits(GetCarta(pDown2)))
                 {
@@ -129,7 +132,7 @@ namespace MagicStaircase.Forms
 
         private void BtnMaxClick(object sender, EventArgs e) => BarraSuperiorDobleClick(null, null);
         private void BtnMinClick(object sender, EventArgs e) => WindowState = FormWindowState.Minimized;
-        private void BtnCloseClick(object sender, EventArgs e) => Application.Exit();
+        private void BtnCloseClick(object sender, EventArgs e) => Close();
         private void BarraSuperiorDobleClick(object sender, EventArgs e)
            => WindowState = WindowState.Equals(FormWindowState.Maximized) ?
             FormWindowState.Normal :
@@ -161,7 +164,7 @@ namespace MagicStaircase.Forms
         private void BtnReset_Click(object sender, EventArgs e)
         {
             game.Reset();
-            Reset();
+            InitializeGame();
         }
 
         private void BtnExit_Click(object sender, EventArgs e) => Close();
@@ -169,9 +172,8 @@ namespace MagicStaircase.Forms
         private async Task JuegoTerminado()
         {
             StopTimer();
-            using (var gameEndView = new GameEndView(game.Points, time))
+            using (var gameEndView = new GameEndView(game.Points(CardsInHand().Count()), time))
             {
-                gameEndView.DisableCancel();
                 if (gameEndView.ShowDialog() == DialogResult.OK)
                 {
                     await new ScoreRepository().AddScore(gameEndView.Score);

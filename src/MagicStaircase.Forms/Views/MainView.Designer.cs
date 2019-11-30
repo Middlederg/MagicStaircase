@@ -414,8 +414,7 @@
             this.LblPuntuacion.TabIndex = 10;
             this.LblPuntuacion.Text = "Puntuación";
             this.LblPuntuacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTipAyuda.SetToolTip(this.LblPuntuacion, "Puntuación actual (Número de cartas restantes)\r\nCuando no queden cartas, el juego" +
-        " termina con victoria absoluta, por loq ue la máxima puntuación es 0");
+            this.ToolTipAyuda.SetToolTip(this.LblPuntuacion, "Current Score, from 3 to 100");
             // 
             // T
             // 
@@ -423,7 +422,7 @@
             this.T.Interval = 1000;
             this.T.Tick += new System.EventHandler(this.Timer_Tick);
             // 
-            // FrmPrincipal
+            // MainView
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -436,7 +435,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FrmPrincipal";
+            this.Name = "MainView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Up and down cards";
             this.TlpPrincipal.ResumeLayout(false);

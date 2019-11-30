@@ -94,7 +94,7 @@
             this.NameLabel.TabIndex = 1;
             this.NameLabel.Text = "label1";
             this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.NameLabel.Click += new System.EventHandler(this.OnClick);
+            this.NameLabel.Click += new System.EventHandler(this.OnMouseOver);
             this.NameLabel.MouseLeave += new System.EventHandler(this.OnMouseLeave);
             this.NameLabel.MouseHover += new System.EventHandler(this.OnMouseOver);
             // 

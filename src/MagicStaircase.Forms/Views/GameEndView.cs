@@ -1,5 +1,6 @@
 ﻿using FontAwesome.Sharp;
 using MagicStaircase.Core;
+using MagicStaircase.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,9 +17,10 @@ namespace MagicStaircase.Forms
     {
         private readonly int points;
         private readonly Time time;
+        private readonly List<Achievement> achievementsUnlocked = new List<Achievement>();
 
         public Score Score => new Score(new Player(NameTextbox.Text.Trim()), points, time);
-
+        
         public GameEndView(int points, Time time)
         {
             InitializeComponent();
@@ -29,6 +31,17 @@ namespace MagicStaircase.Forms
             LblPuntuacion.Text = $"Score: {points}";
             LblValoracion.Text = Score.Message;
             LblTiempo.Text = $"Time: {time.ToString()}";
+        }
+
+        private async void OnLoad(object sender, EventArgs e)
+        {
+            foreach (var achievement in await AchievementsAvaliable())
+            {
+                if (achievement.AchievementUnlocked(Score))
+                {
+                    achievementsUnlocked.Add(achievement);
+                }
+            }
         }
 
         private void BtnOk_Click(object sender, EventArgs e)
@@ -43,12 +56,30 @@ namespace MagicStaircase.Forms
             Close();
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e)
+        private async void AchievementsButton_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            using (AchievementsView f = new AchievementsView()
+            {
+                Scores = new List<Score>() { Score },
+                Achievements = await AchievementsAvaliable()
+            })
+            {
+                Visible = false;
+                f.ShowDialog();
+                Visible = true;
+            }
         }
-
-        public void DisableCancel() => BtnCancel.Enabled = false;
+      
+        private async Task<IEnumerable<Achievement>> AchievementsAvaliable()
+        {
+            var scores = await new ScoreRepository().GetScores();
+            var achievements = new List<Achievement>();
+            foreach (var achievement in AchievementFactory.Achievements)
+            {
+                if (!scores.Any(x => achievement.AchievementUnlocked(x)))
+                    achievements.Add(achievement);
+            }
+            return achievements;
+        }
     }
 }

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenuView));
             this.TlpPrincipal = new System.Windows.Forms.TableLayoutPanel();
+            this.LblTitulo = new System.Windows.Forms.Label();
             this.FlpControlBox = new System.Windows.Forms.FlowLayoutPanel();
             this.BtnClose = new FontAwesome.Sharp.IconButton();
             this.BtnMax = new FontAwesome.Sharp.IconButton();
@@ -38,7 +39,6 @@
             this.Repo = new System.Windows.Forms.LinkLabel();
             this.MainImage = new System.Windows.Forms.PictureBox();
             this.pGeneral = new System.Windows.Forms.Panel();
-            this.LblTitulo = new System.Windows.Forms.Label();
             this.PlayButton = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.AchievementsButton = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.TlpPrincipal.SuspendLayout();
@@ -51,8 +51,8 @@
             // 
             this.TlpPrincipal.AllowDrop = true;
             this.TlpPrincipal.ColumnCount = 2;
-            this.TlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.TlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.TlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.TlpPrincipal.Controls.Add(this.LblTitulo, 0, 0);
             this.TlpPrincipal.Controls.Add(this.FlpControlBox, 1, 0);
             this.TlpPrincipal.Controls.Add(this.Version, 0, 5);
@@ -72,9 +72,25 @@
             this.TlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.TlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TlpPrincipal.Size = new System.Drawing.Size(384, 384);
             this.TlpPrincipal.TabIndex = 1;
+            // 
+            // LblTitulo
+            // 
+            this.LblTitulo.AutoSize = true;
+            this.LblTitulo.BackColor = System.Drawing.Color.SeaGreen;
+            this.LblTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblTitulo.Font = new System.Drawing.Font("Courier New", 16F, System.Drawing.FontStyle.Bold);
+            this.LblTitulo.ForeColor = System.Drawing.Color.White;
+            this.LblTitulo.Location = new System.Drawing.Point(0, 0);
+            this.LblTitulo.Margin = new System.Windows.Forms.Padding(0);
+            this.LblTitulo.Name = "LblTitulo";
+            this.LblTitulo.Padding = new System.Windows.Forms.Padding(20, 0, 0, 5);
+            this.LblTitulo.Size = new System.Drawing.Size(230, 40);
+            this.LblTitulo.TabIndex = 17;
+            this.LblTitulo.Text = "MAGIC STAIRCASE";
+            this.LblTitulo.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.LblTitulo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveFormMouseDown);
             // 
             // FlpControlBox
             // 
@@ -84,10 +100,10 @@
             this.FlpControlBox.Controls.Add(this.BtnMin);
             this.FlpControlBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FlpControlBox.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.FlpControlBox.Location = new System.Drawing.Point(264, 0);
+            this.FlpControlBox.Location = new System.Drawing.Point(230, 0);
             this.FlpControlBox.Margin = new System.Windows.Forms.Padding(0);
             this.FlpControlBox.Name = "FlpControlBox";
-            this.FlpControlBox.Size = new System.Drawing.Size(120, 40);
+            this.FlpControlBox.Size = new System.Drawing.Size(154, 40);
             this.FlpControlBox.TabIndex = 15;
             // 
             // BtnClose
@@ -98,13 +114,14 @@
             this.BtnClose.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.BtnClose.IconColor = System.Drawing.Color.White;
             this.BtnClose.IconSize = 30;
-            this.BtnClose.Location = new System.Drawing.Point(80, 0);
+            this.BtnClose.Location = new System.Drawing.Point(114, 0);
             this.BtnClose.Margin = new System.Windows.Forms.Padding(0);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Rotation = 0D;
             this.BtnClose.Size = new System.Drawing.Size(40, 40);
             this.BtnClose.TabIndex = 0;
             this.BtnClose.UseVisualStyleBackColor = true;
+            this.BtnClose.Click += new System.EventHandler(this.BtnCloseClick);
             // 
             // BtnMax
             // 
@@ -115,13 +132,14 @@
             this.BtnMax.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
             this.BtnMax.IconColor = System.Drawing.Color.White;
             this.BtnMax.IconSize = 30;
-            this.BtnMax.Location = new System.Drawing.Point(40, 0);
+            this.BtnMax.Location = new System.Drawing.Point(74, 0);
             this.BtnMax.Margin = new System.Windows.Forms.Padding(0);
             this.BtnMax.Name = "BtnMax";
             this.BtnMax.Rotation = 0D;
             this.BtnMax.Size = new System.Drawing.Size(40, 40);
             this.BtnMax.TabIndex = 1;
             this.BtnMax.UseVisualStyleBackColor = true;
+            this.BtnMax.Click += new System.EventHandler(this.BtnMaxClick);
             // 
             // BtnMin
             // 
@@ -131,13 +149,14 @@
             this.BtnMin.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
             this.BtnMin.IconColor = System.Drawing.Color.White;
             this.BtnMin.IconSize = 30;
-            this.BtnMin.Location = new System.Drawing.Point(0, 0);
+            this.BtnMin.Location = new System.Drawing.Point(34, 0);
             this.BtnMin.Margin = new System.Windows.Forms.Padding(0);
             this.BtnMin.Name = "BtnMin";
             this.BtnMin.Rotation = 0D;
             this.BtnMin.Size = new System.Drawing.Size(40, 40);
             this.BtnMin.TabIndex = 2;
             this.BtnMin.UseVisualStyleBackColor = true;
+            this.BtnMin.Click += new System.EventHandler(this.BtnMinClick);
             // 
             // Version
             // 
@@ -146,7 +165,7 @@
             this.Version.Location = new System.Drawing.Point(20, 354);
             this.Version.Margin = new System.Windows.Forms.Padding(20, 0, 20, 0);
             this.Version.Name = "Version";
-            this.Version.Size = new System.Drawing.Size(224, 20);
+            this.Version.Size = new System.Drawing.Size(190, 20);
             this.Version.TabIndex = 13;
             this.Version.Text = "Version";
             this.Version.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -158,7 +177,7 @@
             this.Repo.Location = new System.Drawing.Point(20, 334);
             this.Repo.Margin = new System.Windows.Forms.Padding(20, 0, 20, 0);
             this.Repo.Name = "Repo";
-            this.Repo.Size = new System.Drawing.Size(224, 20);
+            this.Repo.Size = new System.Drawing.Size(190, 20);
             this.Repo.TabIndex = 14;
             this.Repo.TabStop = true;
             this.Repo.Text = "Source code in github.com";
@@ -188,22 +207,6 @@
             this.pGeneral.Name = "pGeneral";
             this.pGeneral.Size = new System.Drawing.Size(386, 386);
             this.pGeneral.TabIndex = 2;
-            // 
-            // LblTitulo
-            // 
-            this.LblTitulo.AutoSize = true;
-            this.LblTitulo.BackColor = System.Drawing.Color.SeaGreen;
-            this.LblTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LblTitulo.Font = new System.Drawing.Font("Courier New", 16F, System.Drawing.FontStyle.Bold);
-            this.LblTitulo.ForeColor = System.Drawing.Color.White;
-            this.LblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.LblTitulo.Margin = new System.Windows.Forms.Padding(0);
-            this.LblTitulo.Name = "LblTitulo";
-            this.LblTitulo.Padding = new System.Windows.Forms.Padding(20, 0, 0, 5);
-            this.LblTitulo.Size = new System.Drawing.Size(264, 40);
-            this.LblTitulo.TabIndex = 17;
-            this.LblTitulo.Text = "MAGIC STAIRCASE";
-            this.LblTitulo.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // PlayButton
             // 

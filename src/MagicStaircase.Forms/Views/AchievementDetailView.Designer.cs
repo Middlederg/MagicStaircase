@@ -33,7 +33,6 @@
             this.LblTitulo = new System.Windows.Forms.Label();
             this.FlpControlBox = new System.Windows.Forms.FlowLayoutPanel();
             this.BtnClose = new FontAwesome.Sharp.IconButton();
-            this.BtnMin = new FontAwesome.Sharp.IconButton();
             this.LvwScores = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
@@ -101,7 +100,6 @@
             // 
             this.FlpControlBox.BackColor = System.Drawing.Color.SeaGreen;
             this.FlpControlBox.Controls.Add(this.BtnClose);
-            this.FlpControlBox.Controls.Add(this.BtnMin);
             this.FlpControlBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FlpControlBox.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.FlpControlBox.Location = new System.Drawing.Point(470, 0);
@@ -126,23 +124,6 @@
             this.BtnClose.TabIndex = 0;
             this.BtnClose.UseVisualStyleBackColor = true;
             this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
-            // 
-            // BtnMin
-            // 
-            this.BtnMin.FlatAppearance.BorderSize = 0;
-            this.BtnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMin.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.BtnMin.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
-            this.BtnMin.IconColor = System.Drawing.Color.White;
-            this.BtnMin.IconSize = 30;
-            this.BtnMin.Location = new System.Drawing.Point(16, 0);
-            this.BtnMin.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnMin.Name = "BtnMin";
-            this.BtnMin.Rotation = 0D;
-            this.BtnMin.Size = new System.Drawing.Size(32, 32);
-            this.BtnMin.TabIndex = 2;
-            this.BtnMin.UseVisualStyleBackColor = true;
-            this.BtnMin.Click += new System.EventHandler(this.BtnMin_Click);
             // 
             // LvwScores
             // 
@@ -204,7 +185,6 @@
         private System.Windows.Forms.Label LblTitulo;
         private System.Windows.Forms.FlowLayoutPanel FlpControlBox;
         private FontAwesome.Sharp.IconButton BtnClose;
-        private FontAwesome.Sharp.IconButton BtnMin;
         private System.Windows.Forms.ListView LvwScores;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label DescriptionLabel;

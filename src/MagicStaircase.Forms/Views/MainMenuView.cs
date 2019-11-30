@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using MagicStaircase.Core;
 using System.Runtime.InteropServices;
+using MagicStaircase.Core.Repositories;
+using System.Threading.Tasks;
 
 namespace MagicStaircase.Forms
 {
@@ -24,14 +26,24 @@ namespace MagicStaircase.Forms
             }
         }
 
-        private void BtnBestScores_Click(object sender, EventArgs e)
+        private async void BtnBestScores_Click(object sender, EventArgs e)
         {
-            using (BestScoresView f = new BestScoresView())
+            AchievementsButton.IconChar = FontAwesome.Sharp.IconChar.Spinner;
+            AchievementsButton.Text = "LOADING...";
+            var scores = await new ScoreRepository().GetScores();
+
+            using (AchievementsView f = new AchievementsView()
+            {
+                Scores = scores,
+                Achievements = AchievementFactory.Achievements
+            })
             {
                 Visible = false;
                 f.ShowDialog();
                 Visible = true;
             }
+            AchievementsButton.IconChar = FontAwesome.Sharp.IconChar.Trophy;
+            AchievementsButton.Text = "ACHIEVEMENTS";
         }
 
         private void BtnExit_Click(object sender, EventArgs e) => Application.Exit();
@@ -43,15 +55,37 @@ namespace MagicStaircase.Forms
             {
                 var updateChecker = new UpdateChecker();
                 if (await updateChecker.IsUpToDate())
-                    Version.Text += " Program is up to date";
+                {
+                    TlpPrincipal.Controls.Add(new Label()
+                    {
+                        Text = "Program is up to date",
+                        Dock = DockStyle.Fill,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+                    }, 1, 5);
+                }
                 else
-                    Version.Text += $"Version {await updateChecker.LastRelease()} avaliable";
+                {
+                    var linkLabel = new LinkLabel()
+                    {
+                        Text = $"Version {await updateChecker.LastRelease()} avaliable",
+                        Dock = DockStyle.Fill,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+                    };
+                    linkLabel.Click += OnNewVersionLink;
+                    TlpPrincipal.Controls.Add(linkLabel, 1, 5);
+                }
             }
             catch (Exception ex)
-            { 
+            {
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void OnNewVersionLink(object sender, EventArgs e)
+        {
+            Process.Start(Configuration.LatestRelease);
+        }
+
         private void BtnMaxClick(object sender, EventArgs e) => BarraSuperiorDobleClick(null, null);
         private void BtnMinClick(object sender, EventArgs e) => WindowState = FormWindowState.Minimized;
         private void BtnCloseClick(object sender, EventArgs e) => Application.Exit();
@@ -73,7 +107,11 @@ namespace MagicStaircase.Forms
 
         private void MoveFormMouseDown(object sender, MouseEventArgs e)
         {
-
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
 
         #endregion

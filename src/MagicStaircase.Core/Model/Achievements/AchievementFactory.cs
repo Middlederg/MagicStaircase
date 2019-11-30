@@ -23,6 +23,8 @@ namespace MagicStaircase.Core
 
         public static Achievement FastPlayer => new Achievement("Fast player", UnderMinutes(1));
         public static Achievement EasyAchievemnt => new Achievement("Easy one", PointsAtLeast(10));
+        public static Achievement OnePointAchievemnt => new Achievement("One point", PointsAtLeast(1));
+        public static Achievement TwoPointsAchievemnt => new Achievement("Two points", PointsAtLeast(2));
 
         public static List<Achievement> Achievements = new List<Achievement>
         {
@@ -33,7 +35,9 @@ namespace MagicStaircase.Core
             ExcelenceCertificate,
             ApprovalCertificate,
             FastPlayer,
-            EasyAchievemnt
+            EasyAchievemnt,
+            OnePointAchievemnt,
+            TwoPointsAchievemnt
         };
     }
 }

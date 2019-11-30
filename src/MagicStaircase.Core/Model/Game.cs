@@ -14,7 +14,7 @@ namespace MagicStaircase.Core
         public List<int>[] Piles { get; private set; }
 
         public bool HasCards => Deck.Any();
-        public int Points => 100 - Deck.Count();
+        public int Points(int cardsInHand) => 100 - Deck.Count() - cardsInHand;
 
         public Game()
         {
