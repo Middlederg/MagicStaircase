@@ -33,7 +33,7 @@ namespace MagicStaircase.Forms.CustomControls
             get => unlockerScores;
             set
             {
-                unlockerScores = value;
+                unlockerScores = value ?? new List<Score>();
                 IconPbx.IconColor = unlockerScores.Any() ? ActiveColor : InactiveColor;
                 SubtitleLabel.ForeColor = unlockerScores.Any() ? ActiveColor : InactiveColor;
                 SubtitleLabel.Text = unlockerScores.Any() ? "Achievement unlocked!" : "Pending challenge";

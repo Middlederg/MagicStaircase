@@ -32,10 +32,11 @@
             this.LblValoracion = new System.Windows.Forms.Label();
             this.LblPuntuacion = new System.Windows.Forms.Label();
             this.TlpGeneral = new System.Windows.Forms.TableLayoutPanel();
-            this.BtnOk = new MagicStaircase.Forms.CustomControls.CustomButton();
-            this.NameTextbox = new System.Windows.Forms.TextBox();
+            this.AchievementsTitleLabel = new System.Windows.Forms.Label();
+            this.Flp = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.AchievementsButton = new MagicStaircase.Forms.CustomControls.CustomButton();
+            this.NameTextbox = new System.Windows.Forms.TextBox();
+            this.BtnOk = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.TlpGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +47,7 @@
             this.LblTiempo.Location = new System.Drawing.Point(13, 67);
             this.LblTiempo.Margin = new System.Windows.Forms.Padding(0);
             this.LblTiempo.Name = "LblTiempo";
-            this.LblTiempo.Size = new System.Drawing.Size(168, 25);
+            this.LblTiempo.Size = new System.Drawing.Size(100, 25);
             this.LblTiempo.TabIndex = 12;
             this.LblTiempo.Text = "Tiempo";
             // 
@@ -61,7 +62,7 @@
             this.LblValoracion.Location = new System.Drawing.Point(13, 12);
             this.LblValoracion.Margin = new System.Windows.Forms.Padding(0);
             this.LblValoracion.Name = "LblValoracion";
-            this.LblValoracion.Size = new System.Drawing.Size(421, 30);
+            this.LblValoracion.Size = new System.Drawing.Size(358, 30);
             this.LblValoracion.TabIndex = 11;
             this.LblValoracion.Text = "Valoración";
             this.LblValoracion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -73,7 +74,7 @@
             this.LblPuntuacion.Location = new System.Drawing.Point(13, 42);
             this.LblPuntuacion.Margin = new System.Windows.Forms.Padding(0);
             this.LblPuntuacion.Name = "LblPuntuacion";
-            this.LblPuntuacion.Size = new System.Drawing.Size(168, 25);
+            this.LblPuntuacion.Size = new System.Drawing.Size(100, 25);
             this.LblPuntuacion.TabIndex = 10;
             this.LblPuntuacion.Text = "Puntuación";
             this.LblPuntuacion.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -81,30 +82,81 @@
             // TlpGeneral
             // 
             this.TlpGeneral.ColumnCount = 2;
-            this.TlpGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.TlpGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.TlpGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.TlpGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TlpGeneral.Controls.Add(this.label1, 0, 3);
             this.TlpGeneral.Controls.Add(this.BtnOk, 0, 5);
             this.TlpGeneral.Controls.Add(this.LblPuntuacion, 0, 1);
             this.TlpGeneral.Controls.Add(this.NameTextbox, 0, 4);
             this.TlpGeneral.Controls.Add(this.LblTiempo, 0, 2);
             this.TlpGeneral.Controls.Add(this.LblValoracion, 0, 0);
-            this.TlpGeneral.Controls.Add(this.AchievementsButton, 1, 1);
+            this.TlpGeneral.Controls.Add(this.AchievementsTitleLabel, 0, 6);
+            this.TlpGeneral.Controls.Add(this.Flp, 0, 7);
             this.TlpGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TlpGeneral.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TlpGeneral.Location = new System.Drawing.Point(0, 0);
             this.TlpGeneral.Margin = new System.Windows.Forms.Padding(0);
             this.TlpGeneral.Name = "TlpGeneral";
             this.TlpGeneral.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
-            this.TlpGeneral.RowCount = 6;
+            this.TlpGeneral.RowCount = 8;
             this.TlpGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.TlpGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.TlpGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.TlpGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TlpGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.TlpGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.TlpGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.TlpGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TlpGeneral.Size = new System.Drawing.Size(447, 200);
+            this.TlpGeneral.Size = new System.Drawing.Size(384, 380);
             this.TlpGeneral.TabIndex = 13;
+            // 
+            // AchievementsTitleLabel
+            // 
+            this.AchievementsTitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.AchievementsTitleLabel.AutoSize = true;
+            this.TlpGeneral.SetColumnSpan(this.AchievementsTitleLabel, 2);
+            this.AchievementsTitleLabel.Location = new System.Drawing.Point(23, 203);
+            this.AchievementsTitleLabel.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.AchievementsTitleLabel.Name = "AchievementsTitleLabel";
+            this.AchievementsTitleLabel.Size = new System.Drawing.Size(175, 14);
+            this.AchievementsTitleLabel.TabIndex = 15;
+            this.AchievementsTitleLabel.Text = "No achievements unlocked";
+            this.AchievementsTitleLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // Flp
+            // 
+            this.Flp.AutoScroll = true;
+            this.TlpGeneral.SetColumnSpan(this.Flp, 2);
+            this.Flp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Flp.Location = new System.Drawing.Point(13, 217);
+            this.Flp.Margin = new System.Windows.Forms.Padding(0);
+            this.Flp.Name = "Flp";
+            this.Flp.Size = new System.Drawing.Size(358, 151);
+            this.Flp.TabIndex = 14;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.TlpGeneral.SetColumnSpan(this.label1, 2);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(13, 92);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(358, 20);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Insert your name:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // NameTextbox
+            // 
+            this.TlpGeneral.SetColumnSpan(this.NameTextbox, 2);
+            this.NameTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NameTextbox.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NameTextbox.Location = new System.Drawing.Point(13, 112);
+            this.NameTextbox.Margin = new System.Windows.Forms.Padding(0);
+            this.NameTextbox.Name = "NameTextbox";
+            this.NameTextbox.Size = new System.Drawing.Size(358, 26);
+            this.NameTextbox.TabIndex = 2;
             // 
             // BtnOk
             // 
@@ -123,67 +175,18 @@
             this.BtnOk.Margin = new System.Windows.Forms.Padding(0);
             this.BtnOk.Name = "BtnOk";
             this.BtnOk.Rotation = 0D;
-            this.BtnOk.Size = new System.Drawing.Size(421, 41);
+            this.BtnOk.Size = new System.Drawing.Size(358, 40);
             this.BtnOk.TabIndex = 3;
             this.BtnOk.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnOk.UseVisualStyleBackColor = false;
             this.BtnOk.Click += new System.EventHandler(this.BtnOk_Click);
             // 
-            // NameTextbox
-            // 
-            this.TlpGeneral.SetColumnSpan(this.NameTextbox, 2);
-            this.NameTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NameTextbox.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameTextbox.Location = new System.Drawing.Point(13, 112);
-            this.NameTextbox.Margin = new System.Windows.Forms.Padding(0);
-            this.NameTextbox.Name = "NameTextbox";
-            this.NameTextbox.Size = new System.Drawing.Size(421, 26);
-            this.NameTextbox.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.TlpGeneral.SetColumnSpan(this.label1, 2);
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(13, 92);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(421, 20);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Insert your name:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // AchievementsButton
-            // 
-            this.AchievementsButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.AchievementsButton.BackColor = System.Drawing.Color.SeaGreen;
-            this.AchievementsButton.FlatAppearance.BorderSize = 0;
-            this.AchievementsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AchievementsButton.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.AchievementsButton.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold);
-            this.AchievementsButton.ForeColor = System.Drawing.Color.White;
-            this.AchievementsButton.IconChar = FontAwesome.Sharp.IconChar.Trophy;
-            this.AchievementsButton.IconColor = System.Drawing.Color.White;
-            this.AchievementsButton.IconSize = 20;
-            this.AchievementsButton.Location = new System.Drawing.Point(187, 52);
-            this.AchievementsButton.Margin = new System.Windows.Forms.Padding(0);
-            this.AchievementsButton.Name = "AchievementsButton";
-            this.AchievementsButton.Rotation = 0D;
-            this.TlpGeneral.SetRowSpan(this.AchievementsButton, 2);
-            this.AchievementsButton.Size = new System.Drawing.Size(240, 30);
-            this.AchievementsButton.TabIndex = 14;
-            this.AchievementsButton.Text = "Achievements unlocked";
-            this.AchievementsButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.AchievementsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.AchievementsButton.UseVisualStyleBackColor = false;
-            this.AchievementsButton.Click += new System.EventHandler(this.AchievementsButton_Click);
-            // 
             // GameEndView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 200);
+            this.ClientSize = new System.Drawing.Size(384, 380);
             this.ControlBox = false;
             this.Controls.Add(this.TlpGeneral);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -209,6 +212,7 @@
         private CustomControls.CustomButton BtnOk;
         private System.Windows.Forms.TextBox NameTextbox;
         private System.Windows.Forms.Label label1;
-        private CustomControls.CustomButton AchievementsButton;
+        private System.Windows.Forms.FlowLayoutPanel Flp;
+        private System.Windows.Forms.Label AchievementsTitleLabel;
     }
 }

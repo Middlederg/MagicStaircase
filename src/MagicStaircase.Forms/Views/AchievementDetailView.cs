@@ -21,7 +21,7 @@ namespace MagicStaircase.Forms
             LblTitulo.Text = achievement.ToString();
             DescriptionLabel.Text = achievement.Description();
 
-            LvwScores.Columns.AddRange(new string[] { "Player", "Points", "Date", "Time" }.Select(x => new ColumnHeader() { Text = x }).ToArray());
+            LvwScores.Columns.AddRange(GetColumns().ToArray());
             foreach (var score in scores)
             {
                 ListViewItem item = new ListViewItem(score.Player.ToString());
@@ -30,6 +30,14 @@ namespace MagicStaircase.Forms
                 item.SubItems.Add(score.Time.ToString());
                 LvwScores.Items.Add(item);
             }
+        }
+
+        private IEnumerable<ColumnHeader> GetColumns()
+        {
+            yield return new ColumnHeader() { Text = "Player", Width = 90 };
+            yield return new ColumnHeader() { Text = "Points", Width = 55 };
+            yield return new ColumnHeader() { Text = "Date", Width = 90 };
+            yield return new ColumnHeader() { Text = "Time", Width = 50 };
         }
 
         private void BtnClose_Click(object sender, EventArgs e) => Close();

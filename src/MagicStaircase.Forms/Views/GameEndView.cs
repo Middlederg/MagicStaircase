@@ -1,6 +1,7 @@
 ﻿using FontAwesome.Sharp;
 using MagicStaircase.Core;
 using MagicStaircase.Core.Repositories;
+using MagicStaircase.Forms.CustomControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,6 @@ namespace MagicStaircase.Forms
     {
         private readonly int points;
         private readonly Time time;
-        private readonly List<Achievement> achievementsUnlocked = new List<Achievement>();
 
         public Score Score => new Score(new Player(NameTextbox.Text.Trim()), points, time);
         
@@ -35,11 +35,20 @@ namespace MagicStaircase.Forms
 
         private async void OnLoad(object sender, EventArgs e)
         {
+            Flp.Controls.Clear();
             foreach (var achievement in await AchievementsAvaliable())
             {
                 if (achievement.AchievementUnlocked(Score))
                 {
-                    achievementsUnlocked.Add(achievement);
+                    AchievementsTitleLabel.Text = "Acievements unlocked:";
+                    Flp.Controls.Add(new AchievementControl()
+                    {
+                        BackColor = Color.Linen,
+                        BorderStyle = BorderStyle.FixedSingle,
+                        Margin = new Padding(15, 15, 0, 0),
+                        Achievement = achievement,
+                        UnlockerScores = new List<Score>() { Score }
+                    });
                 }
             }
         }
@@ -54,20 +63,6 @@ namespace MagicStaircase.Forms
 
             DialogResult = DialogResult.OK;
             Close();
-        }
-
-        private async void AchievementsButton_Click(object sender, EventArgs e)
-        {
-            using (AchievementsView f = new AchievementsView()
-            {
-                Scores = new List<Score>() { Score },
-                Achievements = await AchievementsAvaliable()
-            })
-            {
-                Visible = false;
-                f.ShowDialog();
-                Visible = true;
-            }
         }
       
         private async Task<IEnumerable<Achievement>> AchievementsAvaliable()
