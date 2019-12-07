@@ -18,12 +18,18 @@ namespace MagicStaircase.Forms
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
-            using (MainView f = new MainView())
+            bool beginAgain = false;
+            do
             {
-                Visible = false;
-                f.ShowDialog();
-                Visible = true;
+                using (MainView f = new MainView())
+                {
+                    Visible = false;
+                    f.ShowDialog();
+                    beginAgain = f.BeginAgain;
+                }
             }
+            while (beginAgain);
+            Visible = true;
         }
 
         private async void BtnBestScores_Click(object sender, EventArgs e)

@@ -21,6 +21,8 @@ namespace MagicStaircase.Forms
         private int placedCards;
         private Time time;
 
+        public bool BeginAgain { get; private set; }
+
         public MainView()
         {
             InitializeComponent();
@@ -163,8 +165,8 @@ namespace MagicStaircase.Forms
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
-            game.Reset();
-            InitializeGame();
+            BeginAgain = true;
+            Close();
         }
 
         private void BtnExit_Click(object sender, EventArgs e) => Close();
