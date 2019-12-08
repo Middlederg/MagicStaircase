@@ -8,7 +8,7 @@ https://boardgamegeek.com/boardgame/173090/game
 
 # Releases
 
-Las releases siguen el patrón: <major version>.<minor version>.<build number>
+Las releases siguen el patrón: major version.minor version.build number
 Para sacar una nueva release:
 
 - Cambiar la versión en el fichero GlobalAssemblyInfo.cs
