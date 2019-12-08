@@ -1,11 +1,13 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 
 namespace MagicStaircase.Core
 {
     public static class Configuration
     {
-        public static string MainDirectory = Directory.GetCurrentDirectory();
+        public const string ProgramFolder = "MagicStaircase";
+        public static string MainDirectory = $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\{ProgramFolder}";
         public static string ScoresDirectory = $@"{MainDirectory}\scores\";
         public static string ScoresFile = $@"{ScoresDirectory}data.txt";
 
