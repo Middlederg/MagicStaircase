@@ -1,17 +1,22 @@
 # Magic Staircase
 
-The Game cardgame implementation in windows forms
+The Game cardgame implementation 
+
+- In Blazor webassembly 
+
+- In windows forms
 
 https://boardgamegeek.com/boardgame/173090/game
 
 ---
 
-# Releases
+# How to release new versions in blazor wasm
 
-Las releases siguen el patrón: major version.minor version.build number
-Para sacar una nueva release:
+- Pushes to master are automatically deployed (see .github/workflows/cd.yaml)
 
-- Cambiar la versión en el fichero GlobalAssemblyInfo.cs
-- Cambiar la versión el el proyecto de instalación
-- Subir a github la release (MagisStaircase.msi) y tagearla con "v" seguido del número de release
+# How to release new versions in winforms
+
+1. Change version in MagicStaircase.Core.csproj file
+2. Change version in installation project
+3. Upload to github the generated file (MagisStaircase.msi) y and tag it with "v" and version number
 

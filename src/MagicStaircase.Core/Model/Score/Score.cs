@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace MagicStaircase.Core
 {
@@ -20,7 +18,6 @@ namespace MagicStaircase.Core
             Date = DateTime.Now;
             Time = time;
         }
-
 
         public string Message
         {

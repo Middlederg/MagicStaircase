@@ -129,6 +129,7 @@
             // 
             this.TlpPrincipal.SetColumnSpan(this.LvwScores, 2);
             this.LvwScores.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LvwScores.HideSelection = false;
             this.LvwScores.Location = new System.Drawing.Point(235, 62);
             this.LvwScores.Margin = new System.Windows.Forms.Padding(0, 0, 10, 10);
             this.LvwScores.Name = "LvwScores";
@@ -169,6 +170,7 @@
             this.Font = new System.Drawing.Font("Courier New", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AchievementDetailView";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AchievementDetailView";
             this.TlpPrincipal.ResumeLayout(false);

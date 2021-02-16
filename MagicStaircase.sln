@@ -9,7 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Forms", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A1C91F8D-7E02-47B5-A587-536530DB80A8}"
 	ProjectSection(SolutionItems) = preProject
-		GlobalAssemblyInfo.cs = GlobalAssemblyInfo.cs
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+		build\dependencies.props = build\dependencies.props
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicStaircase.Tests", "test\MagicStaircase.Tests\MagicStaircase.Tests.csproj", "{B1A3D3D9-E06A-4068-A1C4-503E0F5C8F42}"

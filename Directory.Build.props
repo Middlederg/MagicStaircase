@@ -1,0 +1,10 @@
+<Project>
+    <Import Project="build/dependencies.props"/>
+    <PropertyGroup Label="Default Metadata">
+        <Authors>jcl86</Authors>
+        <Company>Middlederg</Company>
+        <PublishUrl></PublishUrl>
+        <WinformsPublishUrl>https://github.com/Middlederg/MagicStaircase/releases/</WinformsPublishUrl>
+        <RepositoryUrl>https://github.com/middlederg/magicstaircase.git</RepositoryUrl>
+    </PropertyGroup>
+</Project>
