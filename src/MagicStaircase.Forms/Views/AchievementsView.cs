@@ -32,7 +32,7 @@ namespace MagicStaircase.Forms
                         BorderStyle = BorderStyle.FixedSingle,
                         Margin = new Padding(15, 15, 0, 0),
                         Achievement = achievement,
-                        UnlockerScores = Scores.Where(x => achievement.AchievementUnlocked(x))
+                        UnlockerScores = Scores.Where(x => achievement.TryToUnlockAchievement(x))
                     });
                 }
             }

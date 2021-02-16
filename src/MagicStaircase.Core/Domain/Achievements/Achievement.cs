@@ -15,7 +15,7 @@ namespace MagicStaircase.Core
             this.unlockingStrategies = unlockingStrategies.ToList();
         }
 
-        public bool AchievementUnlocked(Score score) => unlockingStrategies.All(x => x.IsUnlocked(score));
+        public bool TryToUnlockAchievement(Score score) => unlockingStrategies.All(x => x.IsUnlocked(score));
 
         public override string ToString() => name;
 

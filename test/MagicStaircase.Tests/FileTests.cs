@@ -8,11 +8,11 @@ namespace MagicStaircase.Tests
 {
     public class FileTests
     {
-        private readonly ScoreRepository repository;
+        private readonly LocalFileScoreRepository repository;
 
         public FileTests()
         {
-            repository = new ScoreRepository();
+            repository = new LocalFileScoreRepository();
         }
 
         [Fact]

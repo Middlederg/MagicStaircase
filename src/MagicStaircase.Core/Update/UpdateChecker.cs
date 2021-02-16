@@ -20,8 +20,7 @@ namespace MagicStaircase.Core
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("MagicS", ""));
-                string endpoint = $"https://api.github.com/repos/Middlederg/MagicStaircase/releases/latest";
-                HttpResponseMessage response = await client.GetAsync(endpoint);
+                HttpResponseMessage response = await client.GetAsync(Configuration.LatestReleaseApiEndpoint);
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new Exception($"Could not check if program is up to date\n{await response.Content.ReadAsStringAsync()}");

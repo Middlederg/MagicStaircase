@@ -178,7 +178,7 @@ namespace MagicStaircase.Forms
             {
                 if (gameEndView.ShowDialog() == DialogResult.OK)
                 {
-                    await new ScoreRepository().AddScore(gameEndView.Score);
+                    await new LocalFileScoreRepository().AddScore(gameEndView.Score);
                 }
             }
             DisableButtons();

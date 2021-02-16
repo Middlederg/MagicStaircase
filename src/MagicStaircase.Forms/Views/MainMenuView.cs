@@ -36,7 +36,7 @@ namespace MagicStaircase.Forms
         {
             AchievementsButton.IconChar = FontAwesome.Sharp.IconChar.Spinner;
             AchievementsButton.Text = "LOADING...";
-            var scores = await new ScoreRepository().GetScores();
+            var scores = await new LocalFileScoreRepository().GetScores();
 
             using (AchievementsView f = new AchievementsView()
             {

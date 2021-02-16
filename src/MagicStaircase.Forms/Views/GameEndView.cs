@@ -38,7 +38,7 @@ namespace MagicStaircase.Forms
             Flp.Controls.Clear();
             foreach (var achievement in await AchievementsAvaliable())
             {
-                if (achievement.AchievementUnlocked(Score))
+                if (achievement.TryToUnlockAchievement(Score))
                 {
                     AchievementsTitleLabel.Text = "Acievements unlocked:";
                     Flp.Controls.Add(new AchievementControl()
@@ -67,11 +67,11 @@ namespace MagicStaircase.Forms
       
         private async Task<IEnumerable<Achievement>> AchievementsAvaliable()
         {
-            var scores = await new ScoreRepository().GetScores();
+            var scores = await new LocalFileScoreRepository().GetScores();
             var achievements = new List<Achievement>();
             foreach (var achievement in AchievementFactory.Achievements)
             {
-                if (!scores.Any(x => achievement.AchievementUnlocked(x)))
+                if (!scores.Any(x => achievement.TryToUnlockAchievement(x)))
                     achievements.Add(achievement);
             }
             return achievements;

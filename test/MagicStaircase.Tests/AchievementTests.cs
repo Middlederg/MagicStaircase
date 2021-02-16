@@ -12,7 +12,7 @@ namespace MagicStaircase.Tests
             var achievement = AchievementFactory.GoldMedal;
             var score = new Score(TestFactory.AnyPlayer, 100,TestFactory.AnyTime);
 
-            var result = achievement.AchievementUnlocked(score);
+            var result = achievement.TryToUnlockAchievement(score);
 
             Assert.True(result);
         }
@@ -23,7 +23,7 @@ namespace MagicStaircase.Tests
             var achievement = AchievementFactory.GoldMedal;
             var score = new Score(TestFactory.AnyPlayer, 96, TestFactory.AnyTime);
 
-            var result = achievement.AchievementUnlocked(score);
+            var result = achievement.TryToUnlockAchievement(score);
 
             Assert.False(result);
         }

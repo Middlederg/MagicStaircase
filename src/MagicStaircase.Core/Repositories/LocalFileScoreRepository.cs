@@ -7,9 +7,9 @@ using Newtonsoft.Json;
 
 namespace MagicStaircase.Core.Repositories
 {
-    public class ScoreRepository
+    public class LocalFileScoreRepository
     {
-        public ScoreRepository()
+        public LocalFileScoreRepository()
         {
             Directory.CreateDirectory(Configuration.ScoresDirectory);
         }
@@ -17,7 +17,9 @@ namespace MagicStaircase.Core.Repositories
         public async Task<IEnumerable<Score>> GetScores()
         {
             if (!File.Exists(Configuration.ScoresFile))
+            {
                 return new List<Score>();
+            }
 
             using (var streamReader = new StreamReader(Configuration.ScoresFile))
             {

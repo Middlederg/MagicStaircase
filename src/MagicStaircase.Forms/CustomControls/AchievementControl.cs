@@ -57,7 +57,7 @@ namespace MagicStaircase.Forms.CustomControls
 
         private void OnClick(object sender, EventArgs e)
         {
-            var scores = unlockerScores.Where(score => achievement.AchievementUnlocked(score));
+            var scores = unlockerScores.Where(score => achievement.TryToUnlockAchievement(score));
             using (var detailView = new AchievementDetailView(achievement, scores))
             {
                 detailView.ShowDialog();
