@@ -63,7 +63,7 @@ namespace MagicStaircase.Forms
 
                 int indxCarta = int.Parse(panelDestino.Tag.ToString());
                 game.AddToPile(origen.Numero, indxCarta);
-                string ayuda = string.Join("\n", game.Piles[indxCarta].Select(x => x.ToString()));
+                string ayuda = string.Join("\n", game.Piles.ElementAt(indxCarta).Select(x => x.ToString()));
                 
                 var nuevaCarta = new Carta(origen.Numero);
                 ToolTipAyuda.SetToolTip(nuevaCarta, ayuda);

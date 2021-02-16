@@ -16,38 +16,33 @@ namespace MagicStaircase.Forms.CustomControls
     {
         public int FontSize { get; set; } = 40;
 
-        private int number;
-        public int Numero
+        private readonly Pile pile;
+        public void AddCard(int value)
         {
-            get { return number; }
-            set
+            if (value == 0)
             {
-                number = value;
-                if (number == 0)
-                {
-                    Text = "";
-                    BackColor = SystemColors.Control;
-                }
-                else
-                {
-                    Text = number.ToString();
-                    BackColor = Color.White;
-                }
+                Text = "";
+                BackColor = SystemColors.Control;
             }
+            else
+            {
+                Text = value.ToString();
+                BackColor = Color.White;
+                pile.Add(new Card(value));
+            }
+            
         }
-
-        public Direction Direction { get; set; }
 
         public Carta()
         {
             InitializeComponent();
-            number = 1;
+            pile = new Pile(Direction.Up);
         }
 
-        public Carta(int numero)
+        public Carta(Direction direction)
         {
             InitializeComponent();
-            Numero = numero;
+            pile = new Pile(direction);
             Font = new Font("Courier new", FontSize, FontStyle.Regular);
             BorderStyle = BorderStyle.FixedSingle;
             MouseDown += Carta_MouseDown;
@@ -91,6 +86,7 @@ namespace MagicStaircase.Forms.CustomControls
 
         public bool Fits(Carta obj)
         {
+            pile.fit
             if(obj.Direction.Equals(Direction.Up)) return (Greater(obj) || TenLess(obj));
             if(obj.Direction.Equals(Direction.Down)) return (Lower(obj) || TenMore(obj));
             return false;

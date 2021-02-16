@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace MagicStaircase.Core
@@ -11,7 +10,7 @@ namespace MagicStaircase.Core
 
         public List<int> Deck { get; private set; }
 
-        public List<int>[] Piles { get; private set; }
+        public IEnumerable<Pile> Piles { get; private set; }
 
         public bool HasCards => Deck.Any();
         public int Points(int cardsInHand) => 100 - Deck.Count() - cardsInHand;
@@ -24,11 +23,13 @@ namespace MagicStaircase.Core
         public void Reset()
         {
             Deck = Enumerable.Range(2, 97).ToList().RandomizeList().ToList();
-            Piles = new List<int>[4];
-            Piles[0] = new List<int>() { 1 };
-            Piles[1] = new List<int>() { 1 };
-            Piles[2] = new List<int>() { 99 };
-            Piles[3] = new List<int>() { 99 };
+            Piles = new List<Pile>
+            {
+                new Pile(Direction.Up),
+                new Pile(Direction.Up),
+                new Pile(Direction.Down),
+                new Pile(Direction.Down)
+            };
         }
 
         public int TakeCard()
@@ -38,6 +39,6 @@ namespace MagicStaircase.Core
             return num;
         }
 
-        public void AddToPile(int number, int pileIndx) => Piles[pileIndx].Add(number);
+        public void AddToPile(int number, int pileIndx) => Piles.ElementAt(pileIndx).Add(new Card(number));
     }
 }
