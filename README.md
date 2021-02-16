@@ -6,6 +6,8 @@ The Game cardgame implementation
 
 - In windows forms
 
+![winforms](resources/winforms-main.JPG)
+
 https://boardgamegeek.com/boardgame/173090/game
 
 ---
