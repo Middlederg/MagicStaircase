@@ -18,7 +18,7 @@ namespace MagicStaircase.Forms
     public partial class MainView : Form
     {
         private Game game;
-        private int placedCards;
+        private int totalPlacedCardsInTurn;
         private Time time;
 
         public bool BeginAgain { get; private set; }
@@ -33,7 +33,7 @@ namespace MagicStaircase.Forms
         {
             time = new Time();
             BtnNext.Enabled = false;
-            placedCards = 0;
+            totalPlacedCardsInTurn = 0;
             CartaUp1.Numero = CartaUp2.Numero = 1;
             CartaDown1.Numero = CartaDown2.Numero = 99;
             CartaUp1.Place(Direction.Up, CardDrop);
@@ -63,7 +63,7 @@ namespace MagicStaircase.Forms
 
                 int indxCarta = int.Parse(panelDestino.Tag.ToString());
                 game.AddToPile(origen.Numero, indxCarta);
-                string ayuda = string.Join("\n", game.Piles.ElementAt(indxCarta).Select(x => x.ToString()));
+                string ayuda = string.Join("\n", game.Piles.ElementAt(indxCarta));
                 
                 var nuevaCarta = new Carta(origen.Numero);
                 ToolTipAyuda.SetToolTip(nuevaCarta, ayuda);
@@ -71,33 +71,33 @@ namespace MagicStaircase.Forms
                 nuevaCarta.Place(destino.Direction, CardDrop);
                 origen.Placed();
 
-                placedCards++;
-                BtnNext.Enabled = placedCards >= Game.MinCardPerTurn;
+                totalPlacedCardsInTurn++;
+                BtnNext.Enabled = totalPlacedCardsInTurn >= Game.MinCardPerTurn;
                 PrintScore();
                 PutInGrayNonPlayableCards();
 
                 if ((CardsInHand().Count() > Game.PlayerCardCount - Game.MinCardPerTurn) && !IsPlayableCard())
                 {
-                    await JuegoTerminado();
+                    await EndGame();
                 }
             }
         }
 
         private async void BtnNext_Click(object sender, EventArgs e)
         {
-            if (placedCards >= 2)
+            if (totalPlacedCardsInTurn >= 2)
             {
                 foreach (var carta in CardsPlayed())
                 {
                     if (game.HasCards)
                         carta.Numero = game.TakeCard();
                 }
-                placedCards = 0;
+                totalPlacedCardsInTurn = 0;
                 PutInGrayNonPlayableCards();
 
                 if (!IsPlayableCard())
                 {
-                    await JuegoTerminado();
+                    await EndGame();
                 }
             }
         }
@@ -171,7 +171,7 @@ namespace MagicStaircase.Forms
 
         private void BtnExit_Click(object sender, EventArgs e) => Close();
 
-        private async Task JuegoTerminado()
+        private async Task EndGame()
         {
             StopTimer();
             using (var gameEndView = new GameEndView(game.Points(CardsInHand().Count()), time))
@@ -184,14 +184,14 @@ namespace MagicStaircase.Forms
             DisableButtons();
         }
 
-        private void StopTimer() => T.Enabled = false;
+        private void StopTimer() => Timer.Enabled = false;
         private void DisableButtons()
         {
             BtnNext.Enabled = false;
             BtnReset.Enabled = false;
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
             time.NextSecond();
             LblTiempo.Text = time.ToString();

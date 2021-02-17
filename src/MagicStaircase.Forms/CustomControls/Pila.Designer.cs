@@ -1,6 +1,6 @@
 ﻿namespace MagicStaircase.Forms.CustomControls
 {
-    partial class Carta
+    partial class Pila
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,21 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.HelpTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
-            // Carta
+            // Pila
             // 
             this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Font = new System.Drawing.Font("Courier New", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Courier New", 39.75F);
             this.Margin = new System.Windows.Forms.Padding(10);
             this.Size = new System.Drawing.Size(100, 140);
             this.Text = "1";
-            this.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ToolTip HelpTooltip;
     }
 }

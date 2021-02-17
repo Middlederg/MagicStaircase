@@ -52,7 +52,7 @@
             this.BtnNext = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.LblPuntuacion = new System.Windows.Forms.Label();
             this.ToolTipAyuda = new System.Windows.Forms.ToolTip(this.components);
-            this.T = new System.Windows.Forms.Timer(this.components);
+            this.Timer = new System.Windows.Forms.Timer(this.components);
             this.TlpPrincipal.SuspendLayout();
             this.pDown2.SuspendLayout();
             this.pDown1.SuspendLayout();
@@ -418,9 +418,9 @@
             // 
             // T
             // 
-            this.T.Enabled = true;
-            this.T.Interval = 1000;
-            this.T.Tick += new System.EventHandler(this.Timer_Tick);
+            this.Timer.Enabled = true;
+            this.Timer.Interval = 1000;
+            this.Timer.Tick += new System.EventHandler(this.TimerTick);
             // 
             // MainView
             // 
@@ -474,7 +474,7 @@
         private System.Windows.Forms.Label LblPuntuacion;
         private System.Windows.Forms.ToolTip ToolTipAyuda;
         private System.Windows.Forms.Label LblTiempo;
-        private System.Windows.Forms.Timer T;
+        private System.Windows.Forms.Timer Timer;
     }
 }
 

@@ -1,0 +1,87 @@
+﻿using FontAwesome.Sharp;
+using MagicStaircase.Core;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace MagicStaircase.Forms.CustomControls
+{
+    public partial class Pila : Label
+    {
+        public int FontSize { get; set; } = 20;
+
+        private Pile pile;
+        public void AddCard(int value)
+        {
+            if (value == 0)
+            {
+                Text = "";
+                BackColor = SystemColors.Control;
+            }
+            else
+            {
+                Text = value.ToString();
+                BackColor = Color.White;
+                pile.Add(new Card(value));
+            }
+        }
+
+        public Pila()
+        {
+            InitializeComponent();
+            pile = new Pile(Direction.Up);
+        }
+
+        public void Initialize(Direction direction, DragEventHandler cardDrop)
+        {
+            pile = new Pile(direction);
+            Font = new Font("Courier new", FontSize, FontStyle.Bold);
+            Image = GetArrowIcon(direction == Direction.Up ? IconChar.ArrowUp : IconChar.ArrowDown);
+            AllowDrop = true;
+            DragEnter += CardEnter;
+            DragDrop += cardDrop;
+        }
+
+        public Action OnCardPlaced { get; set; }
+
+        private void CardEnter(object sender, DragEventArgs e)
+        {
+            var origin = e.Data.GetData(typeof(Carta)) as Carta;
+            e.Effect = origin.HasVisibleCard && pile.Fits(origin.Card) ?
+                        DragDropEffects.Copy :
+                        DragDropEffects.None;
+        }
+
+        private async void CardDrop(object sender, DragEventArgs e)
+        {
+            var origin = e.Data.GetData(typeof(Carta)) as Carta;
+          //  var destino = sender as Carta;
+            if (origin.HasVisibleCard && pile.Fits(origin.Card))
+            {
+                pile.Add(origin.Card);
+                HelpTooltip.SetToolTip(this, pile.ToString());
+                Text = origin.Card.ToString();
+
+                OnCardPlaced();
+                totalPlacedCardsInTurn++;
+                BtnNext.Enabled = totalPlacedCardsInTurn >= Game.MinCardPerTurn;
+                PrintScore();
+                PutInGrayNonPlayableCards();
+
+                if ((CardsInHand().Count() > Game.PlayerCardCount - Game.MinCardPerTurn) && !IsPlayableCard())
+                {
+                    await EndGame();
+                }
+            }
+        }
+
+        private Image GetArrowIcon(IconChar icn) => icn.ToBitmap(50, Color.Black);
+        
+    }
+}
