@@ -18,7 +18,6 @@ namespace MagicStaircase.Forms
     public partial class MainView : Form
     {
         private Game game;
-        private int totalPlacedCardsInTurn;
         private Time time;
 
         public bool BeginAgain { get; private set; }
@@ -33,101 +32,70 @@ namespace MagicStaircase.Forms
         {
             time = new Time();
             BtnNext.Enabled = false;
-            totalPlacedCardsInTurn = 0;
-            CartaUp1.Numero = CartaUp2.Numero = 1;
-            CartaDown1.Numero = CartaDown2.Numero = 99;
-            CartaUp1.Place(Direction.Up, CardDrop);
-            CartaUp2.Place(Direction.Up, CardDrop);
-            CartaDown1.Place(Direction.Down, CardDrop);
-            CartaDown2.Place(Direction.Down, CardDrop);
+            pila1.Initialize(Direction.Up, 0, OnCardPlaced);
+            pila2.Initialize(Direction.Up, 1, OnCardPlaced);
+            pila3.Initialize(Direction.Up, 2, OnCardPlaced);
+            pila4.Initialize(Direction.Up, 3, OnCardPlaced);
+            //CartaUp1.Numero = CartaUp2.Numero = 1;
+            //CartaDown1.Numero = CartaDown2.Numero = 99;
+            //CartaUp1.Place(Direction.Up, CardDrop);
+            //CartaUp2.Place(Direction.Up, CardDrop);
+            //CartaDown1.Place(Direction.Down, CardDrop);
+            //CartaDown2.Place(Direction.Down, CardDrop);
 
             game = new Game();
             FlpMano.Controls.Clear();
-            for (int i = 0; i < Game.PlayerCardCount; i++)
+            foreach (var card in game.HandCards)
             {
-                FlpMano.Controls.Add(new Carta(game.TakeCard()));
+                var cardControl = new Carta();
+                cardControl.SetValue(card.Number);
+                FlpMano.Controls.Add(cardControl);
             }
             PrintScore();
         }
 
-        private void PrintScore() => LblPuntuacion.Text = $"Score: {game.Points(CardsInHand().Count())}/100";
+        private void PrintScore() => LblPuntuacion.Text = $"Score: {game.Points()}/100";
 
-        private async void CardDrop(object sender, DragEventArgs e)
+        private async Task OnCardPlaced(Card card, int pileIndex)
         {
-            var origen = e.Data.GetData(typeof(Carta)) as Carta;
-            var destino = sender as Carta;
-            if (origen.Fits(destino))
+            game.Play(card.Number, pileIndex);
+            BtnNext.Enabled = game.CanPass;
+            PrintScore();
+            PutInGrayNonPlayableCards();
+
+            if (game.IsGameEnd())
             {
-                var panelDestino = destino.Parent as Panel;
-                panelDestino.Controls.Remove(destino);
-
-                int indxCarta = int.Parse(panelDestino.Tag.ToString());
-                game.AddToPile(origen.Numero, indxCarta);
-                string ayuda = string.Join("\n", game.Piles.ElementAt(indxCarta));
-                
-                var nuevaCarta = new Carta(origen.Numero);
-                ToolTipAyuda.SetToolTip(nuevaCarta, ayuda);
-                panelDestino.Controls.Add(nuevaCarta);
-                nuevaCarta.Place(destino.Direction, CardDrop);
-                origen.Placed();
-
-                totalPlacedCardsInTurn++;
-                BtnNext.Enabled = totalPlacedCardsInTurn >= Game.MinCardPerTurn;
-                PrintScore();
-                PutInGrayNonPlayableCards();
-
-                if ((CardsInHand().Count() > Game.PlayerCardCount - Game.MinCardPerTurn) && !IsPlayableCard())
-                {
-                    await EndGame();
-                }
+                await EndGame();
             }
         }
 
         private async void BtnNext_Click(object sender, EventArgs e)
         {
-            if (totalPlacedCardsInTurn >= 2)
+            if (game.CanPass)
             {
-                foreach (var carta in CardsPlayed())
-                {
-                    if (game.HasCards)
-                        carta.Numero = game.TakeCard();
-                }
-                totalPlacedCardsInTurn = 0;
+                game.RefillHand();
                 PutInGrayNonPlayableCards();
 
-                if (!IsPlayableCard())
+                if (!game.IsPlayableCard())
                 {
                     await EndGame();
                 }
             }
         }
 
-        private Carta GetCarta(Panel p) => p.Controls[0] as Carta;
-        private IEnumerable<Carta> CardsPlayed() => FlpMano.Controls.OfType<Carta>().Where(x => x.Numero == 0);
-        private IEnumerable<Carta> CardsInHand() => FlpMano.Controls.OfType<Carta>().Where(x => x.Numero != 0);
-        private bool IsPlayableCard()
-        {
-            foreach (Carta c in CardsInHand())
-            {
-                if (c.Fits(GetCarta(pUp1)) || c.Fits(GetCarta(pUp2)) || c.Fits(GetCarta(pDown1)) || c.Fits(GetCarta(pDown2)))
-                    return true;
-            }
-            return false;
-        }
+        private IEnumerable<Carta> CardsInHand() => FlpMano.Controls.OfType<Carta>().Where(x => x.HasCard);
 
         private void PutInGrayNonPlayableCards()
         {
-            foreach (Carta c in CardsInHand())
+            foreach (Carta card in CardsInHand())
             {
-                if (!c.Fits(GetCarta(pUp1)) && !c.Fits(GetCarta(pUp2)) && !c.Fits(GetCarta(pDown1)) && !c.Fits(GetCarta(pDown2)))
+                if (game.Piles.Any(pile => pile.Fits(card.Card)))
                 {
-                    c.BackColor = SystemColors.Control;
-                    ToolTipAyuda.SetToolTip(c, "This card can not be placed :(");
+                    card.Reenable();
                 }
                 else
                 {
-                    c.BackColor = Color.White;
-                    ToolTipAyuda.SetToolTip(c, "");
+                    card.Disable();
                 }
             }
         }
@@ -174,7 +142,7 @@ namespace MagicStaircase.Forms
         private async Task EndGame()
         {
             StopTimer();
-            using (var gameEndView = new GameEndView(game.Points(CardsInHand().Count()), time))
+            using (var gameEndView = new GameEndView(game.Points(), time))
             {
                 if (gameEndView.ShowDialog() == DialogResult.OK)
                 {

@@ -10,9 +10,11 @@ namespace MagicStaircase.Core
         public Card LastCard => cards.Last();
 
         public Direction Direction { get; }
+        public int Index { get; }
 
-        public Pile(Direction direction)
+        public Pile(Direction direction, int index)
         {
+            Index = index;
             Direction = direction;
             cards = new List<Card>();
             if (direction == Direction.Up) cards.Add(new Card(1));
@@ -23,11 +25,11 @@ namespace MagicStaircase.Core
         {
             if (Direction == Direction.Up)
             {
-                return LastCard.Greater(card) || LastCard.TenLess(card);
+                return LastCard.Lower(card) ||LastCard.TenMore(card) ;
             }
             if (Direction == Direction.Down)
             {
-                return LastCard.Lower(card) || LastCard.TenMore(card);
+                return LastCard.Greater(card) || LastCard.TenLess(card);
             }
             return false;
         }

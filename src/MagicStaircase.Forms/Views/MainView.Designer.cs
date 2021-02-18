@@ -32,32 +32,24 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.TlpPrincipal = new System.Windows.Forms.TableLayoutPanel();
             this.LblTiempo = new System.Windows.Forms.Label();
-            this.pDown2 = new System.Windows.Forms.Panel();
-            this.CartaDown2 = new MagicStaircase.Forms.CustomControls.Carta();
-            this.pDown1 = new System.Windows.Forms.Panel();
-            this.CartaDown1 = new MagicStaircase.Forms.CustomControls.Carta();
-            this.pUp2 = new System.Windows.Forms.Panel();
-            this.CartaUp2 = new MagicStaircase.Forms.CustomControls.Carta();
             this.FlpMano = new System.Windows.Forms.FlowLayoutPanel();
-            this.pUp1 = new System.Windows.Forms.Panel();
-            this.CartaUp1 = new MagicStaircase.Forms.CustomControls.Carta();
             this.LblTitulo = new System.Windows.Forms.Label();
             this.FlpControlBox = new System.Windows.Forms.FlowLayoutPanel();
             this.BtnClose = new FontAwesome.Sharp.IconButton();
             this.BtnMax = new FontAwesome.Sharp.IconButton();
             this.BtnMin = new FontAwesome.Sharp.IconButton();
             this.FlpButtons = new System.Windows.Forms.FlowLayoutPanel();
-            this.BtnExit = new MagicStaircase.Forms.CustomControls.CustomButton();
-            this.BtnReset = new MagicStaircase.Forms.CustomControls.CustomButton();
-            this.BtnNext = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.LblPuntuacion = new System.Windows.Forms.Label();
             this.ToolTipAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.Timer = new System.Windows.Forms.Timer(this.components);
+            this.BtnExit = new MagicStaircase.Forms.CustomControls.CustomButton();
+            this.BtnReset = new MagicStaircase.Forms.CustomControls.CustomButton();
+            this.BtnNext = new MagicStaircase.Forms.CustomControls.CustomButton();
+            this.pila1 = new MagicStaircase.Forms.CustomControls.Pila();
+            this.pila2 = new MagicStaircase.Forms.CustomControls.Pila();
+            this.pila3 = new MagicStaircase.Forms.CustomControls.Pila();
+            this.pila4 = new MagicStaircase.Forms.CustomControls.Pila();
             this.TlpPrincipal.SuspendLayout();
-            this.pDown2.SuspendLayout();
-            this.pDown1.SuspendLayout();
-            this.pUp2.SuspendLayout();
-            this.pUp1.SuspendLayout();
             this.FlpControlBox.SuspendLayout();
             this.FlpButtons.SuspendLayout();
             this.SuspendLayout();
@@ -65,22 +57,22 @@
             // TlpPrincipal
             // 
             this.TlpPrincipal.AllowDrop = true;
+            this.TlpPrincipal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TlpPrincipal.ColumnCount = 4;
             this.TlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.TlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.TlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.TlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.TlpPrincipal.Controls.Add(this.pila1, 0, 2);
             this.TlpPrincipal.Controls.Add(this.LblTiempo, 1, 4);
-            this.TlpPrincipal.Controls.Add(this.pDown2, 3, 2);
-            this.TlpPrincipal.Controls.Add(this.pDown1, 2, 2);
-            this.TlpPrincipal.Controls.Add(this.pUp2, 1, 2);
             this.TlpPrincipal.Controls.Add(this.FlpMano, 0, 3);
-            this.TlpPrincipal.Controls.Add(this.pUp1, 0, 2);
             this.TlpPrincipal.Controls.Add(this.LblTitulo, 0, 0);
             this.TlpPrincipal.Controls.Add(this.FlpControlBox, 3, 0);
             this.TlpPrincipal.Controls.Add(this.FlpButtons, 2, 4);
             this.TlpPrincipal.Controls.Add(this.LblPuntuacion, 0, 4);
-            this.TlpPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TlpPrincipal.Controls.Add(this.pila2, 1, 2);
+            this.TlpPrincipal.Controls.Add(this.pila3, 2, 2);
+            this.TlpPrincipal.Controls.Add(this.pila4, 3, 2);
             this.TlpPrincipal.Location = new System.Drawing.Point(0, 0);
             this.TlpPrincipal.Margin = new System.Windows.Forms.Padding(0);
             this.TlpPrincipal.Name = "TlpPrincipal";
@@ -110,91 +102,6 @@
             this.ToolTipAyuda.SetToolTip(this.LblTiempo, "Puntuación actual (Número de cartas restantes)\r\nCuando no queden cartas, el juego" +
         " termina con victoria absoluta, por loq ue la máxima puntuación es 0");
             // 
-            // pDown2
-            // 
-            this.pDown2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pDown2.Controls.Add(this.CartaDown2);
-            this.pDown2.Font = new System.Drawing.Font("Courier New", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pDown2.Location = new System.Drawing.Point(750, 60);
-            this.pDown2.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.pDown2.Name = "pDown2";
-            this.pDown2.Size = new System.Drawing.Size(100, 140);
-            this.pDown2.TabIndex = 4;
-            this.pDown2.Tag = "3";
-            // 
-            // CartaDown2
-            // 
-            this.CartaDown2.BackColor = System.Drawing.Color.White;
-            this.CartaDown2.Direction = MagicStaircase.Core.Direction.Down;
-            this.CartaDown2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CartaDown2.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold);
-            this.CartaDown2.FontSize = 40;
-            this.CartaDown2.Location = new System.Drawing.Point(0, 0);
-            this.CartaDown2.Margin = new System.Windows.Forms.Padding(10);
-            this.CartaDown2.Name = "CartaDown2";
-            this.CartaDown2.Numero = 99;
-            this.CartaDown2.Size = new System.Drawing.Size(98, 138);
-            this.CartaDown2.TabIndex = 1;
-            this.CartaDown2.Text = "99";
-            this.CartaDown2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // pDown1
-            // 
-            this.pDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pDown1.Controls.Add(this.CartaDown1);
-            this.pDown1.Font = new System.Drawing.Font("Courier New", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pDown1.Location = new System.Drawing.Point(640, 60);
-            this.pDown1.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.pDown1.Name = "pDown1";
-            this.pDown1.Size = new System.Drawing.Size(100, 140);
-            this.pDown1.TabIndex = 3;
-            this.pDown1.Tag = "2";
-            // 
-            // CartaDown1
-            // 
-            this.CartaDown1.BackColor = System.Drawing.Color.White;
-            this.CartaDown1.Direction = MagicStaircase.Core.Direction.Down;
-            this.CartaDown1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CartaDown1.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold);
-            this.CartaDown1.FontSize = 40;
-            this.CartaDown1.Location = new System.Drawing.Point(0, 0);
-            this.CartaDown1.Margin = new System.Windows.Forms.Padding(10);
-            this.CartaDown1.Name = "CartaDown1";
-            this.CartaDown1.Numero = 99;
-            this.CartaDown1.Size = new System.Drawing.Size(98, 138);
-            this.CartaDown1.TabIndex = 1;
-            this.CartaDown1.Text = "99";
-            this.CartaDown1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // pUp2
-            // 
-            this.pUp2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pUp2.Controls.Add(this.CartaUp2);
-            this.pUp2.Font = new System.Drawing.Font("Courier New", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pUp2.Location = new System.Drawing.Point(250, 60);
-            this.pUp2.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.pUp2.Name = "pUp2";
-            this.pUp2.Size = new System.Drawing.Size(100, 140);
-            this.pUp2.TabIndex = 2;
-            this.pUp2.Tag = "1";
-            // 
-            // CartaUp2
-            // 
-            this.CartaUp2.BackColor = System.Drawing.Color.White;
-            this.CartaUp2.Direction = MagicStaircase.Core.Direction.Up;
-            this.CartaUp2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CartaUp2.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold);
-            this.CartaUp2.FontSize = 40;
-            this.CartaUp2.Location = new System.Drawing.Point(0, 0);
-            this.CartaUp2.Margin = new System.Windows.Forms.Padding(10);
-            this.CartaUp2.Name = "CartaUp2";
-            this.CartaUp2.Numero = 1;
-            this.CartaUp2.Size = new System.Drawing.Size(98, 138);
-            this.CartaUp2.TabIndex = 1;
-            this.CartaUp2.Text = "1";
-            this.CartaUp2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // FlpMano
             // 
             this.TlpPrincipal.SetColumnSpan(this.FlpMano, 4);
@@ -204,36 +111,6 @@
             this.FlpMano.Name = "FlpMano";
             this.FlpMano.Size = new System.Drawing.Size(980, 185);
             this.FlpMano.TabIndex = 0;
-            // 
-            // pUp1
-            // 
-            this.pUp1.AllowDrop = true;
-            this.pUp1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pUp1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pUp1.Controls.Add(this.CartaUp1);
-            this.pUp1.Font = new System.Drawing.Font("Courier New", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pUp1.Location = new System.Drawing.Point(140, 60);
-            this.pUp1.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.pUp1.Name = "pUp1";
-            this.pUp1.Size = new System.Drawing.Size(100, 140);
-            this.pUp1.TabIndex = 1;
-            this.pUp1.Tag = "0";
-            // 
-            // CartaUp1
-            // 
-            this.CartaUp1.BackColor = System.Drawing.Color.White;
-            this.CartaUp1.Direction = MagicStaircase.Core.Direction.Up;
-            this.CartaUp1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CartaUp1.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold);
-            this.CartaUp1.FontSize = 40;
-            this.CartaUp1.Location = new System.Drawing.Point(0, 0);
-            this.CartaUp1.Margin = new System.Windows.Forms.Padding(10);
-            this.CartaUp1.Name = "CartaUp1";
-            this.CartaUp1.Numero = 1;
-            this.CartaUp1.Size = new System.Drawing.Size(98, 138);
-            this.CartaUp1.TabIndex = 0;
-            this.CartaUp1.Text = "1";
-            this.CartaUp1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // LblTitulo
             // 
@@ -333,6 +210,26 @@
             this.FlpButtons.Size = new System.Drawing.Size(480, 50);
             this.FlpButtons.TabIndex = 9;
             // 
+            // LblPuntuacion
+            // 
+            this.LblPuntuacion.AutoSize = true;
+            this.LblPuntuacion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblPuntuacion.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPuntuacion.Location = new System.Drawing.Point(20, 430);
+            this.LblPuntuacion.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.LblPuntuacion.Name = "LblPuntuacion";
+            this.LblPuntuacion.Size = new System.Drawing.Size(230, 50);
+            this.LblPuntuacion.TabIndex = 10;
+            this.LblPuntuacion.Text = "Puntuación";
+            this.LblPuntuacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTipAyuda.SetToolTip(this.LblPuntuacion, "Current Score, from 3 to 100");
+            // 
+            // Timer
+            // 
+            this.Timer.Enabled = true;
+            this.Timer.Interval = 1000;
+            this.Timer.Tick += new System.EventHandler(this.TimerTick);
+            // 
             // BtnExit
             // 
             this.BtnExit.BackColor = System.Drawing.Color.SeaGreen;
@@ -402,25 +299,67 @@
             this.BtnNext.UseVisualStyleBackColor = false;
             this.BtnNext.Click += new System.EventHandler(this.BtnNext_Click);
             // 
-            // LblPuntuacion
+            // pila1
             // 
-            this.LblPuntuacion.AutoSize = true;
-            this.LblPuntuacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LblPuntuacion.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPuntuacion.Location = new System.Drawing.Point(20, 430);
-            this.LblPuntuacion.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.LblPuntuacion.Name = "LblPuntuacion";
-            this.LblPuntuacion.Size = new System.Drawing.Size(230, 50);
-            this.LblPuntuacion.TabIndex = 10;
-            this.LblPuntuacion.Text = "Puntuación";
-            this.LblPuntuacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTipAyuda.SetToolTip(this.LblPuntuacion, "Current Score, from 3 to 100");
+            this.pila1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pila1.BackColor = System.Drawing.Color.White;
+            this.pila1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pila1.Font = new System.Drawing.Font("Courier New", 39.75F);
+            this.pila1.FontSize = 20;
+            this.pila1.Location = new System.Drawing.Point(140, 70);
+            this.pila1.Margin = new System.Windows.Forms.Padding(10);
+            this.pila1.Name = "pila1";
+            this.pila1.OnCardPlaced = null;
+            this.pila1.Size = new System.Drawing.Size(100, 140);
+            this.pila1.TabIndex = 0;
+            this.pila1.Text = "pila1";
+            this.pila1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // T
+            // pila2
             // 
-            this.Timer.Enabled = true;
-            this.Timer.Interval = 1000;
-            this.Timer.Tick += new System.EventHandler(this.TimerTick);
+            this.pila2.BackColor = System.Drawing.Color.White;
+            this.pila2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pila2.Font = new System.Drawing.Font("Courier New", 39.75F);
+            this.pila2.FontSize = 20;
+            this.pila2.Location = new System.Drawing.Point(260, 70);
+            this.pila2.Margin = new System.Windows.Forms.Padding(10);
+            this.pila2.Name = "pila2";
+            this.pila2.OnCardPlaced = null;
+            this.pila2.Size = new System.Drawing.Size(100, 140);
+            this.pila2.TabIndex = 12;
+            this.pila2.Text = "pila2";
+            this.pila2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pila3
+            // 
+            this.pila3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pila3.BackColor = System.Drawing.Color.White;
+            this.pila3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pila3.Font = new System.Drawing.Font("Courier New", 39.75F);
+            this.pila3.FontSize = 20;
+            this.pila3.Location = new System.Drawing.Point(640, 70);
+            this.pila3.Margin = new System.Windows.Forms.Padding(10);
+            this.pila3.Name = "pila3";
+            this.pila3.OnCardPlaced = null;
+            this.pila3.Size = new System.Drawing.Size(100, 140);
+            this.pila3.TabIndex = 13;
+            this.pila3.Text = "pila3";
+            this.pila3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pila4
+            // 
+            this.pila4.BackColor = System.Drawing.Color.White;
+            this.pila4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pila4.Font = new System.Drawing.Font("Courier New", 39.75F);
+            this.pila4.FontSize = 20;
+            this.pila4.Location = new System.Drawing.Point(760, 70);
+            this.pila4.Margin = new System.Windows.Forms.Padding(10);
+            this.pila4.Name = "pila4";
+            this.pila4.OnCardPlaced = null;
+            this.pila4.Size = new System.Drawing.Size(100, 140);
+            this.pila4.TabIndex = 14;
+            this.pila4.Text = "pila4";
+            this.pila4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MainView
             // 
@@ -440,10 +379,6 @@
             this.Text = "Up and down cards";
             this.TlpPrincipal.ResumeLayout(false);
             this.TlpPrincipal.PerformLayout();
-            this.pDown2.ResumeLayout(false);
-            this.pDown1.ResumeLayout(false);
-            this.pUp2.ResumeLayout(false);
-            this.pUp1.ResumeLayout(false);
             this.FlpControlBox.ResumeLayout(false);
             this.FlpButtons.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -454,14 +389,6 @@
 
         private System.Windows.Forms.TableLayoutPanel TlpPrincipal;
         private System.Windows.Forms.FlowLayoutPanel FlpMano;
-        private System.Windows.Forms.Panel pUp1;
-        private System.Windows.Forms.Panel pDown2;
-        private System.Windows.Forms.Panel pDown1;
-        private System.Windows.Forms.Panel pUp2;
-        private CustomControls.Carta CartaUp1;
-        private CustomControls.Carta CartaDown1;
-        private CustomControls.Carta CartaUp2;
-        private CustomControls.Carta CartaDown2;
         private System.Windows.Forms.Label LblTitulo;
         private System.Windows.Forms.FlowLayoutPanel FlpControlBox;
         private FontAwesome.Sharp.IconButton BtnClose;
@@ -475,6 +402,10 @@
         private System.Windows.Forms.ToolTip ToolTipAyuda;
         private System.Windows.Forms.Label LblTiempo;
         private System.Windows.Forms.Timer Timer;
+        private CustomControls.Pila pila1;
+        private CustomControls.Pila pila2;
+        private CustomControls.Pila pila3;
+        private CustomControls.Pila pila4;
     }
 }
 

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.ToolTipAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // Carta
@@ -44,5 +46,7 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.ToolTip ToolTipAyuda;
     }
 }

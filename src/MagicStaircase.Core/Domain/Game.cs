@@ -5,15 +5,15 @@ namespace MagicStaircase.Core
 {
     public class Game
     {
-        public const int PlayerCardCount = 8;
-        public const int MinCardPerTurn = 2;
+        private Deck deck;
+        public bool AreRemainingCards => deck.HasCards;
+        public int Points() => 100 - deck.TotaCards - playerHand.TotaCards;
 
-        public List<int> Deck { get; private set; }
+        private Hand playerHand;
+        public IEnumerable<Card> HandCards => playerHand.Cards;
+        public bool CanPass => playerHand.CanPass;
 
         public IEnumerable<Pile> Piles { get; private set; }
-
-        public bool HasCards => Deck.Any();
-        public int Points(int cardsInHand) => 100 - Deck.Count() - cardsInHand;
 
         public Game()
         {
@@ -22,23 +22,55 @@ namespace MagicStaircase.Core
 
         public void Reset()
         {
-            Deck = Enumerable.Range(2, 97).ToList().RandomizeList().ToList();
+            playerHand = new Hand();
+            deck = new Deck();
+            RefillHand();
             Piles = new List<Pile>
             {
-                new Pile(Direction.Up),
-                new Pile(Direction.Up),
-                new Pile(Direction.Down),
-                new Pile(Direction.Down)
+                new Pile(Direction.Up, 0),
+                new Pile(Direction.Up, 1),
+                new Pile(Direction.Down, 2),
+                new Pile(Direction.Down, 3)
             };
         }
 
-        public int TakeCard()
+        public void RefillHand()
         {
-            int num = Deck.First();
-            Deck.Remove(num);
-            return num;
+            foreach (int _ in Enumerable.Range(0, playerHand.PlayedCards))
+            {
+                if (deck.HasCards)
+                {
+                    playerHand.Add(deck.TakeCard());
+                }
+            }
         }
 
-        public void AddToPile(int number, int pileIndx) => Piles.ElementAt(pileIndx).Add(new Card(number));
+        public void Play(int number, int pileIndx)
+        {
+            playerHand.Place(number);
+            Piles.ElementAt(pileIndx).Add(new Card(number));
+        }
+
+        public bool IsPlayableCard()
+        {
+            foreach (var pile in Piles)
+            {
+                if (HandCards.Any(card => pile.Fits(card)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsGameEnd()
+        {
+            if (!IsPlayableCard())
+            {
+                return false;
+            }
+
+            return !playerHand.CanPlayCards();
+        }
     }
 }

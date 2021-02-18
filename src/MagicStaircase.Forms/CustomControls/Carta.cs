@@ -17,10 +17,9 @@ namespace MagicStaircase.Forms.CustomControls
         public int FontSize { get; set; } = 40;
 
         public Card Card { get; private set; }
-        public bool HasVisibleCard => Card != null;
+        public bool HasCard => Card != null;
 
         public DragEventHandler CardDrop { get; set; }
-
 
         public void Clean()
         {
@@ -28,6 +27,18 @@ namespace MagicStaircase.Forms.CustomControls
             Text = "";
             BackColor = SystemColors.Control;
             MouseDown -= CardMouseDown;
+        }
+
+        public void Disable()
+        {
+            BackColor = SystemColors.Control;
+            ToolTipAyuda.SetToolTip(this, "This card can not be placed :(");
+        }
+
+        public void Reenable()
+        {
+            BackColor = Color.White;
+            ToolTipAyuda.SetToolTip(this, "");
         }
 
         public void SetValue(int value)

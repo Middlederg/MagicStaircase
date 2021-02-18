@@ -17,30 +17,17 @@ namespace MagicStaircase.Forms.CustomControls
         public int FontSize { get; set; } = 20;
 
         private Pile pile;
-        public void AddCard(int value)
-        {
-            if (value == 0)
-            {
-                Text = "";
-                BackColor = SystemColors.Control;
-            }
-            else
-            {
-                Text = value.ToString();
-                BackColor = Color.White;
-                pile.Add(new Card(value));
-            }
-        }
 
         public Pila()
         {
             InitializeComponent();
-            pile = new Pile(Direction.Up);
+            pile = new Pile(Direction.Up, 1);
         }
 
-        public void Initialize(Direction direction, DragEventHandler cardDrop)
+        public void Initialize(Direction direction, int index, DragEventHandler cardDrop)
         {
-            pile = new Pile(direction);
+            pile = new Pile(direction, index);
+            BackColor = Color.White;
             Font = new Font("Courier new", FontSize, FontStyle.Bold);
             Image = GetArrowIcon(direction == Direction.Up ? IconChar.ArrowUp : IconChar.ArrowDown);
             AllowDrop = true;
@@ -48,12 +35,12 @@ namespace MagicStaircase.Forms.CustomControls
             DragDrop += cardDrop;
         }
 
-        public Action OnCardPlaced { get; set; }
+        public Func<Card, int, Task> OnCardPlaced { get; set; }
 
         private void CardEnter(object sender, DragEventArgs e)
         {
             var origin = e.Data.GetData(typeof(Carta)) as Carta;
-            e.Effect = origin.HasVisibleCard && pile.Fits(origin.Card) ?
+            e.Effect = origin.HasCard && pile.Fits(origin.Card) ?
                         DragDropEffects.Copy :
                         DragDropEffects.None;
         }
@@ -61,23 +48,14 @@ namespace MagicStaircase.Forms.CustomControls
         private async void CardDrop(object sender, DragEventArgs e)
         {
             var origin = e.Data.GetData(typeof(Carta)) as Carta;
-          //  var destino = sender as Carta;
-            if (origin.HasVisibleCard && pile.Fits(origin.Card))
+            //var destino = sender as Carta;
+            if (origin.HasCard && pile.Fits(origin.Card))
             {
                 pile.Add(origin.Card);
-                HelpTooltip.SetToolTip(this, pile.ToString());
+                //HelpTooltip.SetToolTip(this, pile.ToString());
                 Text = origin.Card.ToString();
-
-                OnCardPlaced();
-                totalPlacedCardsInTurn++;
-                BtnNext.Enabled = totalPlacedCardsInTurn >= Game.MinCardPerTurn;
-                PrintScore();
-                PutInGrayNonPlayableCards();
-
-                if ((CardsInHand().Count() > Game.PlayerCardCount - Game.MinCardPerTurn) && !IsPlayableCard())
-                {
-                    await EndGame();
-                }
+                await OnCardPlaced(origin.Card, pile.Index);
+                origin.Clean();
             }
         }
 

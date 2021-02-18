@@ -7,16 +7,13 @@ namespace MagicStaircase.Tests
 {
     public class AscendingPileShould
     {
-        private readonly Pile pile;
-
-        public AscendingPileShould()
-        {
-            pile = new Pile(Direction.Up);
-        }
+        public Pile Create => new Pile(Direction.Up, 0);
 
         [Fact]
         public void Be_created()
         {
+            var pile = Create;
+
             pile.LastCard.Should().Be(new Card(1));
             pile.ToString().Should().Be("1");
         }
@@ -30,6 +27,8 @@ namespace MagicStaircase.Tests
         [InlineData(120)]
         public void Add_card(int value)
         {
+            var pile = Create;
+
             pile.Fits(new Card(value)).Should().BeTrue();
 
             pile.Add(new Card(value));
@@ -48,6 +47,8 @@ namespace MagicStaircase.Tests
         [InlineData(14)]
         public void Fail_to_add_card(int value)
         {
+            var pile = Create;
+
             pile.Add(new Card(14));
 
             pile.Fits(new Card(value)).Should().BeFalse();
@@ -59,6 +60,8 @@ namespace MagicStaircase.Tests
         [Fact]
         public void Add_5_cards()
         {
+            var pile = Create;
+
             pile.Add(new Card(9));
             pile.Add(new Card(12));
             pile.Add(new Card(25));
@@ -71,6 +74,8 @@ namespace MagicStaircase.Tests
         [Fact]
         public void Add_10_less()
         {
+            var pile = Create;
+
             pile.Add(new Card(31));
 
             pile.Fits(new Card(20)).Should().BeFalse();
