@@ -24,7 +24,7 @@ namespace MagicStaircase.Forms.CustomControls
             pile = new Pile(Direction.Up, 1);
         }
 
-        public void Initialize(Direction direction, int index, DragEventHandler cardDrop)
+        public void Initialize(Direction direction, int index, Func<Card, int, Task> onCardPlaced)
         {
             pile = new Pile(direction, index);
             BackColor = Color.White;
@@ -32,7 +32,8 @@ namespace MagicStaircase.Forms.CustomControls
             Image = GetArrowIcon(direction == Direction.Up ? IconChar.ArrowUp : IconChar.ArrowDown);
             AllowDrop = true;
             DragEnter += CardEnter;
-            DragDrop += cardDrop;
+            DragDrop += CardDrop;
+            OnCardPlaced = onCardPlaced;
         }
 
         public Func<Card, int, Task> OnCardPlaced { get; set; }
