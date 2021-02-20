@@ -46,6 +46,7 @@ namespace MagicStaircase.Forms.CustomControls
             Text = value.ToString();
             BackColor = Color.White;
             Card = new Card(value);
+            MouseDown += CardMouseDown;
         }
 
         public Carta()
@@ -55,12 +56,6 @@ namespace MagicStaircase.Forms.CustomControls
             BorderStyle = BorderStyle.FixedSingle;
             MouseDown += CardMouseDown;
             DragDrop += CardDrop;
-        }
-
-        public void SetCardDropEvent(DragEventHandler cardDrop)
-        {
-            DragDrop += cardDrop;
-            AllowDrop = true;
         }
 
         private void CardMouseDown(object sender, MouseEventArgs e)

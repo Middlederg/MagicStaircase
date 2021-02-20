@@ -18,7 +18,7 @@ namespace MagicStaircase.Core
             Direction = direction;
             cards = new List<Card>();
             if (direction == Direction.Up) cards.Add(new Card(1));
-            if (direction == Direction.Down) cards.Add(new Card(100));
+            if (direction == Direction.Down) cards.Add(new Card(99));
         }
 
         public bool Fits(Card card)

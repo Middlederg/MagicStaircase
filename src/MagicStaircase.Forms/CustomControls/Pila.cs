@@ -22,18 +22,27 @@ namespace MagicStaircase.Forms.CustomControls
         {
             InitializeComponent();
             pile = new Pile(Direction.Up, 1);
+            TextAlign = ContentAlignment.TopCenter;
+            InitializeValues();
         }
 
         public void Initialize(Direction direction, int index, Func<Card, int, Task> onCardPlaced)
         {
             pile = new Pile(direction, index);
-            BackColor = Color.White;
-            Font = new Font("Courier new", FontSize, FontStyle.Bold);
-            Image = GetArrowIcon(direction == Direction.Up ? IconChar.ArrowUp : IconChar.ArrowDown);
+            InitializeValues();
+
             AllowDrop = true;
             DragEnter += CardEnter;
             DragDrop += CardDrop;
             OnCardPlaced = onCardPlaced;
+        }
+
+        private void InitializeValues()
+        {
+            BackColor = Color.White;
+            Font = new Font("Courier new", FontSize, FontStyle.Bold);
+            Text = pile.LastCard.Number.ToString();
+            Image = GetArrowIcon(pile.Direction == Direction.Up ? IconChar.ArrowUp : IconChar.ArrowDown);
         }
 
         public Func<Card, int, Task> OnCardPlaced { get; set; }
@@ -60,7 +69,7 @@ namespace MagicStaircase.Forms.CustomControls
             }
         }
 
-        private Image GetArrowIcon(IconChar icn) => icn.ToBitmap(50, Color.Black);
-        
+        private Image GetArrowIcon(IconChar icn) => icn.ToBitmap(Color.Black, 50);
+
     }
 }

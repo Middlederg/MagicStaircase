@@ -34,8 +34,8 @@ namespace MagicStaircase.Forms
             BtnNext.Enabled = false;
             pila1.Initialize(Direction.Up, 0, OnCardPlaced);
             pila2.Initialize(Direction.Up, 1, OnCardPlaced);
-            pila3.Initialize(Direction.Up, 2, OnCardPlaced);
-            pila4.Initialize(Direction.Up, 3, OnCardPlaced);
+            pila3.Initialize(Direction.Down, 2, OnCardPlaced);
+            pila4.Initialize(Direction.Down, 3, OnCardPlaced);
             //CartaUp1.Numero = CartaUp2.Numero = 1;
             //CartaDown1.Numero = CartaDown2.Numero = 99;
             //CartaUp1.Place(Direction.Up, CardDrop);
@@ -73,8 +73,9 @@ namespace MagicStaircase.Forms
         {
             if (game.CanPass)
             {
-                game.RefillHand();
+                RefillHand();
                 PutInGrayNonPlayableCards();
+                BtnNext.Enabled = false;
 
                 if (!game.IsPlayableCard())
                 {
@@ -84,6 +85,11 @@ namespace MagicStaircase.Forms
         }
 
         private IEnumerable<Carta> CardsInHand() => FlpMano.Controls.OfType<Carta>().Where(x => x.HasCard);
+        private IEnumerable<Carta> PlayedCards()
+        {
+            return FlpMano.Controls.OfType<Carta>()
+                .Where(x => !x.HasCard);
+        }
 
         private void PutInGrayNonPlayableCards()
         {
@@ -97,6 +103,17 @@ namespace MagicStaircase.Forms
                 {
                     card.Disable();
                 }
+            }
+        }
+
+        private void RefillHand()
+        {
+            var newNumbers = game.RefillHand().ToList();
+
+            foreach (var (card, index) in PlayedCards().Select((card, index) => (card, index)))
+            {
+                var number = newNumbers.ElementAt(index);
+                card.SetValue(number);
             }
         }
 

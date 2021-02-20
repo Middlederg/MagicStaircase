@@ -41,7 +41,7 @@ namespace MagicStaircase.Forms
         public AchievementsView()
         {
             InitializeComponent();
-            Icon = System.Drawing.Icon.FromHandle(IconChar.Trophy.ToBitmap(98, Color.Black).GetHicon());
+            Icon = System.Drawing.Icon.FromHandle(IconChar.Trophy.ToBitmap(Color.Black, 98).GetHicon());
         }
 
         private void BtnClose_Click(object sender, EventArgs e) => Close();

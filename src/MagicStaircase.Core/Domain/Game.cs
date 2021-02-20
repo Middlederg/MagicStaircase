@@ -24,7 +24,7 @@ namespace MagicStaircase.Core
         {
             playerHand = new Hand();
             deck = new Deck();
-            RefillHand();
+            RefillHand().ToList();
             Piles = new List<Pile>
             {
                 new Pile(Direction.Up, 0),
@@ -34,13 +34,15 @@ namespace MagicStaircase.Core
             };
         }
 
-        public void RefillHand()
+        public IEnumerable<int> RefillHand()
         {
             foreach (int _ in Enumerable.Range(0, playerHand.PlayedCards))
             {
                 if (deck.HasCards)
                 {
-                    playerHand.Add(deck.TakeCard());
+                    var newNumber = deck.TakeCard();
+                    playerHand.Add(newNumber);
+                    yield return newNumber;                         
                 }
             }
         }
@@ -65,7 +67,7 @@ namespace MagicStaircase.Core
 
         public bool IsGameEnd()
         {
-            if (!IsPlayableCard())
+            if (IsPlayableCard())
             {
                 return false;
             }

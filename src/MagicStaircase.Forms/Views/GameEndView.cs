@@ -27,7 +27,7 @@ namespace MagicStaircase.Forms
             this.points = points;
             this.time = time;
 
-            Icon = System.Drawing.Icon.FromHandle(IconChar.HourglassEnd.ToBitmap(98, Color.Black).GetHicon());
+            Icon = System.Drawing.Icon.FromHandle(IconChar.HourglassEnd.ToBitmap(Color.Black,98).GetHicon());
             LblPuntuacion.Text = $"Score: {points}";
             LblValoracion.Text = Score.Message;
             LblTiempo.Text = $"Time: {time.ToString()}";

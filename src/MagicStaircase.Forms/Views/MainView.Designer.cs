@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.TlpPrincipal = new System.Windows.Forms.TableLayoutPanel();
+            this.pila1 = new MagicStaircase.Forms.CustomControls.Pila();
             this.LblTiempo = new System.Windows.Forms.Label();
             this.FlpMano = new System.Windows.Forms.FlowLayoutPanel();
             this.LblTitulo = new System.Windows.Forms.Label();
@@ -39,16 +40,15 @@
             this.BtnMax = new FontAwesome.Sharp.IconButton();
             this.BtnMin = new FontAwesome.Sharp.IconButton();
             this.FlpButtons = new System.Windows.Forms.FlowLayoutPanel();
-            this.LblPuntuacion = new System.Windows.Forms.Label();
-            this.ToolTipAyuda = new System.Windows.Forms.ToolTip(this.components);
-            this.Timer = new System.Windows.Forms.Timer(this.components);
             this.BtnExit = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.BtnReset = new MagicStaircase.Forms.CustomControls.CustomButton();
             this.BtnNext = new MagicStaircase.Forms.CustomControls.CustomButton();
-            this.pila1 = new MagicStaircase.Forms.CustomControls.Pila();
+            this.LblPuntuacion = new System.Windows.Forms.Label();
             this.pila2 = new MagicStaircase.Forms.CustomControls.Pila();
             this.pila3 = new MagicStaircase.Forms.CustomControls.Pila();
             this.pila4 = new MagicStaircase.Forms.CustomControls.Pila();
+            this.ToolTipAyuda = new System.Windows.Forms.ToolTip(this.components);
+            this.Timer = new System.Windows.Forms.Timer(this.components);
             this.TlpPrincipal.SuspendLayout();
             this.FlpControlBox.SuspendLayout();
             this.FlpButtons.SuspendLayout();
@@ -86,12 +86,29 @@
             this.TlpPrincipal.Size = new System.Drawing.Size(1000, 500);
             this.TlpPrincipal.TabIndex = 0;
             // 
+            // pila1
+            // 
+            this.pila1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pila1.BackColor = System.Drawing.Color.White;
+            this.pila1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pila1.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.pila1.FontSize = 20;
+            this.pila1.Image = ((System.Drawing.Image)(resources.GetObject("pila1.Image")));
+            this.pila1.Location = new System.Drawing.Point(140, 70);
+            this.pila1.Margin = new System.Windows.Forms.Padding(10);
+            this.pila1.Name = "pila1";
+            this.pila1.OnCardPlaced = null;
+            this.pila1.Size = new System.Drawing.Size(100, 140);
+            this.pila1.TabIndex = 0;
+            this.pila1.Text = "2";
+            this.pila1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // LblTiempo
             // 
             this.LblTiempo.AutoSize = true;
             this.LblTiempo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LblTiempo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LblTiempo.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblTiempo.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.LblTiempo.Location = new System.Drawing.Point(290, 440);
             this.LblTiempo.Margin = new System.Windows.Forms.Padding(40, 10, 40, 10);
             this.LblTiempo.Name = "LblTiempo";
@@ -118,7 +135,7 @@
             this.LblTitulo.BackColor = System.Drawing.Color.SeaGreen;
             this.TlpPrincipal.SetColumnSpan(this.LblTitulo, 3);
             this.LblTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LblTitulo.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblTitulo.Font = new System.Drawing.Font("Courier New", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.LblTitulo.ForeColor = System.Drawing.Color.White;
             this.LblTitulo.Location = new System.Drawing.Point(0, 0);
             this.LblTitulo.Margin = new System.Windows.Forms.Padding(0);
@@ -148,14 +165,13 @@
             // 
             this.BtnClose.FlatAppearance.BorderSize = 0;
             this.BtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnClose.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.BtnClose.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.BtnClose.IconColor = System.Drawing.Color.White;
+            this.BtnClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnClose.IconSize = 30;
             this.BtnClose.Location = new System.Drawing.Point(210, 0);
             this.BtnClose.Margin = new System.Windows.Forms.Padding(0);
             this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Rotation = 0D;
             this.BtnClose.Size = new System.Drawing.Size(40, 40);
             this.BtnClose.TabIndex = 0;
             this.BtnClose.UseVisualStyleBackColor = true;
@@ -166,14 +182,13 @@
             this.BtnMax.Enabled = false;
             this.BtnMax.FlatAppearance.BorderSize = 0;
             this.BtnMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMax.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.BtnMax.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
             this.BtnMax.IconColor = System.Drawing.Color.White;
+            this.BtnMax.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnMax.IconSize = 30;
             this.BtnMax.Location = new System.Drawing.Point(170, 0);
             this.BtnMax.Margin = new System.Windows.Forms.Padding(0);
             this.BtnMax.Name = "BtnMax";
-            this.BtnMax.Rotation = 0D;
             this.BtnMax.Size = new System.Drawing.Size(40, 40);
             this.BtnMax.TabIndex = 1;
             this.BtnMax.UseVisualStyleBackColor = true;
@@ -183,14 +198,13 @@
             // 
             this.BtnMin.FlatAppearance.BorderSize = 0;
             this.BtnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMin.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.BtnMin.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
             this.BtnMin.IconColor = System.Drawing.Color.White;
+            this.BtnMin.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnMin.IconSize = 30;
             this.BtnMin.Location = new System.Drawing.Point(130, 0);
             this.BtnMin.Margin = new System.Windows.Forms.Padding(0);
             this.BtnMin.Name = "BtnMin";
-            this.BtnMin.Rotation = 0D;
             this.BtnMin.Size = new System.Drawing.Size(40, 40);
             this.BtnMin.TabIndex = 2;
             this.BtnMin.UseVisualStyleBackColor = true;
@@ -210,41 +224,20 @@
             this.FlpButtons.Size = new System.Drawing.Size(480, 50);
             this.FlpButtons.TabIndex = 9;
             // 
-            // LblPuntuacion
-            // 
-            this.LblPuntuacion.AutoSize = true;
-            this.LblPuntuacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LblPuntuacion.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPuntuacion.Location = new System.Drawing.Point(20, 430);
-            this.LblPuntuacion.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.LblPuntuacion.Name = "LblPuntuacion";
-            this.LblPuntuacion.Size = new System.Drawing.Size(230, 50);
-            this.LblPuntuacion.TabIndex = 10;
-            this.LblPuntuacion.Text = "Puntuación";
-            this.LblPuntuacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTipAyuda.SetToolTip(this.LblPuntuacion, "Current Score, from 3 to 100");
-            // 
-            // Timer
-            // 
-            this.Timer.Enabled = true;
-            this.Timer.Interval = 1000;
-            this.Timer.Tick += new System.EventHandler(this.TimerTick);
-            // 
             // BtnExit
             // 
             this.BtnExit.BackColor = System.Drawing.Color.SeaGreen;
             this.BtnExit.FlatAppearance.BorderSize = 0;
             this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnExit.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.BtnExit.Font = new System.Drawing.Font("Courier New", 19F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnExit.Font = new System.Drawing.Font("Courier New", 19F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BtnExit.ForeColor = System.Drawing.Color.White;
             this.BtnExit.IconChar = FontAwesome.Sharp.IconChar.TimesCircle;
             this.BtnExit.IconColor = System.Drawing.Color.White;
+            this.BtnExit.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnExit.IconSize = 40;
             this.BtnExit.Location = new System.Drawing.Point(330, 0);
             this.BtnExit.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BtnExit.Name = "BtnExit";
-            this.BtnExit.Rotation = 0D;
             this.BtnExit.Size = new System.Drawing.Size(150, 50);
             this.BtnExit.TabIndex = 10;
             this.BtnExit.Text = "Exit";
@@ -258,16 +251,15 @@
             this.BtnReset.BackColor = System.Drawing.Color.SeaGreen;
             this.BtnReset.FlatAppearance.BorderSize = 0;
             this.BtnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnReset.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.BtnReset.Font = new System.Drawing.Font("Courier New", 19F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnReset.Font = new System.Drawing.Font("Courier New", 19F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BtnReset.ForeColor = System.Drawing.Color.White;
             this.BtnReset.IconChar = FontAwesome.Sharp.IconChar.SyncAlt;
             this.BtnReset.IconColor = System.Drawing.Color.White;
+            this.BtnReset.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnReset.IconSize = 40;
             this.BtnReset.Location = new System.Drawing.Point(170, 0);
             this.BtnReset.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BtnReset.Name = "BtnReset";
-            this.BtnReset.Rotation = 0D;
             this.BtnReset.Size = new System.Drawing.Size(150, 50);
             this.BtnReset.TabIndex = 9;
             this.BtnReset.Text = "Reset";
@@ -281,16 +273,15 @@
             this.BtnNext.BackColor = System.Drawing.Color.SeaGreen;
             this.BtnNext.FlatAppearance.BorderSize = 0;
             this.BtnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnNext.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.BtnNext.Font = new System.Drawing.Font("Courier New", 19F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnNext.Font = new System.Drawing.Font("Courier New", 19F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BtnNext.ForeColor = System.Drawing.Color.White;
             this.BtnNext.IconChar = FontAwesome.Sharp.IconChar.ChevronCircleRight;
             this.BtnNext.IconColor = System.Drawing.Color.White;
+            this.BtnNext.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnNext.IconSize = 40;
             this.BtnNext.Location = new System.Drawing.Point(10, 0);
             this.BtnNext.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.BtnNext.Name = "BtnNext";
-            this.BtnNext.Rotation = 0D;
             this.BtnNext.Size = new System.Drawing.Size(150, 50);
             this.BtnNext.TabIndex = 8;
             this.BtnNext.Text = "Next";
@@ -299,35 +290,34 @@
             this.BtnNext.UseVisualStyleBackColor = false;
             this.BtnNext.Click += new System.EventHandler(this.BtnNext_Click);
             // 
-            // pila1
+            // LblPuntuacion
             // 
-            this.pila1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pila1.BackColor = System.Drawing.Color.White;
-            this.pila1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pila1.Font = new System.Drawing.Font("Courier New", 39.75F);
-            this.pila1.FontSize = 20;
-            this.pila1.Location = new System.Drawing.Point(140, 70);
-            this.pila1.Margin = new System.Windows.Forms.Padding(10);
-            this.pila1.Name = "pila1";
-            this.pila1.OnCardPlaced = null;
-            this.pila1.Size = new System.Drawing.Size(100, 140);
-            this.pila1.TabIndex = 0;
-            this.pila1.Text = "pila1";
-            this.pila1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.LblPuntuacion.AutoSize = true;
+            this.LblPuntuacion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblPuntuacion.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LblPuntuacion.Location = new System.Drawing.Point(20, 430);
+            this.LblPuntuacion.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.LblPuntuacion.Name = "LblPuntuacion";
+            this.LblPuntuacion.Size = new System.Drawing.Size(230, 50);
+            this.LblPuntuacion.TabIndex = 10;
+            this.LblPuntuacion.Text = "Puntuación";
+            this.LblPuntuacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTipAyuda.SetToolTip(this.LblPuntuacion, "Current Score, from 3 to 100");
             // 
             // pila2
             // 
             this.pila2.BackColor = System.Drawing.Color.White;
             this.pila2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pila2.Font = new System.Drawing.Font("Courier New", 39.75F);
+            this.pila2.Font = new System.Drawing.Font("Courier New", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.pila2.FontSize = 20;
+            this.pila2.Image = ((System.Drawing.Image)(resources.GetObject("pila2.Image")));
             this.pila2.Location = new System.Drawing.Point(260, 70);
             this.pila2.Margin = new System.Windows.Forms.Padding(10);
             this.pila2.Name = "pila2";
             this.pila2.OnCardPlaced = null;
             this.pila2.Size = new System.Drawing.Size(100, 140);
             this.pila2.TabIndex = 12;
-            this.pila2.Text = "pila2";
+            this.pila2.Text = "1";
             this.pila2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pila3
@@ -335,8 +325,9 @@
             this.pila3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pila3.BackColor = System.Drawing.Color.White;
             this.pila3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pila3.Font = new System.Drawing.Font("Courier New", 39.75F);
+            this.pila3.Font = new System.Drawing.Font("Courier New", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.pila3.FontSize = 20;
+            this.pila3.Image = ((System.Drawing.Image)(resources.GetObject("pila3.Image")));
             this.pila3.Location = new System.Drawing.Point(640, 70);
             this.pila3.Margin = new System.Windows.Forms.Padding(10);
             this.pila3.Name = "pila3";
@@ -350,8 +341,9 @@
             // 
             this.pila4.BackColor = System.Drawing.Color.White;
             this.pila4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pila4.Font = new System.Drawing.Font("Courier New", 39.75F);
+            this.pila4.Font = new System.Drawing.Font("Courier New", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.pila4.FontSize = 20;
+            this.pila4.Image = ((System.Drawing.Image)(resources.GetObject("pila4.Image")));
             this.pila4.Location = new System.Drawing.Point(760, 70);
             this.pila4.Margin = new System.Windows.Forms.Padding(10);
             this.pila4.Name = "pila4";
@@ -361,6 +353,12 @@
             this.pila4.Text = "pila4";
             this.pila4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // Timer
+            // 
+            this.Timer.Enabled = true;
+            this.Timer.Interval = 1000;
+            this.Timer.Tick += new System.EventHandler(this.TimerTick);
+            // 
             // MainView
             // 
             this.AllowDrop = true;
@@ -369,7 +367,7 @@
             this.ClientSize = new System.Drawing.Size(1000, 500);
             this.ControlBox = false;
             this.Controls.Add(this.TlpPrincipal);
-            this.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

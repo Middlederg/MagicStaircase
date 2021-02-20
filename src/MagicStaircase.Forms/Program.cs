@@ -5,8 +5,6 @@ namespace MagicStaircase.Forms
 {
     static class Program
     {
-        public const string UpdatePath = "https://github.com/Middlederg/MagicStaircase";
-
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
