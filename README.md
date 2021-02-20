@@ -14,7 +14,7 @@ https://boardgamegeek.com/boardgame/173090/game
 
 # How to release new versions in blazor wasm
 
-- Pushes to master are automatically deployed (see .github/workflows/cd.yaml)
+- Pushes to master are automatically deployed (see .github/workflows/web-cd.yaml)
 
 # How to release new versions in winforms
 

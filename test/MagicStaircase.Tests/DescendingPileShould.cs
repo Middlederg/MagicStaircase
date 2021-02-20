@@ -14,8 +14,8 @@ namespace MagicStaircase.Tests
         {
             var pile = Create();
 
-            pile.LastCard.Should().Be(new Card(100));
-            pile.ToString().Should().Be("100");
+            pile.LastCard.Should().Be(new Card(99));
+            pile.ToString().Should().Be("99");
         }
 
         [Theory]
@@ -66,7 +66,7 @@ namespace MagicStaircase.Tests
             pile.Add(new Card(12));
             pile.Add(new Card(9));
 
-            pile.ToString().Should().Be("100, 80, 47, 25, 12, 9");
+            pile.ToString().Should().Be("99, 80, 47, 25, 12, 9");
         }
 
         [Fact]
