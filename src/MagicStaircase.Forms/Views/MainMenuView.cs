@@ -53,7 +53,7 @@ namespace MagicStaircase.Forms
         }
 
         private void BtnExit_Click(object sender, EventArgs e) => Application.Exit();
-        private void Repo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start(Configuration.RepoLink);
+        private void Repo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("explorer.exe", Configuration.RepoLink);
         
         private async void OnLoad(object sender, EventArgs e)
         {
