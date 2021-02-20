@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Core", "src\MagicStaircase.Core\MagicStaircase.Core.csproj", "{3737E358-320E-4BD6-86D1-07E8240A6254}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicStaircase.Core", "src\MagicStaircase.Core\MagicStaircase.Core.csproj", "{3737E358-320E-4BD6-86D1-07E8240A6254}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Forms", "src\MagicStaircase.Forms\MagicStaircase.Forms.csproj", "{31DD2FEC-FA5A-4037-A033-5A65E21D4274}"
 EndProject
@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3AC9DB62-23D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D518904D-DFDB-4A4F-B344-51764DEE293D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Web", "src\MagicStaircase.Web\MagicStaircase.Web.csproj", "{133DC555-A9D9-4683-A5DE-601ACD58F887}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicStaircase.Web", "src\MagicStaircase.Web\MagicStaircase.Web.csproj", "{133DC555-A9D9-4683-A5DE-601ACD58F887}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

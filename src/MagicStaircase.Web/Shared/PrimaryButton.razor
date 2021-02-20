@@ -1,0 +1,28 @@
+﻿<button @onclick="ButtonClicked"
+        class="flex justify-center items-center uppercase
+        @(GetColor) font-semibold
+         hover:text-white py-1 px-3 border  rounded-sm outline-none focus:outline-none
+        @(Enabled ? "" : "hidden")">
+    @ChildContent
+</button>
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public string Color { get; set; }
+    private string GetColor => string.IsNullOrWhiteSpace(Color) ? 
+        "text-green-600 hover:bg-green-600 border-green-600" :
+        $"text-{Color} hover:bg-{Color} border-{Color}";
+
+    [Parameter]
+    public bool Enabled { get; set; } = true;
+
+    private async Task ButtonClicked()
+    {
+        await OnClick.InvokeAsync(null);
+    }
+}

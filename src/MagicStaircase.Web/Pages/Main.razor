@@ -1,0 +1,54 @@
+﻿@page "/main"
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-8">
+    @foreach (var pile in game.Piles)
+    {
+        <Card />
+    }
+</div>
+
+<div class="flex flex-row align-items justify-between gap-4">
+    @foreach (var pile in game.Piles)
+    {
+        <Card />
+    }
+</div>
+
+<div class="grid grid-cols-4 md:grid-cols-8 gap-2 mb-8">
+    @foreach (var card in game.HandCards)
+    {
+        <Card />
+    }
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="flex flex-row align-items justify-center ga-4">
+        <div class="">
+            Score
+        </div>
+        <div class="">
+            Time
+        </div>
+    </div>
+    <div class="flex flex-row align-items justify-center gap-4">
+        <PrimaryButton>
+            Next
+        </PrimaryButton>
+        <PrimaryButton>
+            Reset
+        </PrimaryButton>
+        <PrimaryButton>
+            Exit
+        </PrimaryButton>
+    </div>
+</div>
+
+@code{
+
+    private Core.Game game;
+
+    protected override void OnInitialized()
+    {
+        game = new Core.Game();
+    }
+}
