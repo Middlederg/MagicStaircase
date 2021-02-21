@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicStaircase.Core", "src\MagicStaircase.Core\MagicStaircase.Core.csproj", "{3737E358-320E-4BD6-86D1-07E8240A6254}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicStaircase.Forms", "src\MagicStaircase.Forms\MagicStaircase.Forms.csproj", "{31DD2FEC-FA5A-4037-A033-5A65E21D4274}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicStaircase.Forms", "src\MagicStaircase.Forms\MagicStaircase.Forms.csproj", "{31DD2FEC-FA5A-4037-A033-5A65E21D4274}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A1C91F8D-7E02-47B5-A587-536530DB80A8}"
 	ProjectSection(SolutionItems) = preProject

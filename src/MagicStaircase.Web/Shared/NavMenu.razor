@@ -1,37 +1,26 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">MagicStaircase.Web</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+﻿<div class="w-full text-white bg-green-500 border-b-2 border-green-700 mb-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between py-2 md:py-3 px-4 md:px-8 ">
+        <div class="flex flex-row items-center justify-between mb-2 sm:mb-0">
+            <NavLink class="text-lg font-semibold tracking-widest
+      text-white hover:text-green-100 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"
+                     href="" Match="NavLinkMatch.All">
+                Magic staircase
+            </NavLink>
+        </div>
+        <nav class="flex justify-end items-center flex-row">
+            <NavLink class="px-4 py-2 text-sm font-semibold rounded-lg outline-none focus:outline-none"
+                     href="main" ActiveClass=" text-green-900  bg-white  hover:bg-green-50">
+                Play game
+            </NavLink>
+            <NavLink class="px-4 py-2 text-sm font-semibold rounded-lg outline-none focus:outline-none" 
+                     href="achievements" ActiveClass=" text-green-900  bg-white  hover:bg-green-50">
+                Achievements
+            </NavLink>
+        </nav>
+    </div>
 </div>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
-    </ul>
-</div>
 
 @code {
-    private bool collapseNavMenu = true;
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
 }

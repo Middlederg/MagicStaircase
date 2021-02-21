@@ -1,7 +1,19 @@
-﻿<div class="w-16 h-24 md:w-24 md:h-32 lg:w-32 lg:h-44 xl:w-40 xl:h-60 bg-white border border-black">
-
-</div>
-
+﻿<button class="w-16 h-24 md:w-24 md:h-32 lg:w-32 lg:h-44 xl:w-40 xl:h-60 
+     bg-white border-2 border-green-700 rounded-lg hover:shadow-lg flex items-center justify-center 
+        outline-none focus:outline-none" draggable="true"
+     @ondragend="HandleDragStart">
+    <span class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-mono font-bold">
+        @InnerCard.Number
+    </span>
+</button>
+@text
 @code {
+    string text = "";
+    [Parameter]
+    public Core.Card InnerCard { get; set; }
 
+    private void HandleDragStart()
+    {
+        text = "dragged";
+    }
 }

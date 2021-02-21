@@ -1,44 +1,54 @@
 ﻿@page "/main"
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-8">
+<div class="grid grid-cols-4 gap-2 mb-10">
     @foreach (var pile in game.Piles)
     {
-        <Card />
+        <div class="flex justify-center">
+            <Pile InnerPile="pile"/>
+        </div>
     }
 </div>
 
-<div class="flex flex-row align-items justify-between gap-4">
-    @foreach (var pile in game.Piles)
-    {
-        <Card />
-    }
-</div>
-
-<div class="grid grid-cols-4 md:grid-cols-8 gap-2 mb-8">
+<div class="grid grid-cols-4 md:grid-cols-8 gap-2 mb-10">
     @foreach (var card in game.HandCards)
     {
-        <Card />
+        <div class="flex justify-center">
+            <Card InnerCard="card" />
+        </div>
     }
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div class="flex flex-row align-items justify-center ga-4">
-        <div class="">
-            Score
+    <div class="flex flex-row items-center justify-center gap-8">
+        <div class="font-semibold whitespace-nowrap lg:tracking-wider text-normal lg:text-2xl">
+            Score: @game.Points()/100
         </div>
-        <div class="">
-            Time
+        <div class="inline-block px-4 lg:px-6 py-1 lg:py-2 font-semibold rounded-lg text-xl 
+             lg:text-4xl text-white bg-green-700 font-mono border-2 border-green-900">
+            01:54
         </div>
     </div>
-    <div class="flex flex-row align-items justify-center gap-4">
+    <div class="flex items-center justify-center gap-4">
         <PrimaryButton>
-            Next
+            <svg class="w-6 h-6 xl:w-9 xl:h-9 mr-2 xl:mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7">
+                </path>
+            </svg>
+            <span class="xl:text-4xl">Next</span>
         </PrimaryButton>
         <PrimaryButton>
-            Reset
+            <svg class="w-6 h-6 xl:w-9 xl:h-9 lg:mr-2 xl:mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                </path>
+            </svg>
+            <span class="hidden lg:block xl:text-4xl">Reset</span> 
         </PrimaryButton>
         <PrimaryButton>
-            Exit
+
+            <svg class="w-6 h-6 xl:w-9 xl:h-9 lg:mr-2 xl:mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+            </svg>
+            <span class="hidden lg:block xl:text-4xl">Exit</span>
         </PrimaryButton>
     </div>
 </div>
