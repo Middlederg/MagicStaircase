@@ -45,7 +45,7 @@ namespace MagicStaircase.Forms
 
             game = new Game();
             FlpMano.Controls.Clear();
-            foreach (var card in game.HandCards)
+            foreach (var card in game.PlayerHand.Cards)
             {
                 var cardControl = new Carta();
                 cardControl.SetValue(card.Number);
@@ -95,7 +95,7 @@ namespace MagicStaircase.Forms
         {
             foreach (Carta card in CardsInHand())
             {
-                if (game.Piles.Any(pile => pile.Fits(card.Card)))
+                if (game.CardCanBePlaced(card.Card))
                 {
                     card.Reenable();
                 }

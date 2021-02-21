@@ -1,24 +1,55 @@
 ﻿
 <div class="grid grid-cols-4 md:grid-cols-8 gap-2 mb-10">
-    @foreach (var card in Cards)
+    @foreach (var card in Game.PlayerHand.Cards)
     {
         <div class="flex justify-center">
-            <Card InnerCard="card" CardSelected="OnCardSelected" />
+            <Card @ref="ComponentRef" InnerCard="card" OnCardSelected="CardSelected" />
         </div>
     }
 </div>
 <p>
-    @SelectedCard?.Number
+    @info
 </p>
 
 @code{
+    string info = "";
+
+    [CascadingParameter]
+    public Core.Game Game { get; set; }
+
     [Parameter]
-    public IEnumerable<Core.Card> Cards { get; set; }
+    public EventCallback<Core.Card> OnCardSelected { get; set; }
 
-    [CascadingParameter] Core.Card SelectedCard { get; set; }
+    private void CardSelected(Core.Card card)
+    {
+        info = "card selected " + (card?.Number ?? 0).ToString();
 
-    private void OnCardSelected(Core.Card card)
+        foreach (var component in ComponentRefs)
+        {
+            component.Update(card);
+        }
+
+        OnCardSelected.InvokeAsync(card);
+    }
+
+    private List<Card> ComponentRefs = new List<Card>();
+    Card ComponentRef
+    {
+        set { ComponentRefs.Add(value); }
+    }
+
+    public void CardHasBeenPlaced()
+    {
+        foreach (var component in ComponentRefs)
+        {
+            component.Update(null);
+        }
+    }
+
+    public void Refilled()
     {
         StateHasChanged();
+
+        info = "cards: " + Game.PlayerHand.Cards.Count() + $"{Game.PlayerHand.TotaCards}";
     }
 }

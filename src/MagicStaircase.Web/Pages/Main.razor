@@ -1,18 +1,19 @@
 ﻿@page "/main"
 
-<CascadingValue Value="selectedCard">
-
-    <div class="grid grid-cols-4 gap-2 mb-10">
-        @foreach (var pile in game.Piles)
-        {
-            <div class="flex justify-center">
-                <Pile InnerPile="pile" />
-            </div>
-        }
-    </div>
-
-    <Board Cards="game.HandCards" />
+<CascadingValue Value="game">
+    <CascadingValue Value="selectedCard">
+        <div class="grid grid-cols-4 gap-2 mb-10">
+            @foreach (var pile in game.Piles)
+            {
+                <div class="flex justify-center">
+                    <Pile InnerPile="pile" OnCardPlaced="CardPlaced" />
+                </div>
+            }
+        </div>
+        <Board @ref="board" OnCardSelected="CardSelected" />
+    </CascadingValue>
 </CascadingValue>
+
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div class="flex flex-row items-center justify-center gap-8">
         <div class="font-semibold whitespace-nowrap lg:tracking-wider text-normal lg:text-2xl">
@@ -24,7 +25,7 @@
         </div>
     </div>
     <div class="flex items-center justify-center gap-4">
-        <PrimaryButton>
+        <PrimaryButton Enabled="game.CanPass" OnClick="OnNextClicked">
             <svg class="w-6 h-6 xl:w-9 xl:h-9 mr-2 xl:mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7">
                 </path>
@@ -47,8 +48,14 @@
         </PrimaryButton>
     </div>
 </div>
+<p>
+    @info
+</p>
 
 @code{
+    private Board board;
+
+    private string info;
 
     private Core.Game game;
 
@@ -57,5 +64,25 @@
     protected override void OnInitialized()
     {
         game = new Core.Game();
+    }
+
+    private void CardSelected(Core.Card card)
+    {
+        selectedCard = card;
+    }
+
+    private void CardPlaced(Core.Card card)
+    {
+        info = (card?.Number ?? 0).ToString() + " placed";
+        selectedCard = null;
+        board.CardHasBeenPlaced();
+        StateHasChanged();
+    }
+
+    private void OnNextClicked()
+    {
+        game.RefillHand().ToList();
+        //StateHasChanged();
+        board.Refilled();
     }
 }

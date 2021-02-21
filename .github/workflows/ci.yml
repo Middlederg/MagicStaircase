@@ -16,9 +16,8 @@ jobs:
         dotnet-version: 5.0.x
     - name: Install dependencies
       run: dotnet restore
-    - name: Build and Publish
-      run: |
-        dotnet build --configuration Release --no-restore
+    - name: Build
+      run: dotnet build test/MagicStaircase.Tests/MagicStaircase.Tests.csproj --configuration Release --no-restore
         
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test test/MagicStaircase.Tests/MagicStaircase.Tests.csproj  --no-restore --verbosity normal

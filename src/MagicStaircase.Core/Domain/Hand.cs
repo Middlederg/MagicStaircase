@@ -9,23 +9,22 @@ namespace MagicStaircase.Core
         public int PlayedCards => PlayerHandCount - TotaCards;
         public bool CanPass => PlayedCards >= MandatoryMinCardPerTurn;
 
-        private readonly List<Card> cards;
-        public IReadOnlyCollection<Card> Cards => cards;
-        public int TotaCards => cards.Count;
+        public List<Card> Cards { get; private set; }
+        public int TotaCards => Cards.Count;
 
         public Hand()
         {
-            cards = new List<Card>();
+            Cards = new List<Card>();
         }
 
         public void Add(int number)
         {
-            cards.Add(new Card(number));
+            Cards.Add(new Card(number));
         }
 
         public void Place(int number)
         {
-            cards.RemoveAll(x => x.Number == number);
+            Cards.RemoveAll(x => x.Number == number);
         }
 
         public bool CanPlayCards()

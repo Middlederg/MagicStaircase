@@ -1,7 +1,8 @@
-﻿<div class="w-16 h-24 md:w-24 md:h-32 lg:w-32 lg:h-44 xl:w-40 xl:h-60
+﻿<button class="w-16 h-24 md:w-24 md:h-32 lg:w-32 lg:h-44 xl:w-40 xl:h-60
      bg-white border-2 border-green-700 rounded-lg
      flex flex-col items-center justify-around
-      @(Fits() ? "hover:shadow-lg" : "")">
+        outline-none focus:outline-none
+      @(Fits() ? "hover:shadow-lg" : "")" @onclick="PileClicked">
 
     <span class="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-mono font-bold">
         @InnerPile.LastCard.Number
@@ -24,15 +25,37 @@
         </svg>
     </span>
     <span>
-        @SelectedCard?.Number
+        @*@if (!string.IsNullOrWhiteSpace(info))
+        {
+            <span class="flex items-center bg-red-500 border-l-4 border-red-700 py-2 px-3 shadow-md mb-2">
+                @info
+            </span>
+        }*@
     </span>
-</div>
+</button>
 
 @code {
+
     [Parameter]
     public Core.Pile InnerPile { get; set; }
 
-    [CascadingParameter] Core.Card SelectedCard { get; set; }
+    [CascadingParameter]
+    Core.Game Game { get; set; }
+
+    [CascadingParameter]
+    Core.Card SelectedCard { get; set; }
+
+    [Parameter]
+    public EventCallback<Core.Card> OnCardPlaced { get; set; }
 
     private bool Fits() => SelectedCard != null && InnerPile.Fits(SelectedCard);
+
+    private async Task PileClicked()
+    {
+        if (Fits())
+        {
+            Game.Play(SelectedCard.Number, InnerPile.Index);
+            await OnCardPlaced.InvokeAsync(SelectedCard);
+        }
+    }
 }

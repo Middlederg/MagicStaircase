@@ -7,11 +7,10 @@ namespace MagicStaircase.Core
     {
         private Deck deck;
         public bool AreRemainingCards => deck.HasCards;
-        public int Points() => 100 - deck.TotaCards - playerHand.TotaCards;
+        public int Points() => 100 - deck.TotaCards - PlayerHand.TotaCards;
 
-        private Hand playerHand;
-        public IEnumerable<Card> HandCards => playerHand.Cards;
-        public bool CanPass => playerHand.CanPass;
+        public Hand PlayerHand { get; private set; }
+        public bool CanPass => PlayerHand.CanPass;
 
         public IEnumerable<Pile> Piles { get; private set; }
 
@@ -22,7 +21,7 @@ namespace MagicStaircase.Core
 
         public void Reset()
         {
-            playerHand = new Hand();
+            PlayerHand = new Hand();
             deck = new Deck();
             RefillHand().ToList();
             Piles = new List<Pile>
@@ -36,28 +35,33 @@ namespace MagicStaircase.Core
 
         public IEnumerable<int> RefillHand()
         {
-            foreach (int _ in Enumerable.Range(0, playerHand.PlayedCards))
+            foreach (int _ in Enumerable.Range(0, PlayerHand.PlayedCards))
             {
                 if (deck.HasCards)
                 {
                     var newNumber = deck.TakeCard();
-                    playerHand.Add(newNumber);
-                    yield return newNumber;                         
+                    PlayerHand.Add(newNumber);
+                    yield return newNumber;
                 }
             }
         }
 
         public void Play(int number, int pileIndx)
         {
-            playerHand.Place(number);
+            PlayerHand.Place(number);
             Piles.ElementAt(pileIndx).Add(new Card(number));
+        }
+
+        public bool CardCanBePlaced(Card card)
+        {
+            return Piles.Any(pile => pile.Fits(card));
         }
 
         public bool IsPlayableCard()
         {
             foreach (var pile in Piles)
             {
-                if (HandCards.Any(card => pile.Fits(card)))
+                if (PlayerHand.Cards.Any(card => pile.Fits(card)))
                 {
                     return true;
                 }
@@ -72,7 +76,7 @@ namespace MagicStaircase.Core
                 return false;
             }
 
-            return !playerHand.CanPlayCards();
+            return !PlayerHand.CanPlayCards();
         }
     }
 }

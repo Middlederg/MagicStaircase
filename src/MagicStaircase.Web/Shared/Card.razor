@@ -1,26 +1,37 @@
-﻿<button class="w-16 h-24 md:w-24 md:h-32 lg:w-32 lg:h-44 xl:w-40 xl:h-60 
-     bg-white border-2 border-green-700 rounded-lg hover:shadow-lg flex items-center justify-center 
-        @(InnerCardIsSelected ? "outline-black focus:outline-black" : "outline-none focus:outline-none")" 
-        @onclick="OnCardSelected">
+﻿<button class="w-16 h-24 md:w-24 md:h-32 lg:w-32 lg:h-44 xl:w-40 xl:h-60
+        @(selected ? "outline-black focus:outline-black" : "outline-none focus:outline-none")
+      border-2 border-green-700 rounded-lg hover:shadow-lg flex items-center justify-center
+        @(canBePlaced ? "bg-white text-green-900" : "bg-green-50 text-green-500")"
+        @onclick="CardSelected">
     <span class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-mono font-bold">
         @InnerCard.Number
     </span>
 </button>
 
 @code {
-    [Parameter] public Core.Card InnerCard { get; set; }
-
-    [CascadingParameter] Core.Card SelectedCard { get; set; }
+    private bool selected = false;
+    private bool canBePlaced => Game.CardCanBePlaced(InnerCard);
 
     [Parameter]
-    public EventCallback<Core.Card> CardSelected { get; set; }
+    public Core.Card InnerCard { get; set; }
 
-    private async Task OnCardSelected()
+    [CascadingParameter]
+    public Core.Game Game { get; set; }
+
+    [Parameter]
+    public EventCallback<Core.Card> OnCardSelected { get; set; }
+
+    private async Task CardSelected()
     {
-        SelectedCard = InnerCard;
-        await CardSelected.InvokeAsync(InnerCard);
-        StateHasChanged();
+        if (Game.CardCanBePlaced(InnerCard))
+        {
+            await OnCardSelected.InvokeAsync(InnerCard);
+        }
     }
 
-    private bool InnerCardIsSelected => SelectedCard != null && SelectedCard.Equals(InnerCard);
+    public void Update(Core.Card selectedCard)
+    {
+        selected = selectedCard != null && selectedCard.Equals(InnerCard);
+    }
+
 }
