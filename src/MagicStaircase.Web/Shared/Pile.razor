@@ -1,6 +1,7 @@
 ﻿<div class="w-16 h-24 md:w-24 md:h-32 lg:w-32 lg:h-44 xl:w-40 xl:h-60
-     bg-white border-2 border-green-700 rounded-lg hover:shadow-lg flex flex-col items-center justify-around"
-  ondragover="event.preventDefault();">
+     bg-white border-2 border-green-700 rounded-lg
+     flex flex-col items-center justify-around
+      @(Fits() ? "hover:shadow-lg" : "")">
 
     <span class="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-mono font-bold">
         @InnerPile.LastCard.Number
@@ -23,11 +24,15 @@
         </svg>
     </span>
     <span>
-
+        @SelectedCard?.Number
     </span>
 </div>
 
 @code {
     [Parameter]
     public Core.Pile InnerPile { get; set; }
+
+    [CascadingParameter] Core.Card SelectedCard { get; set; }
+
+    private bool Fits() => SelectedCard != null && InnerPile.Fits(SelectedCard);
 }

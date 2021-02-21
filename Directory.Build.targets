@@ -1,5 +1,9 @@
 <Project>
 
+  <ItemGroup Label="Blazor">
+
+  </ItemGroup> 
+  
   <ItemGroup Label="ThirdParty">
     <PackageReference Update="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
