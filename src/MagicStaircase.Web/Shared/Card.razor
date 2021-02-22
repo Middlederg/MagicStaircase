@@ -2,13 +2,14 @@
         @(selected ? "outline-black focus:outline-black" : "outline-none focus:outline-none")
       border-2 border-green-700 rounded-lg hover:shadow-lg flex items-center justify-center
         @(canBePlaced ? "bg-white text-green-900" : "bg-green-50 text-green-500")"
-        @onclick="CardSelected">
+        @onclick="CardSelected" title="@(!canBePlaced ? CanNotBePlacedLiteral : "")">
     <span class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-mono font-bold">
         @InnerCard.Number
     </span>
 </button>
 
 @code {
+    private const string CanNotBePlacedLiteral = "This card can not be placed :(";
     private bool selected = false;
     private bool canBePlaced => Game.CardCanBePlaced(InnerCard);
 
@@ -20,6 +21,8 @@
 
     [Parameter]
     public EventCallback<Core.Card> OnCardSelected { get; set; }
+
+    private string info;
 
     private async Task CardSelected()
     {

@@ -1,0 +1,127 @@
+﻿@inject Core.IScoreReporitory repository
+
+<div class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 @(Hidden ? "hidden" : "")"
+     style="z-index:2;">
+    <div class="bg-white rounded shadow-lg mx-8 max-w-xl">
+        <!-- modal header -->
+        <div class="border-b px-4 py-2 flex justify-between items-center">
+
+            <h3 class="flex justify-content-center items-center font-semibold text-lg">
+                End of game
+            </h3>
+
+        </div>
+        <!-- modal body -->
+        <div class="px-6 py-3">
+
+            <p class="mb-4 flex flex-col items-center">
+                <div class="flex justify-between items-center mb-8">
+                    <span class="font-semibold whitespace-nowrap lg:tracking-wider text-normal lg:text-2xl">
+                        Score: @Game.Points()/100
+                    </span>
+
+                    <span class="font-semibold font-mono whitespace-nowrap lg:tracking-wider text-normal lg:text-2xl">
+                        Time: @time?.ToString()
+                    </span>
+                </div>
+
+                <input type="text" class="block w-full border rounded py-3 px-4 mb-3 outline-none focus:border-blue-300"
+                       @bind="name" placeholder="Insert your name" />
+                <div class="text-yellow-600 italic mb-4">
+                    @message
+                </div>
+
+                <div class="border">
+                    <div class="p-4 bg-white border-b border-gray-200 font-bold uppercase">
+                        @achievementsHeader
+                    </div>
+                    <div class="p-4 flex flex-col gap-2 bg-white border-b border-gray-200">
+                        @if (achievements != null)
+                        {
+                            @foreach (var achievement in achievements)
+                            {
+                                <Achievement InnerAchievement="achievement" UnlockerScores="new List<Core.Score>() { score }" />
+                            }
+                        }
+                    </div>
+                </div>
+            </p>
+
+            <div class="flex justify-end items-center mt-6">
+                <PrimaryButton >
+                    <svg class="w-6 h-6" fill="currentColor" stroke="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                                 </path></svg>
+                    <span class="hidden lg:block xl:text-4xl">OK</span>
+                </PrimaryButton>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@code {
+
+    private string name;
+    private string message;
+    private Core.Time time;
+    private string achievementsHeader = "No achievements unlocked";
+
+    private List<Core.Achievement> achievements;
+    private Core.Score score;
+
+    [Parameter]
+    public bool Hidden { get; set; }
+
+    [Parameter]
+    public EventCallback OnModalAccepted { get; set; }
+
+    [CascadingParameter]
+    public Core.Game Game { get; set; }
+
+    protected override void OnInitialized()
+    {
+        achievements = new List<Core.Achievement>();
+    }
+
+    private async Task OnAccepted()
+    {
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            message = "";
+            Hidden = true;
+            await OnModalAccepted.InvokeAsync(null);
+        }
+        else message = "You must enter a valid name";
+    }
+
+    private async Task<IEnumerable<Core.Achievement>> AchievementsAvaliable()
+    {
+        var scores = await repository.GetScores();
+        var achievements = new List<Core.Achievement>();
+        foreach (var achievement in Core.AchievementFactory.Achievements)
+        {
+            if (!scores.Any(x => achievement.TryToUnlockAchievement(x)))
+            {
+                achievements.Add(achievement);
+            }
+        }
+        return achievements;
+    }
+
+    public async Task Show(Core.Time time)
+    {
+        this.time = time;
+        Hidden = false;
+        score = new Core.Score(new Core.Player(name), Game.Points(), time);
+        foreach (var achievement in await AchievementsAvaliable())
+        {
+            if (achievement.TryToUnlockAchievement(score))
+            {
+                achievementsHeader = "Achievements unlocked!";
+                achievements.Add(achievement);
+            }
+        }
+    }
+
+}

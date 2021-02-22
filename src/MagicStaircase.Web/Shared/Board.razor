@@ -7,9 +7,6 @@
         </div>
     }
 </div>
-<p>
-    @info
-</p>
 
 @code{
     string info = "";
@@ -49,7 +46,5 @@
     public void Refilled()
     {
         StateHasChanged();
-
-        info = "cards: " + Game.PlayerHand.Cards.Count() + $"{Game.PlayerHand.TotaCards}";
     }
 }

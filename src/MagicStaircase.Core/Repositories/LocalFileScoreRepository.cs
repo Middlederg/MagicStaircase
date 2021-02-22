@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace MagicStaircase.Core.Repositories
 {
-    public class LocalFileScoreRepository
+    public class LocalFileScoreRepository : IScoreReporitory
     {
         public LocalFileScoreRepository()
         {
