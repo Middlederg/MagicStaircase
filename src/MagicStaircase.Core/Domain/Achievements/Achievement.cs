@@ -19,6 +19,7 @@ namespace MagicStaircase.Core
 
         public override string ToString() => name;
 
-        public string Description() => $"To unlock this achievement, you must: {string.Join("\n-", unlockingStrategies)}";
+        public string Description() => $"To unlock this achievement, you must: {UnlockingStrategiesText}";
+        public string UnlockingStrategiesText => string.Join(", ", unlockingStrategies);
     }
 }

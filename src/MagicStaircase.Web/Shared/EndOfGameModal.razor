@@ -15,7 +15,7 @@
         <div class="px-6 py-3">
 
             <p class="mb-4 flex flex-col items-center">
-                <div class="flex justify-between items-center mb-8">
+                <div class="w-full flex justify-around items-center mb-4">
                     <span class="font-semibold whitespace-nowrap lg:tracking-wider text-normal lg:text-2xl">
                         Score: @Game.Points()/100
                     </span>
@@ -48,9 +48,11 @@
             </p>
 
             <div class="flex justify-end items-center mt-6">
-                <PrimaryButton >
-                    <svg class="w-6 h-6" fill="currentColor" stroke="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                                 </path></svg>
+                <PrimaryButton>
+                    <svg class="w-6 h-6" fill="currentColor" stroke="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                        </path>
+                    </svg>
                     <span class="hidden lg:block xl:text-4xl">OK</span>
                 </PrimaryButton>
 
@@ -95,7 +97,22 @@
         else message = "You must enter a valid name";
     }
 
-    private async Task<IEnumerable<Core.Achievement>> AchievementsAvaliable()
+    public async Task Show(Core.Time time)
+    {
+        this.time = time;
+        Hidden = false;
+        score = new Core.Score(new Core.Player(name), Game.Points(), time);
+        foreach (var achievement in await GetAvaliableAchievements())
+        {
+            if (achievement.TryToUnlockAchievement(score))
+            {
+                achievementsHeader = "Achievements unlocked!";
+                achievements.Add(achievement);
+            }
+        }
+    }
+
+    private async Task<IEnumerable<Core.Achievement>> GetAvaliableAchievements()
     {
         var scores = await repository.GetScores();
         var achievements = new List<Core.Achievement>();
@@ -107,21 +124,6 @@
             }
         }
         return achievements;
-    }
-
-    public async Task Show(Core.Time time)
-    {
-        this.time = time;
-        Hidden = false;
-        score = new Core.Score(new Core.Player(name), Game.Points(), time);
-        foreach (var achievement in await AchievementsAvaliable())
-        {
-            if (achievement.TryToUnlockAchievement(score))
-            {
-                achievementsHeader = "Achievements unlocked!";
-                achievements.Add(achievement);
-            }
-        }
     }
 
 }

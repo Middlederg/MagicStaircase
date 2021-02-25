@@ -60,6 +60,8 @@ namespace MagicStaircase.Core
             };
         }
 
-        
+        public override string ToString() => $"{Player} ({PointsText})";
+
+        public string PointsText => $"{Points} point{(Points == 1 ? "" : "s")}";
     }
 }
