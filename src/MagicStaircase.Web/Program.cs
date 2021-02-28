@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Blazored.LocalStorage;
 
 namespace MagicStaircase.Web
 {
@@ -18,6 +19,8 @@ namespace MagicStaircase.Web
 
             builder.Services.AddScoped<Core.IScoreReporitory, LocalStorageScoreRepository>();
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            
+            builder.Services.AddBlazoredLocalStorage();
 
             await builder.Build().RunAsync();
         }

@@ -32,7 +32,7 @@ namespace MagicStaircase.Core
             }
         }
 
-        private Score(ScoreViewModel score)
+        public Score(ScoreViewModel score)
         {
             Player = new Player(score.PlayerName);
             Points = score.Points;
@@ -62,6 +62,6 @@ namespace MagicStaircase.Core
 
         public override string ToString() => $"{Player} ({PointsText})";
 
-        public string PointsText => $"{Points} point{(Points == 1 ? "" : "s")}";
+        private string PointsText => $"{Points} point{(Points == 1 ? "" : "s")}";
     }
 }

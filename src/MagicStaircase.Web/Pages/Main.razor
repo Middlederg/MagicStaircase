@@ -77,7 +77,6 @@
 
     private async Task CardPlaced(Core.Card card)
     {
-        isGameEnd = true;
         await modal.Show(new Core.Time(500));
 
         selectedCard = null;

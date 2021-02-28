@@ -24,7 +24,7 @@ namespace MagicStaircase.Core.Repositories
             using (var streamReader = new StreamReader(Configuration.ScoresFile))
             {
                 var json = await streamReader.ReadToEndAsync();
-                return Score.Deserialize(json);
+                return Score.Deserialize(json).ToList();
             }
         }
 

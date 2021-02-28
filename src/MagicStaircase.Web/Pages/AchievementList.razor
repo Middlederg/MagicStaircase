@@ -4,10 +4,14 @@
 
 <div class="md:mx-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        @foreach (var achievement in achievementsList)
+        @if (achievementsList != null && scores != null)
         {
-            <Achievement InnerAchievement="achievement"
-                         UnlockerScores="scores.Where(x => achievement.TryToUnlockAchievement(x))" />
+
+            @foreach (var achievement in achievementsList)
+            {
+                <Achievement InnerAchievement="achievement"
+                             UnlockerScores="scores.Where(x => achievement.TryToUnlockAchievement(x))" />
+            }
         }
     </div>
 </div>
@@ -20,11 +24,7 @@
     protected async override Task OnInitializedAsync()
     {
         achievementsList = Core.AchievementFactory.Achievements;
-        scores = new List<Core.Score>() 
-        { 
-            new Core.Score(new Core.Player("Mike"), 15, new Core.Time(50)) ,
-            new Core.Score(new Core.Player("Francis"), 70, new Core.Time(50)), 
-            new Core.Score(new Core.Player("Paco"), 10, new Core.Time(50)) 
-        }; // await repository.GetScores();
+
+        scores = await repository.GetScores();
     }
 }
