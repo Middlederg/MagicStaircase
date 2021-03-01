@@ -1,7 +1,7 @@
 ﻿<button class="w-16 h-24 md:w-24 md:h-32 lg:w-32 lg:h-44 xl:w-40 xl:h-60
         @(selected ? "outline-black focus:outline-black" : "outline-none focus:outline-none")
       border-2 border-green-700 rounded-lg hover:shadow-lg flex items-center justify-center
-        @(canBePlaced ? "bg-white text-green-900" : "bg-green-50 text-green-500")"
+        @(canBePlaced ? "bg-white text-green-900" : "bg-red-50 text-red-500")"
         @onclick="CardSelected" title="@(!canBePlaced ? CanNotBePlacedLiteral : "")">
     <span class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-mono font-bold">
         @InnerCard.Number

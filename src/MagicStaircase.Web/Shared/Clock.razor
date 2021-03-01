@@ -1,0 +1,47 @@
+﻿@using System.Timers;
+
+@implements IDisposable
+
+<div class="inline-block px-4 lg:px-6 py-1 lg:py-2 font-semibold rounded-lg text-xl
+             lg:text-4xl text-white bg-green-700 font-mono border-2 border-green-900">
+    @time.ToString()
+</div>
+
+@code {
+
+    private Core.Time time;
+
+    private Timer timer;
+
+    protected override void OnInitialized()
+    {
+        time = new Core.Time(0);
+        timer = new Timer()
+        {
+            Interval = 1000
+        };
+
+        timer.Elapsed += TimerOnElapsed;
+        timer.Start();
+    }
+
+    private void TimerOnElapsed(object sender, ElapsedEventArgs e)
+    {
+        time.NextSecond();
+        StateHasChanged();
+    }
+
+    public Core.Time Stop()
+    {
+        timer.Stop();
+        return time;
+    }
+
+    public void Dispose()
+    {
+        if (timer != null)
+        {
+            timer.Dispose();
+        }
+    }
+}

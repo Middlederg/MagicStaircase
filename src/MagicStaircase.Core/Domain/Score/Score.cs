@@ -62,6 +62,6 @@ namespace MagicStaircase.Core
 
         public override string ToString() => $"{Player} ({PointsText})";
 
-        private string PointsText => $"{Points} point{(Points == 1 ? "" : "s")}";
+        public string PointsText => $"{Points} point{(Points == 1 ? "" : "s")}";
     }
 }

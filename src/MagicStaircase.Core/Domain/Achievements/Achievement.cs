@@ -21,5 +21,9 @@ namespace MagicStaircase.Core
 
         public string Description() => $"To unlock this achievement, you must: {UnlockingStrategiesText}";
         public string UnlockingStrategiesText => string.Join(", ", unlockingStrategies);
+
+        public bool IsGold() => name.ToUpper().Equals("GOLD MEDAL");
+        public bool IsSilver() => name.ToUpper().Equals("SILVER MEDAL");
+        public bool IsBronze() => name.ToUpper().Equals("BRONZE MEDAL");
     }
 }

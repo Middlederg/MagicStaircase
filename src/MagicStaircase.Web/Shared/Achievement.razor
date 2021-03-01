@@ -1,4 +1,4 @@
-﻿<div class="flex flex-col border-2 rounded border-green-700 gap-4 max-w-xl w-full bg-green-200 overflow-hidden mx-auto">
+﻿<div class="flex flex-col border-2 rounded border-green-700 gap-4 max-w-xl w-full @GetBackground() overflow-hidden mx-auto">
 
     <div class="flex justify-between items-center py-2 md:px-4 md:py-4">
         <div class="flex flex-col mx-4">
@@ -10,7 +10,7 @@
             </p>
             @if (!achievementUnlocked)
             {
-                <p class="mt-1 text-xs text-green-500">
+                <p class="mt-1 text-xs text-green-900">
                     <span class="italic font-bold mr-2">@achievementUnlockedText</span> @InnerAchievement.Description()
                 </p>
             }
@@ -41,6 +41,14 @@
 </div>
 
 @code {
+
+    private string GetBackground()
+    {
+        if (InnerAchievement != null && InnerAchievement.IsGold()) return "bg-yellow-300";
+        if (InnerAchievement != null && InnerAchievement.IsSilver()) return "bg-gray-200";
+        if (InnerAchievement != null && InnerAchievement.IsBronze()) return "bg-yellow-500";
+        return "bg-white";
+    }
 
     [Parameter]
     public Core.Achievement InnerAchievement { get; set; }
