@@ -38,5 +38,16 @@ namespace MagicStaircase.Core.Repositories
                 await streamReader.WriteAsync(json);
             }
         }
+
+        public async Task RemoveScore(Score score)
+        {
+            var scores = (await GetScores()).ToList();
+            using (var streamReader = new StreamWriter(Configuration.ScoresFile))
+            {
+                var result = scores.Select(x => x.ToViewModel()).ToList().Remove(score.ToViewModel());
+                var json = JsonConvert.SerializeObject(result);
+                await streamReader.WriteAsync(json);
+            }
+        }
     }
 }

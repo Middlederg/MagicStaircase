@@ -63,5 +63,22 @@ namespace MagicStaircase.Core
         public override string ToString() => $"{Player} ({PointsText})";
 
         public string PointsText => $"{Points} point{(Points == 1 ? "" : "s")}";
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            var other = (Score)obj;
+
+            return Player.Equals(other.Player) &&
+                Time.Seconds == other.Time.Seconds &&
+                Points == other.Points &&
+                Date == other.Date;
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode() => Points.GetHashCode() * Player.GetHashCode() * Time.GetHashCode() * Date.GetHashCode();
     }
 }

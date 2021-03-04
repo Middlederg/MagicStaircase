@@ -19,7 +19,7 @@ namespace MagicStaircase.Web
 
             builder.Services.AddScoped<Core.IScoreReporitory, LocalStorageScoreRepository>();
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            
+
             builder.Services.AddBlazoredLocalStorage();
 
             await builder.Build().RunAsync();

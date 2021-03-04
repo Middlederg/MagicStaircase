@@ -42,13 +42,7 @@
 
 @code {
 
-    private string GetBackground()
-    {
-        if (InnerAchievement != null && InnerAchievement.IsGold()) return "bg-yellow-300";
-        if (InnerAchievement != null && InnerAchievement.IsSilver()) return "bg-gray-200";
-        if (InnerAchievement != null && InnerAchievement.IsBronze()) return "bg-yellow-500";
-        return "bg-white";
-    }
+    private string GetBackground() => $"bg-{InnerAchievement.GetColor()}";
 
     [Parameter]
     public Core.Achievement InnerAchievement { get; set; }

@@ -7,5 +7,6 @@ namespace MagicStaircase.Core
     {
         Task AddScore(Score score);
         Task<IEnumerable<Score>> GetScores();
+        Task RemoveScore(Score score);
     }
 }

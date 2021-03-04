@@ -35,5 +35,13 @@ namespace MagicStaircase.Web
             var scores = await localStorage.GetItemAsync<List<ScoreViewModel>>(achievementList);
             return scores.Select(x => new Score(x));
         }
+
+        public async Task RemoveScore(Score score)
+        {
+            var scores = await GetScores();
+            var result = scores.Select(x => x.ToViewModel()).ToList();
+            result.Remove(score.ToViewModel());
+            await localStorage.SetItemAsync(achievementList, result);
+        }
     }
 }
