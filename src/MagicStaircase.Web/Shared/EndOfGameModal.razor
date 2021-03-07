@@ -44,20 +44,6 @@
                     @message
                 </div>
 
-                <div class="border">
-                    <div class="p-4 bg-white border-b border-gray-200 font-bold uppercase">
-                        @achievementsHeader
-                    </div>
-                    <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-2 bg-white border-b border-gray-200">
-                        @if (achievements != null)
-                        {
-                            @foreach (var achievement in achievements)
-                            {
-                                <Achievement InnerAchievement="achievement" UnlockerScores="new List<Core.Score>() { score }" />
-                            }
-                        }
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -69,24 +55,17 @@
     private Core.Time time;
     private string name;
     private string message;
-    private string achievementsHeader = "No achievements unlocked";
 
-    private List<Core.Achievement> achievements;
     private Core.Score score;
 
     [Parameter]
     public bool Hidden { get; set; }
 
     [Parameter]
-    public EventCallback OnModalAccepted { get; set; }
+    public EventCallback<string> OnModalAccepted { get; set; }
 
     [CascadingParameter]
     public Core.Game Game { get; set; }
-
-    protected override void OnInitialized()
-    {
-        achievements = new List<Core.Achievement>();
-    }
 
     private async Task OnAccepted()
     {
@@ -96,37 +75,8 @@
             Hidden = true;
             var score = new Core.Score(new Core.Player(name), Game.Points(), time);
             await repository.AddScore(score);
-            await OnModalAccepted.InvokeAsync(null);
+            await OnModalAccepted.InvokeAsync(name);
         }
         else message = "You must enter a valid name";
     }
-
-    public async Task Show(Core.Time time)
-    {
-        Hidden = false;
-        this.time = time;
-        foreach (var achievement in await GetAvaliableAchievements())
-        {
-            if (achievement.TryToUnlockAchievement(Game.Points(), time))
-            {
-                achievementsHeader = "Achievements unlocked!";
-                achievements.Add(achievement);
-            }
-        }
-    }
-
-    private async Task<IEnumerable<Core.Achievement>> GetAvaliableAchievements()
-    {
-        var scores = await repository.GetScores();
-        var achievements = new List<Core.Achievement>();
-        foreach (var achievement in Core.AchievementFactory.Achievements)
-        {
-            if (!scores.Any(x => achievement.TryToUnlockAchievement(x)))
-            {
-                achievements.Add(achievement);
-            }
-        }
-        return achievements;
-    }
-
 }

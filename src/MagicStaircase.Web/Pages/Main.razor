@@ -23,7 +23,7 @@
         <div class="font-semibold whitespace-nowrap lg:tracking-wider text-normal lg:text-2xl">
             Score: @game.Points()/100
         </div>
-    <Clock @ref="clock" />
+        <Clock @ref="clock" />
     </div>
     <div class="flex items-center justify-center gap-4">
         <PrimaryButton Enabled="game.CanPass" OnClick="OnNextClicked">
@@ -49,6 +49,7 @@
     </div>
 </div>
 
+<UnlockedAchievementList @ref="achievementList" />
 
 @code{
 
@@ -57,6 +58,7 @@
     private Board board;
     private EndOfGameModal modal;
     private Clock clock;
+    private UnlockedAchievementList achievementList;
 
     private Core.Game game;
 
@@ -72,22 +74,19 @@
         selectedCard = card;
     }
 
-    private async Task CardPlaced(Core.Card card)
+    private void CardPlaced(Core.Card card)
     {
-        await modal.Show(new Core.Time(500));
-
         selectedCard = null;
         board.CardHasBeenPlaced();
         StateHasChanged();
 
         if (game.IsGameEnd())
         {
-            isGameEnd = true;
-            await modal.Show(new Core.Time(500));
+            OnGameEnd();
         }
     }
 
-    private async Task OnNextClicked()
+    private void OnNextClicked()
     {
         if (game.CanPass)
         {
@@ -97,14 +96,22 @@
             if (!game.IsPlayableCard())
             {
                 isGameEnd = true;
-                var time = clock.Stop();
-                await modal.Show(time);
+                OnGameEnd();
             }
         }
     }
 
-    private void OnModalAccepted()
+    private void OnGameEnd()
     {
+        isGameEnd = true;
+        clock.Stop();
+
+    }
+
+    private async Task OnModalAccepted(string playerName)
+    {
+        var score = new Core.Score(new Core.Player(playerName), game.Points(), clock.Time));
+        await achievementList.Show(score);
         navigationManager.NavigateTo("/");
     }
 

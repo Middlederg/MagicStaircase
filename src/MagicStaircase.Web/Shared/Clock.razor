@@ -9,13 +9,13 @@
 
 @code {
 
-    private Core.Time time;
+    public Core.Time Time { get; private set; }
 
     private Timer timer;
 
     protected override void OnInitialized()
     {
-        time = new Core.Time(0);
+        Time = new Core.Time(0);
         timer = new Timer()
         {
             Interval = 1000
@@ -27,14 +27,13 @@
 
     private void TimerOnElapsed(object sender, ElapsedEventArgs e)
     {
-        time.NextSecond();
+        Time.NextSecond();
         StateHasChanged();
     }
 
-    public Core.Time Stop()
+    public void Stop()
     {
         timer.Stop();
-        return time;
     }
 
     public void Dispose()

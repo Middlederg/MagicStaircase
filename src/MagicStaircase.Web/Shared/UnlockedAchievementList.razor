@@ -1,0 +1,53 @@
+﻿@inject Core.IScoreReporitory repository
+
+
+@if (achievements != null)
+{
+    <div class="border">
+        <div class="p-4 bg-white border-b border-gray-200 font-bold uppercase">
+            @achievementsHeader
+        </div>
+        <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-2 bg-white border-b border-gray-200">
+            @foreach (var achievement in achievements)
+            {
+                <Achievement InnerAchievement="achievement" UnlockerScores="new List<Core.Score>() { score }" />
+            }
+        </div>
+    </div>
+}
+@code {
+
+    private string achievementsHeader = "No achievements unlocked";
+
+    private List<Core.Achievement> achievements;
+
+    private Core.Score score;
+
+    public async Task Show(Core.Score score)
+    {
+        this.score = score;
+        foreach (var achievement in await GetAvaliableAchievements())
+        {
+            if (achievement.TryToUnlockAchievement(score))
+            {
+                achievementsHeader = "Achievements unlocked!";
+                achievements.Add(achievement);
+            }
+        }
+    }
+
+    private async Task<IEnumerable<Core.Achievement>> GetAvaliableAchievements()
+    {
+        var scores = await repository.GetScores();
+        var achievements = new List<Core.Achievement>();
+        foreach (var achievement in Core.AchievementFactory.Achievements)
+        {
+            if (!scores.Any(x => achievement.TryToUnlockAchievement(x)))
+            {
+                achievements.Add(achievement);
+            }
+        }
+        return achievements;
+    }
+
+}
