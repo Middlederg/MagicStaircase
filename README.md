@@ -2,19 +2,25 @@
 
 The Game cardgame implementation 
 
+https://boardgamegeek.com/boardgame/173090/game
+
 - In Blazor webassembly 
+
+[Demo deployed to netlify](https://competent-saha-cde062.netlify.app/)
+
+![winforms](Resources/netlify.jpg)
+
 
 - In windows forms
 
 ![winforms](Resources/winforms-main.JPG)
 
-https://boardgamegeek.com/boardgame/173090/game
-
 ---
 
 # How to release new versions in blazor wasm
 
-- Pushes to master are automatically deployed (see .github/workflows/web-cd.yaml)
+- Pushes to master are automatically deployed to a netlify site in https://competent-saha-cde062.netlify.app/
+
 
 # How to release new versions in winforms
 
