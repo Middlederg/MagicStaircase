@@ -31,7 +31,7 @@
         <span class="hidden md:flex flex-col text-xs">
             @if (UnlockerScores != null)
             {
-                foreach (var score in UnlockerScores)
+                foreach (var score in UnlockerScores.OrderByDescending(x => x.Points).Take(3))
                 {
                     <span>@score</span>
                 }

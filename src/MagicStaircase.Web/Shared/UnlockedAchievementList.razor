@@ -1,14 +1,13 @@
 ﻿@inject Core.IScoreReporitory repository
 
-
-@if (achievements != null)
+@if (achievementList != null && achievementList.Any())
 {
-    <div class="border">
-        <div class="p-4 bg-white border-b border-gray-200 font-bold uppercase">
+    <div class="border rounded border-green-700">
+        <div class="p-2 text-center text-white border-b bg-green-700 font-semibold">
             @achievementsHeader
         </div>
-        <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-2 bg-white border-b border-gray-200">
-            @foreach (var achievement in achievements)
+        <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-2">
+            @foreach (var achievement in achievementList)
             {
                 <Achievement InnerAchievement="achievement" UnlockerScores="new List<Core.Score>() { score }" />
             }
@@ -19,9 +18,14 @@
 
     private string achievementsHeader = "No achievements unlocked";
 
-    private List<Core.Achievement> achievements;
+    private List<Core.Achievement> achievementList;
 
     private Core.Score score;
+
+    protected override void OnInitialized()
+    {
+        achievementList = new List<Core.Achievement>();
+    }
 
     public async Task Show(Core.Score score)
     {
@@ -31,9 +35,11 @@
             if (achievement.TryToUnlockAchievement(score))
             {
                 achievementsHeader = "Achievements unlocked!";
-                achievements.Add(achievement);
+                achievementList.Add(achievement);
             }
         }
+        StateHasChanged();
+        await repository.AddScore(score);
     }
 
     private async Task<IEnumerable<Core.Achievement>> GetAvaliableAchievements()

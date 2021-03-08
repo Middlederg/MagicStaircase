@@ -16,11 +16,6 @@ namespace MagicStaircase.Core
         }
 
         public bool TryToUnlockAchievement(Score score) => unlockingStrategies.All(x => x.IsUnlocked(score));
-        public bool TryToUnlockAchievement(int points, Time time)
-        {
-            var score = new Score(new Player(""), points, time);
-            return unlockingStrategies.All(x => x.IsUnlocked(score));
-        }
 
         public override string ToString() => name;
 

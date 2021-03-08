@@ -36,8 +36,10 @@ namespace MagicStaircase.Core
             ApprovalCertificate,
             FastPlayer,
             EasyAchievemnt,
+#if DEBUG 
             OnePointAchievemnt,
             TwoPointsAchievemnt
+#endif
         };
     }
 }

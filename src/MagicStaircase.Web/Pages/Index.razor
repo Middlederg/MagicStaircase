@@ -23,7 +23,7 @@
                     <th scope="col" class="text-left px-6 py-3 text-xs font-medium uppercase tracking-wider">
                         Score
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                    <th scope="col" class="hidden md:table-cell px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                         Time
                     </th>
                     <th scope="col" class="hidden md:table-cell text-left px-6 py-3 text-xs font-medium uppercase tracking-wider">
@@ -52,7 +52,7 @@
                                 <div class="flex items-center">
                                     <div class="">
                                         <div class="text-sm font-medium text-gray-900">
-                                            @score.PointsText
+                                            @score.Player.ToString() @score.PointsText
                                         </div>
                                         <div class="text-xs text-gray-500">
                                             @score.Message
@@ -60,7 +60,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap">
                                 <div class="text-xs md:text-sm text-gray-900">@score.Time</div>
                             </td>
                             <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -84,7 +84,50 @@
     </div>
 </div>
 
+<div class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 @(selectedScore is null ? "hidden" : "")" 
+     style="z-index:2;">
+    <div class="bg-white rounded shadow-lg mx-8 max-w-xl">
+        <!-- modal header -->
+        <div class="bg-green-500 text-white border-b-2 border-green-700 rounded-t px-4 py-2
+             flex justify-between items-center">
+
+            <h3 class="flex justify-content-center items-center font-semibold text-sm">
+                Delete score
+
+
+            </h3>
+            <button @onclick="() => selectedScore = null"
+                    class="text-white font-semibold outline-none focus:outline-none">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z">
+                    </path>
+                </svg>
+
+            </button>
+        </div>
+        <!-- modal body -->
+        <div class="px-6 py-3">
+
+            <div class="mb-4 flex flex-col items-center">
+
+                <div class="text-red-600 mb-4">
+                    Are you sure you want to delete @(selectedScore?.ToString() ?? "") score?
+                </div>
+
+                <PrimaryButton OnClick="Delete" Color="red-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                 </path></svg>
+
+                </PrimaryButton>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 @code{
+    private Core.Score selectedScore;
+
     private List<Core.Score> scores;
 
     protected async override Task OnInitializedAsync()
@@ -117,10 +160,18 @@
         return "";
     }
 
-    private async Task OnDeleteClicked(Core.Score score)
+    private void OnDeleteClicked(Core.Score score)
     {
-        await repository.RemoveScore(score);
-        scores.Remove(score);
+        selectedScore = score;
     }
 
+    private async Task Delete()
+    {
+        if (selectedScore != null)
+        {
+            await repository.RemoveScore(selectedScore);
+            scores.Remove(selectedScore);
+            selectedScore = null;
+        }
+    }
 }

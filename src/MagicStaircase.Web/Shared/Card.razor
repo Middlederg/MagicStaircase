@@ -22,8 +22,6 @@
     [Parameter]
     public EventCallback<Core.Card> OnCardSelected { get; set; }
 
-    private string info;
-
     private async Task CardSelected()
     {
         if (Game.CardCanBePlaced(InnerCard))

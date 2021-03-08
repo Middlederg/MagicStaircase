@@ -14,11 +14,11 @@
         </div>
         <Board @ref="board" OnCardSelected="CardSelected" />
 
-        <EndOfGameModal @ref="modal" Hidden="!isGameEnd" OnModalAccepted="OnModalAccepted"></EndOfGameModal>
+        <EndOfGameModal @ref="modal" Hidden="!showEndOfGameModal" OnModalAccepted="OnModalAccepted" />
     </CascadingValue>
 </CascadingValue>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
     <div class="flex flex-row items-center justify-center gap-8">
         <div class="font-semibold whitespace-nowrap lg:tracking-wider text-normal lg:text-2xl">
             Score: @game.Points()/100
@@ -33,7 +33,7 @@
             </svg>
             <span class="xl:text-4xl">Next</span>
         </PrimaryButton>
-        <PrimaryButton Enabled="!isGameEnd" OnClick="OnResetClicked">
+        <PrimaryButton Enabled="!showEndOfGameModal" OnClick="OnResetClicked">
             <svg class="w-6 h-6 xl:w-9 xl:h-9 lg:mr-2 xl:mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
                 </path>
@@ -53,7 +53,7 @@
 
 @code{
 
-    private bool isGameEnd = false;
+    private bool showEndOfGameModal = false;
 
     private Board board;
     private EndOfGameModal modal;
@@ -95,7 +95,6 @@
 
             if (!game.IsPlayableCard())
             {
-                isGameEnd = true;
                 OnGameEnd();
             }
         }
@@ -103,16 +102,16 @@
 
     private void OnGameEnd()
     {
-        isGameEnd = true;
         clock.Stop();
-
+        modal.SetTime(clock.Time);
+        showEndOfGameModal = true;
     }
 
     private async Task OnModalAccepted(string playerName)
     {
-        var score = new Core.Score(new Core.Player(playerName), game.Points(), clock.Time));
+        var score = new Core.Score(new Core.Player(playerName), game.Points(), clock.Time);
         await achievementList.Show(score);
-        navigationManager.NavigateTo("/");
+        showEndOfGameModal = false;
     }
 
     private void OnResetClicked()
