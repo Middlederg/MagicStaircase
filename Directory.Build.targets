@@ -1,7 +1,10 @@
 <Project>
 
   <ItemGroup Label="Blazor">
-
+    <PackageReference Update="Blazored.LocalStorage" Version="3.0.0" />
+    <PackageReference Update="Microsoft.AspNetCore.Components.WebAssembly" Version="$(NetPackageVersion)" />
+    <PackageReference Update="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(NetPackageVersion)" />
+    <PackageReference Update="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup> 
   
   <ItemGroup Label="ThirdParty">
